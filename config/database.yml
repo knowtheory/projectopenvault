@@ -1,0 +1,17 @@
+defaults: &defaults
+  adapter: postgres
+  encoding: UTF-8
+  pool: 5
+  username: openvault
+  password: 
+  allow_concurrency: true
+  host: localhost
+
+development:
+  <<: *defaults
+  database: openvault_development
+  
+production:
+  <<: *defaults
+  database: openvault_production
+  
