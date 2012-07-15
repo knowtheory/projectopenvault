@@ -20,3 +20,5 @@ DataMapper.finalize
 
 require File.join(here, '../api')
 require File.join(here, '../app')
+require File.join(here, '../assets')
+
