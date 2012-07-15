@@ -5,7 +5,6 @@ require "bundler/setup"
 groups = [:default]
 groups.push(:development) unless ENV['RACK_ENV'] != 'development'
 Bundler.require(*groups)
-require 'sinatra/base'
 require "sinatra/reloader"
 
 here = File.dirname(__FILE__)
@@ -18,3 +17,6 @@ Dir.open(model_dir).each do |model|
 end
 
 DataMapper.finalize
+
+require File.join(here, '../api')
+require File.join(here, '../app')
