@@ -2,8 +2,10 @@ require './config/setup'
 
 app = Rack::Builder.new do
   map('/assets')  { run AdVault::Assets }
-  map('/api')     { run AdVault::API }
+  map('/spending'){ run AdVault::Spending }
+  map('/ads')     { run Advault::Ads }
   map('/')        { run AdVault::App }
+  map('/admin')   { run Advault::Admin }
 end
 
 run app
