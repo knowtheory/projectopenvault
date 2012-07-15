@@ -11,9 +11,9 @@ class Buy
   property :rate_per_spot, Integer
   property :election_cycle, Enum[:primary, :general]
   
-  #belongs_to :station
-  #belongs_to :buyer
-  #belongs_to :advertiser
-  #belongs_to :candidate
-  #belongs_to :race
+  belongs_to :station
+  belongs_to :buyer
+  belongs_to :advertiser
+  belongs_to :candidate
+  belongs_to :race
 end
