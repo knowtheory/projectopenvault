@@ -8,5 +8,12 @@ class Office
   property :abbreviation, String
   property :region,       String
   
+  has n, :buys
   belongs_to :incumbent, "Candidate", :child_key => [:candidate_id], :required => false
+  
+  def name=(str)
+    self.slug = Utilities.sluggify(str)
+    super
+  end
+
 end
