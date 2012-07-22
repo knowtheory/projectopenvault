@@ -1,6 +1,7 @@
 module AdVault
   class App < Sinatra::Base
     get '/' do
+      haml "%h1 Hello!"
     end
     
     get '/ads' do
