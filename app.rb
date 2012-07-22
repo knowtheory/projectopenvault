@@ -8,35 +8,72 @@ module AdVault
       haml "%h1 Spending"
     end
     
-    get '/spending/candidates.html' do
-      haml "%h1 Spending by Candidate"
-    end
-    
-    get '/spending/office.html' do
-      haml "%h1 Spending by Office"
-    end
-    
-    get '/spending/stations.html' do
-      haml "%h1 Spending by Station"
-    end
-    
-    get '/spending/advertisers.html' do
-      haml "%h1 Spending by Advertiser"
-    end
-    
     get '/ads.html' do
+      haml "%h1 ads"
+    end
+
+    get '/candidates.html' do
+      haml "%h1 Candidates\n<ul>#{Candidate.map{|c|"<li>#{c.name}</li>"}.join}</ul>"
     end
     
-    get '/ads/candidates.html' do
+    get '/candidates/:slug.html' do
+      haml "%h1 Candidate #{Candidate.first(:slug=>params[:slug]).name}"
     end
     
-    get '/ads/office.html' do
+    get '/candidates/:slug/spending.html' do
+      haml "%h1 Spending for Candidate #{Candidate.first(:slug=>params[:slug]).name}"
+    end
+
+    get '/candidates/:slug/ads.html' do
+      haml "%h1 Ads for Candidate #{Candidate.first(:slug=>params[:slug]).name}"
     end
     
-    get '/ads/stations.html' do
+    get '/offices.html' do
+      haml "%h1 Office"
+    end
+
+    get '/offices/:slug.html' do
+      haml "%h1 Office"
+    end
+
+    get '/offices/:slug/spending.html' do
+      haml "%h1 Office"
+    end
+
+    get '/offices/:slug/ads.html' do
+      haml "%h1 Office"
     end
     
-    get '/ads/advertisers.html' do
+    get '/stations.html' do
+      haml "%h1 Station"
+    end
+
+    get '/stations/:slug.html' do
+      haml "%h1 Station"
+    end
+
+    get '/stations/:slug/spending.html' do
+      haml "%h1 Station"
+    end
+
+    get '/stations/:slug/ads.html' do
+      haml "%h1 Station"
+    end
+    
+    get '/advertisers.html' do
+      haml "%h1 Advertiser"
+    end
+
+    get '/advertisers/:slug.html' do
+      haml "%h1 Advertiser"
+    end
+
+    get '/advertisers/:slug/spending.html' do
+      haml "%h1 Advertiser"
+    end
+
+    get '/advertisers/:slug/ads.html' do
+      haml "%h1 Advertiser"
     end
   end
   
