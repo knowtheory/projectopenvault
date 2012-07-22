@@ -5,7 +5,6 @@ require "bundler/setup"
 groups = [:default]
 groups.push(:development) unless ENV['RACK_ENV'] != 'development'
 Bundler.require(*groups)
-require "sinatra/reloader"
 
 here = File.dirname(__FILE__)
 app_root = File.join(here, '..')

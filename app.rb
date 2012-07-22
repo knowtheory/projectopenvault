@@ -4,34 +4,39 @@ module AdVault
       haml "%h1 Hello!"
     end
     
-    get '/spending' do
+    get '/spending.html' do
+      haml "%h1 Spending"
     end
     
-    get '/spending/candidates' do
+    get '/spending/candidates.html' do
+      haml "%h1 Spending by Candidate"
     end
     
-    get '/spending/office' do
+    get '/spending/office.html' do
+      haml "%h1 Spending by Office"
     end
     
-    get '/spending/stations' do
+    get '/spending/stations.html' do
+      haml "%h1 Spending by Station"
     end
     
-    get '/spending/advertisers' do
+    get '/spending/advertisers.html' do
+      haml "%h1 Spending by Advertiser"
     end
     
-    get '/ads' do
+    get '/ads.html' do
     end
     
-    get '/ads/candidates' do
+    get '/ads/candidates.html' do
     end
     
-    get '/ads/office' do
+    get '/ads/office.html' do
     end
     
-    get '/ads/stations' do
+    get '/ads/stations.html' do
     end
     
-    get '/ads/advertisers' do
+    get '/ads/advertisers.html' do
     end
   end
   
