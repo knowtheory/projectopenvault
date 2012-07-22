@@ -1,4 +1,5 @@
 require File.join(File.dirname(__FILE__),'..','config','setup.rb')
+require File.join(File.dirname(__FILE__),'fixtures.rb') # ensures that all the background data exists.
 require 'csv'
 
 def most_recent_data_file(dir=nil)
