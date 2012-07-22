@@ -7,5 +7,5 @@ class Office
   property :abbreviation, String
   property :region, String
   
-  belongs_to :incumbent, Candidate
+  belongs_to :incumbent, "Candidate", :child_key => [:candidate_id], :required => false
 end

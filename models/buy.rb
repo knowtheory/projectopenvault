@@ -9,12 +9,12 @@ class Buy
   property :end_date, Date
   property :spots_per_week, Integer
   property :rate_per_spot, Integer
-  property :election_cycle, Enum[:primary, :general]
+  property :election_cycle, Enum[:primary, :general, :issue]
   
-  belongs_to :submitter, "User"
+  belongs_to :submitter, :model => "User"
   belongs_to :station
   belongs_to :buyer
   belongs_to :advertiser
-  belongs_to :candidate
-  belongs_to :office
+  belongs_to :candidate, :required => false
+  belongs_to :office, :required => false
 end
