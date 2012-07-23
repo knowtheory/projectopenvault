@@ -8,17 +8,50 @@ module AdVault
       end
     end
     
-    get :spending do
-      "Spending Data\n"
+    resource :spending do
+      get do
+        "Spending Data\n"
+      end
+
+      segment "/:id" do
+        get do
+        end
+        
+        post do
+        end
+        
+        put do
+        end
+        
+        delete do
+        end
+      end
     end
 
-    get :ads do
+    resource :ads do
+      get do
+        "Ads!\n"
+      end
+      
+      segment "/:id" do
+        get do
+        end
+        
+        post do
+        end
+        
+        put do
+        end
+        
+        delete do
+        end
+      end
     end
         
     resource :candidates do
       segment "/:slug" do
         get do
-          Candidate.first(:slug=>params[:slug]).canonical(:buys=>true).to_json
+          Candidate.first(:slug=>params[:slug]).canonical.to_json
         end
       
         post do
@@ -33,29 +66,67 @@ module AdVault
           Candidate.first(:slug=>params[:slug])
         end
       
-        resource :spending do
-          get do
-            "Hallo!"
-          end
+        get "/spending" do
+          "Hallo!"
         end
         
-        resource :ads do
-          get do
-            "Ads!"
-          end
+        get "/ads" do
+          "Ads!"
         end
       end
     end
     
     resource :offices do
-      get ":slug" do
-        Office.first(:slug=>params[:slug]).canonical.to_json
+      segment "/:slug" do
+        get do
+          Office.first(:slug=>params[:slug]).canonical.to_json
+        end
+        
+        post do
+        end
+        
+        put do
+        end
+        
+        delete do
+        end
+        
+        get "/spending" do
+          "Hallo!"
+        end
+        
+        get "/ads" do
+          "Ads!"
+        end
       end
     end
     
     resource :stations do
-      get ":call_sign" do
-        Station.first(:call_sign=>params[:call_sign]).canonical.to_json
+      segment "/:call_sign" do
+        get do
+          Station.first(:call_sign=>params[:call_sign]).canonical.to_json
+        end
+        
+        post do
+          Station.first(:call_sign=>params[:call_sign]).canonical
+        end
+        
+        put do
+          Station.first(:call_sign=>params[:call_sign]).canonical
+        end
+        
+        delete do
+          Station.first(:call_sign=>params[:call_sign]).canonical
+        end
+        
+        get "/spending" do
+          "Hallo!"
+        end
+        
+        get "/ads" do
+          "Ads!"
+        end
+        
       end
     end
   end
