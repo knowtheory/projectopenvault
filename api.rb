@@ -11,25 +11,39 @@ module AdVault
     get :spending do
       "Spending Data\n"
     end
-    
-    resource :spending do
-      resource :candidates do
-        get ":slug" do
-          Candidate.first(:slug=>params[:slug]).canonical(:buys=>true).to_json
-        end
-      end
-    end
-    
+
     get :ads do
     end
-    
-    resource :ads do
-      
-    end
-    
+        
     resource :candidates do
-      get ":slug" do
-        Candidate.first(:slug=>params[:slug]).canonical.to_json
+      segment "/:slug" do
+        get do
+          Candidate.first(:slug=>params[:slug]).canonical(:buys=>true).to_json
+        end
+      
+        post do
+          Candidate.first(:slug=>params[:slug])
+        end
+      
+        put do
+          Candidate.first(:slug=>params[:slug])
+        end
+      
+        delete do
+          Candidate.first(:slug=>params[:slug])
+        end
+      
+        resource :spending do
+          get do
+            "Hallo!"
+          end
+        end
+        
+        resource :ads do
+          get do
+            "Ads!"
+          end
+        end
       end
     end
     
