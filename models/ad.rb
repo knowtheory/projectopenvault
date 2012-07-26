@@ -8,4 +8,6 @@ class Ad
   property :embed_code,  Text
   property :description, Text
   property :script,      Text
+  
+  belongs_to :committee
 end

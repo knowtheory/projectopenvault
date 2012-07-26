@@ -15,7 +15,7 @@ class Buy
   belongs_to :submitter, :model => "User"
   belongs_to :station
   belongs_to :buyer
-  belongs_to :advertiser
+  belongs_to :committee
   belongs_to :candidate, :required => false
   belongs_to :office,    :required => false
   
