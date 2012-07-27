@@ -10,6 +10,7 @@ body
   background: #F1F1F1
 
 $gutter-width: 30px
+$smallcaps: 'Alegreya SC'
 
 /* LAYOUT */
 #layout
@@ -22,17 +23,22 @@ $gutter-width: 30px
 #header
   h1
     font-size: 36pt
-    font-family: 'Alegreya SC'
+    font-family: $smallcaps
     float: left
+    margin-left: 20px
 
   #aggregate
     float: right
 
     p
       float: left
+      font-size: 28pt
+      margin-right: 20px
 
     span
       display: block
+      font-size: 16pt
+      font-family: $smallcaps
 
 h2
   font-weight: bold
@@ -52,7 +58,7 @@ h2
     margin-bottom: 1em
 
   p#meta
-    font-family: 'Alegreya SC'
+    font-family: smallcaps
 
 #side-bar
   margin-right: $gutter-width
