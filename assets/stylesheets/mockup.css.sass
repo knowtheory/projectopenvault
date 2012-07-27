@@ -22,6 +22,7 @@ $smallcaps: 'Alegreya SC'
   width: 960px
 
   #header
+    padding-top: 15px
     #masthead
       float: left
       margin-left: $header-gutter-width
@@ -29,9 +30,15 @@ $smallcaps: 'Alegreya SC'
 
       h1
         font-size: 36pt
+        vertical-align: top
+        img
+          margin-top: 10px
+          width: 61px
+          height: 48px
       p.meta
         font-size: 14pt
-        padding-left: 10px
+        margin-top: -15px
+        margin-left: 74px
         padding-bottom: 10px
 
     #aggregate
@@ -108,11 +115,12 @@ $smallcaps: 'Alegreya SC'
             font-size: 24pt
 
   h2
-    font-size: 16pt
+    font-size: 20pt
     font-weight: bold
     color: #395A8E
     border-bottom: 1px solid #C7C7C7
     padding-bottom: 10px
+    margin-bottom: 20px
 
   #main
     margin-left: $gutter-width
@@ -120,7 +128,6 @@ $smallcaps: 'Alegreya SC'
     float: left
     
     #posts
-      margin-top: 20px
     
     h3
       font-size: 24pt
@@ -142,6 +149,16 @@ $smallcaps: 'Alegreya SC'
     width: 280px
     float: right
 
+    #question
+      h3
+        font-style: italic
+        font-size: 24pt
+      label
+        display: block
+        margin: 10px
+      textarea
+        margin: 0 0 10px 10px
+    
   #footer
     width: 100%
     clear: both

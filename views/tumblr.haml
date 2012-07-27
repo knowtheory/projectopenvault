@@ -8,7 +8,9 @@
     #layout
       #header
         #masthead
-          %h1 Project OpenVault
+          %h1
+            %img(src='http://knowtheory.net/assets/tumblr-mockup.png')
+            Project OpenVault
           %p.meta Election coverage for Mid-Missouri
         #aggregate
           %p
@@ -72,6 +74,18 @@
       #side-bar
         #question
           %h2 Let Us Know
+          %h3 Who do you think has the best photo?
+          #response
+            %label
+              %input(type='radio' name="response")
+              Claire McCaskill
+            %label
+              %input(type='radio' name="response")
+              John Brunner
+            %label
+              %input(type='radio' name="response")
+              Sarah Steelman
+            %textarea
 
         #twitter
           %h2
