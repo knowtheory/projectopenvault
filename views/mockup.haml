@@ -43,6 +43,9 @@
         {block:Photo}
         .photo.post
           %img(src="{PhotoURL-500}" alt="{PhotoAlt}")
+          {block:Caption}
+          %p {Caption}
+          {/block:Caption}	
         {/block:Photo}
         {block:Photoset}
         .photoset.post
@@ -110,5 +113,14 @@
                 }                          |
               }).render().start();
 
-      %div#colophon
-        %p Copyright etc
+      %div#footer
+        {block:Pagination}
+        {block:PreviousPage}
+        %a(href="{PreviousPage}") « Newer
+        {/block:PreviousPage}
+        {block:NextPage}
+        %a(href="{NextPage}") Older »
+        {/block:NextPage}
+        {/block:Pagination}
+        #colophon
+          %p Copyright etc
