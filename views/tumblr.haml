@@ -12,23 +12,58 @@
           %p.meta Election coverage for Mid-Missouri
         #aggregate
           %p
-            800
+            3190
             %span Minutes of ads
 
           %p
-            $300, 000
+            $916, 534
             %span Spent thus far
 
       #interactives
         .navigation
           %p.title Total Spending
-          %ul
-            %li.active Candidates
-            %li Committee
-            %li Office
+          #facets
+            %span.active Candidates
+            %span Committee
+            %span Office
         .content
-          %p Herping Derpington
-
+          .badge
+            %img.headshot(src='/assets/peter_kinder_headshot.jpg')
+            .info
+              %p.name Peter Kinder
+              %p.office for Lt. Governor
+              %p.dollars-spent $28,245
+          .badge
+            %img.headshot(src='/assets/mccaskill_headshot.jpg')
+            .info
+              %p.name Claire McCaskill
+              %p.office for U.S. Senate
+              %p.dollars-spent $191,536
+          .badge
+            %img.headshot(src='/assets/john_brunner_headshot.jpg')
+            .info
+              %p.name John Brunner
+              %p.office for U.S. Senate
+              %p.dollars-spent $146,975
+          .badge
+            %img.headshot(src='/assets/sarah_steelman_headshot.jpg')
+            .info
+              %p.name Sarah Steelman
+              %p.office for U.S. Senate
+              %p.dollars-spent $47,020
+          .badge
+            %img.headshot()
+            .info
+              %p.name Candidate
+              %p.office for U.S. House District 4
+              %p.dollars-spent $191,536
+          .badge
+            %img.headshot()
+            .info
+              %p.name Candidate
+              %p.office for U.S. Senate
+              %p.dollars-spent $191,536
+      
       #main
         %h2 Election News &amp; Analysis
         #posts=yield
@@ -72,13 +107,5 @@
               }).render().start();
 
       #footer
-        {block:Pagination}
-        {block:PreviousPage}
-        %a(href="{PreviousPage}") « Newer
-        {/block:PreviousPage}
-        {block:NextPage}
-        %a(href="{NextPage}") Older »
-        {/block:NextPage}
-        {/block:Pagination}
         #colophon
           %p Copyright etc

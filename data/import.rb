@@ -1,5 +1,6 @@
+# require './config/setup.rb'; DataMapper.auto_migrate!; load './data/fixtures.rb'; load './data/import.rb'
 require File.join(File.dirname(__FILE__),'..','config','setup.rb')
-require File.join(File.dirname(__FILE__),'fixtures.rb') # ensures that all the background data exists.
+load File.join(File.dirname(__FILE__),'fixtures.rb') # ensures that all the background data exists.
 require 'csv'
 
 def most_recent_data_file(dir=nil)
@@ -22,7 +23,7 @@ CSV.foreach(most_recent_data_file, :headers => true) do |row|
   buy.submitter  = User.first :last_name => row['submitter']
   buy.station    = Station.first :call_sign => row['station']
   buy.buyer      = Buyer.first_or_create :name => row['buyer']
-  buy.advertiser = Advertiser.first_or_create :name => row['advertiser']
+  buy.committee = Committee.first_or_create :name => row['advertiser']
 
   if row['candidate'] !~ /Issue/i
     buy.candidate = Candidate.first(:name => row['candidate'])

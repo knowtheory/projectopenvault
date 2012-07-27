@@ -5,9 +5,10 @@ class Committee
   property :name, String, :required => true
   property :slug, String, :length => 2048
   property :url,  String, :length => 2048, :format => :url
-  property :tax_status, Enum[:five_oh_one_c_four, :five_oh_one_c_six, :super_pac]
+  #property :tax_status, Enum[:five_oh_one_c_four, :five_oh_one_c_six, :super_pac]
   
   has n, :buys
+  has n, :ads
 
   def name=(str)
     self.slug = Utilities.sluggify(str)

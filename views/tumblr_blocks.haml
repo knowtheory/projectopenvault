@@ -49,4 +49,13 @@
 .audio.post
   %p#meta By {PostAuthorName}, {TimeAgo}
 {/block:Audio}
+.navigation
+  {block:Pagination}
+  {block:PreviousPage}
+  %a(href="{PreviousPage}") « Newer
+  {/block:PreviousPage}
+  {block:NextPage}
+  %a(href="{NextPage}") Older »
+  {/block:NextPage}
+  {/block:Pagination}
 {/block:Posts}

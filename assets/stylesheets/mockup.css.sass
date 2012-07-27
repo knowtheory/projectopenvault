@@ -30,7 +30,9 @@ $smallcaps: 'Alegreya SC'
       h1
         font-size: 36pt
       p.meta
-        font-size: 16pt
+        font-size: 14pt
+        padding-left: 10px
+        padding-bottom: 10px
 
     #aggregate
       float: right
@@ -50,40 +52,63 @@ $smallcaps: 'Alegreya SC'
     clear: both
     width: 100%
     border-bottom: 5px solid #002b7a
+    margin-bottom: 20px
     .navigation
-      width: 100%
+      width: 920px
       margin-left: $header-gutter-width
       margin-right: $header-gutter-width
       float: left
       clear: both
       border-top: 1px solid #C7C7C7
+      border-bottom: 1px solid #C7C7C7
       .title
         float: left
         font-family: $smallcaps
         font-size: 16pt
+        width: 200px
         padding: 5px 130px 6px 0px
-        border-bottom: 1px solid #C7C7C7
-      ul
+      #facets
         font-family: $smallcaps
-        li
-          float: left
+        span
+          display: inline-block
           padding: 5px
           margin-top: 5px
-          border-bottom: 1px solid #C7C7C7
           cursor: pointer
           
         $tab-radius: 3px
-        li.active
+        span.active
           border: 1px solid #C7C7C7
           border-bottom: 1px solid white
           border-top-left-radius: $tab-radius
           border-top-right-radius: $tab-radius
     .content
-      margin-left: $header-gutter-width
-      margin-right: $header-gutter-width
+      margin: $header-gutter-width
       float: left
+      .badge
+        display: inline-block
+        width: 300px
+        img
+          width: 84px
+          height: 84px
+          float: left
+          margin: 5px
+        .info
+          float: left
+          margin: 5px
+          p
+            font-size: 16pt
+          p.name
+            font-weight: bold
+          p.office
+            font-family: $smallcaps
+            font-size: 12pt
+          p.dollars-spent
+            font-family: 'Helvetica'
+            font-weight: bold
+            font-size: 24pt
 
   h2
+    font-size: 16pt
     font-weight: bold
     color: #395A8E
     border-bottom: 1px solid #C7C7C7
@@ -93,9 +118,18 @@ $smallcaps: 'Alegreya SC'
     margin-left: $gutter-width
     width: 590px
     float: left
-
+    
+    #posts
+      margin-top: 20px
+    
     h3
       font-size: 24pt
+      a
+        font-size: 24pt
+        text-decoration: none
+        color: black
+      a:hover
+        text-decoration: underline
     p
       line-height: 1.25
       margin-bottom: 1em

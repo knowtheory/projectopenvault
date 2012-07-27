@@ -7,7 +7,7 @@
   ["Claire McCaskill", true], 
   ["Dave Spence"],
   ["Jay Nixon", true]
-].each{ |candidate| Candidate.find_or_create Hash[[:name, :incumbent].zip(candidate)] }
+].each{ |candidate| Candidate.first_or_create Hash[[:name, :incumbent].zip(candidate)] }
 
 [
   ["Lieutenant Governor", "Lieutenant Governor", "Lt. Gov.", "State-wide", "Peter Kinder"],
@@ -17,7 +17,7 @@
   ["U.S. Representative from the 2nd District", "Representative",  "Rep.", "2nd District", "Todd Akin"]
 ].each do |data|
   data.push Candidate.first(:name=>data.pop) if data.size > 4
-  Office.find_or_create Hash[[:name, :title, :abbreviation, :region, :incumbent].zip(data)]
+  Office.first_or_create Hash[[:name, :title, :abbreviation, :region, :incumbent].zip(data)]
 end
 
 [
@@ -25,11 +25,11 @@ end
   ["KOMU-TV", "KOMU", "http://www.komu.com/home/"],
   ["J.W. Broadcasting", "KMIZ", "http://www.kmiz.com/"],
   ["J.W. Broadcasting", "KQFX"]
-].each{ |station| Station.find_or_create Hash[[:name, :call_sign, :url].zip(station)] }
+].each{ |station| Station.first_or_create Hash[[:name, :call_sign, :url].zip(station)] }
 
 [
   ["Ted", "Han", "ted@knowtheory.net"],
   ["Matthew", "Patane", "patane.mf@gmail.com"],
   ["David", "Herzog", "herzogd@rjionline.org"]
-].each{ |user| User.find_or_create Hash[[:first_name, :last_name, :email].zip(user)] }
+].each{ |user| User.first_or_create Hash[[:first_name, :last_name, :email].zip(user)] }
 
