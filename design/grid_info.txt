@@ -1,0 +1,14 @@
+960px grid
+32px for gutter
+3:1 ratio
+5 possible gutters
+960 - 160 = 800
+each column is 200px
+
+960px grid
+30px for gutter
+2:1 ratio
+4 gutter spaces
+30*4 = 120px of gutter space
+960 - 120 = 840px
+column width is 840px/3 = 280px
