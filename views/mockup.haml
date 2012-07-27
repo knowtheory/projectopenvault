@@ -9,12 +9,13 @@
       %div#header
         %h1 Project OpenVault
         #aggregate
-          %p 
+          %p
             800
-          %span Minutes of Ads
-          %p 
+            %span Minutes of Ads
+
+          %p
             $300, 000
-          %span Spent
+            %span Spent
 
       %div#interactives
 
@@ -44,13 +45,13 @@
           {/block:Title}
           {Body}
         {/block:Text}
-        
+
         {block:Photo}
         .photo.post
           %img(src="{PhotoURL-500}" alt="{PhotoAlt}")
           {block:Caption}
           %p {Caption}
-          {/block:Caption}	
+          {/block:Caption}
         {/block:Photo}
         {block:Photoset}
         .photoset.post
@@ -89,7 +90,7 @@
           %h2
             Twitter
             %span #midmovotes
-            %script                        
+            %script
               new TWTR.Widget({            |
                 version: 2,                |
                 type: 'search',            |
