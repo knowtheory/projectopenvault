@@ -5,9 +5,11 @@
     %link(type="text/css" rel="stylesheet" media="screen" href="/assets/mockup.css")
     %script(charset="utf-8" src="http://widgets.twimg.com/j/2/widget.js")
   %body
-    %div#layout
-      %div#header
-        %h1 Project OpenVault
+    #layout
+      #header
+        #masthead
+          %h1 Project OpenVault
+          %p.meta Election coverage for Mid-Missouri
         #aggregate
           %p
             800
@@ -17,14 +19,15 @@
             $300, 000
             %span Spent thus far
 
-      %div#interactives
+      #interactives
+        
 
-      %div#main
+      #main
         %h2 Election News &amp; Analysis
         #posts=yield
 
 
-      %div#side-bar
+      #side-bar
         #question
           %h2 Let Us Know
 
@@ -61,7 +64,7 @@
                 }                          |
               }).render().start();
 
-      %div#footer
+      #footer
         {block:Pagination}
         {block:PreviousPage}
         %a(href="{PreviousPage}") « Newer
