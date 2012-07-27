@@ -10,6 +10,7 @@ body
   background: #F1F1F1
 
 $gutter-width: 30px
+$header-gutter-width: 20px
 $smallcaps: 'Alegreya SC'
 
 /* LAYOUT */
@@ -20,55 +21,93 @@ $smallcaps: 'Alegreya SC'
   margin: 0 auto
   width: 960px
 
-#header
-  #masthead
-    float: left
-    margin-left: 20px
-    font-family: $smallcaps
-
-    h1
-      font-size: 36pt
-    p.meta
-      font-size: 16pt
-
-  #aggregate
-    float: right
-
-    p
+  #header
+    #masthead
       float: left
-      font-size: 28pt
-      margin-right: 20px
-
-    span
-      display: block
-      font-size: 16pt
+      margin-left: $header-gutter-width
       font-family: $smallcaps
 
-h2
-  font-weight: bold
-  color: #395A8E
-  border-bottom: 1px solid #C7C7C7
-  padding-bottom: 10px
+      h1
+        font-size: 36pt
+      p.meta
+        font-size: 16pt
 
-#main
-  margin-left: $gutter-width
-  width: 590px
-  float: left
+    #aggregate
+      float: right
 
-  h3
-    font-size: 24pt
-  p
-    line-height: 1.25
-    margin-bottom: 1em
+      p
+        float: left
+        font-size: 28pt
+        margin-right: $header-gutter-width
 
-  p#meta
-    font-family: smallcaps
+      span
+        display: block
+        font-size: 16pt
+        font-family: $smallcaps
+      
+  #interactives
+    float: left
+    clear: both
+    width: 100%
+    border-bottom: 5px solid #002b7a
+    .navigation
+      width: 100%
+      margin-left: $header-gutter-width
+      margin-right: $header-gutter-width
+      float: left
+      clear: both
+      border-top: 1px solid #C7C7C7
+      .title
+        float: left
+        font-family: $smallcaps
+        font-size: 16pt
+        padding: 5px 130px 6px 0px
+        border-bottom: 1px solid #C7C7C7
+      ul
+        font-family: $smallcaps
+        li
+          float: left
+          padding: 5px
+          margin-top: 5px
+          border-bottom: 1px solid #C7C7C7
+          cursor: pointer
+          
+        $tab-radius: 3px
+        li.active
+          border: 1px solid #C7C7C7
+          border-bottom: 1px solid white
+          border-top-left-radius: $tab-radius
+          border-top-right-radius: $tab-radius
+    .content
+      margin-left: $header-gutter-width
+      margin-right: $header-gutter-width
+      float: left
 
-#side-bar
-  margin-right: $gutter-width
-  width: 280px
-  float: right
+  h2
+    font-weight: bold
+    color: #395A8E
+    border-bottom: 1px solid #C7C7C7
+    padding-bottom: 10px
 
-#footer
-  width: 100%
-  clear: both
+  #main
+    margin-left: $gutter-width
+    width: 590px
+    float: left
+
+    h3
+      font-size: 24pt
+    p
+      line-height: 1.25
+      margin-bottom: 1em
+
+    p#meta
+      font-family: smallcaps
+
+  #side-bar
+    margin-right: $gutter-width
+    width: 280px
+    float: right
+
+  #footer
+    width: 100%
+    clear: both
