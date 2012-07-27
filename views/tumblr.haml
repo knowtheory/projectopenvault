@@ -1,0 +1,74 @@
+%html
+  %head
+    %title= "{Title}"
+    %link(href='http://fonts.googleapis.com/css?family=Alegreya:400italic,400,700|Alegreya+SC' rel='stylesheet' type='text/css')
+    %link(type="text/css" rel="stylesheet" media="screen" href="/assets/mockup.css")
+    %script(charset="utf-8" src="http://widgets.twimg.com/j/2/widget.js")
+  %body
+    %div#layout
+      %div#header
+        %h1 Project OpenVault
+        #aggregate
+          %p
+            800
+            %span Minutes of ads
+
+          %p
+            $300, 000
+            %span Spent thus far
+
+      %div#interactives
+
+      %div#main
+        %h2 Election News &amp; Analysis
+        #posts=yield
+
+
+      %div#side-bar
+        #question
+          %h2 Let Us Know
+
+        #twitter
+          %h2
+            Twitter
+            %span #midmovotes
+            %script
+              new TWTR.Widget({            |
+                version: 2,                |
+                type: 'search',            |
+                search: '#midmovotes',     |
+                interval: 30000,           |
+                title: '',                 |
+                subject: '',               |
+                width: 250,                |
+                height: 300,               |
+                theme: {                   |
+                  shell: {                 |
+                    background: '#8ec1da', |
+                    color: '#ffffff'       |
+                  },                       |
+                  tweets: {                |
+                    background: '#ffffff', |
+                    color: '#444444',      |
+                    links: '#1985b5'       |
+                  }                        |
+                },                         |
+                features: {                |
+                  scrollbar: false,        |
+                  loop: true,              |
+                  live: true,              |
+                  behavior: 'default'      |
+                }                          |
+              }).render().start();
+
+      %div#footer
+        {block:Pagination}
+        {block:PreviousPage}
+        %a(href="{PreviousPage}") « Newer
+        {/block:PreviousPage}
+        {block:NextPage}
+        %a(href="{NextPage}") Older »
+        {/block:NextPage}
+        {/block:Pagination}
+        #colophon
+          %p Copyright etc

@@ -1,7 +1,11 @@
 module AdVault
   class App < Sinatra::Base
     get '/' do
-      haml :mockup, :layout => false
+      haml :tumblr_mockup, :layout => :tumblr
+    end
+    
+    get '/blocks' do
+      haml :tumblr_blocks, :layout => :tumblr
     end
 
     get '/spending.html' do
