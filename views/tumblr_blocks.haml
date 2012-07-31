@@ -4,7 +4,7 @@
   {block:Title}
   %h3
     %a(href="{Permalink}") {Title}
-  %p#meta By {PostAuthorName}, {TimeAgo}
+  %p.meta By {PostAuthorName}, {TimeAgo}
   {/block:Title}
   {Body}
 {/block:Text}
@@ -12,7 +12,7 @@
 {block:Photo}
 .photo.post
   %img(src="{PhotoURL-500}" alt="{PhotoAlt}")
-  %p#meta By {PostAuthorName}, {TimeAgo}
+  %p.meta By {PostAuthorName}, {TimeAgo}
   {block:Caption}
   %p {Caption}
   {/block:Caption}
@@ -20,7 +20,7 @@
 {block:Photoset}
 .photoset.post
   {Photoset-500}
-  %p#meta By {PostAuthorName}, {TimeAgo}
+  %p.meta By {PostAuthorName}, {TimeAgo}
   {block:Caption}
   .caption {Caption}
   {/block:Caption}
@@ -28,34 +28,47 @@
 {block:Quote}
 .quote.post
   {Quote}
-  %p#meta By {PostAuthorName}, {TimeAgo}
+  %p.meta By {PostAuthorName}, {TimeAgo}
   {block:Source}
   #meta {Source}
   {/block:Source}
 {/block:Quote}
 {block:Link}
 .link.post
-  %p#meta By {PostAuthorName}, {TimeAgo}
+  %p.meta By {PostAuthorName}, {TimeAgo}
 {/block:Link}
 {block:Chat}
 .chat.post
-  %p#meta By {PostAuthorName}, {TimeAgo}
+  %p.meta By {PostAuthorName}, {TimeAgo}
 {/block:Chat}
 {block:Video}
 .video.post
-  %p#meta By {PostAuthorName}, {TimeAgo}
+  %p.meta By {PostAuthorName}, {TimeAgo}
 {/block:Video}
 {block:Audio}
 .audio.post
-  %p#meta By {PostAuthorName}, {TimeAgo}
+  %p.meta By {PostAuthorName}, {TimeAgo}
 {/block:Audio}
+
+
+{/block:Posts}
+
+{block:Navigation}
 .navigation
   {block:Pagination}
   {block:PreviousPage}
   %a(href="{PreviousPage}") « Newer
   {/block:PreviousPage}
+  {block:JumpPagination length="5"}
+  {block:CurrentPage}
+  %span(class="{current_page}") {PageNumber}
+  {/block:CurrentPage}}
+  {block:JumpPage}
+  %a(href="{URL}") {PageNumber}
+  {/block:JumpPage}
+  {/block:JumpPagination} 
   {block:NextPage}
   %a(href="{NextPage}") Older »
   {/block:NextPage}
   {/block:Pagination}
-{/block:Posts}
+{/block:Navigation}

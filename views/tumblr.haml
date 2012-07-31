@@ -69,6 +69,7 @@
       #main
         %h2 Election News &amp; Analysis
         #posts=yield
+		
 
 
       #side-bar
@@ -120,6 +121,26 @@
                 }                          |
               }).render().start();
 
+
+	
+	
       #footer
+        #navigation	
+          %a(href="{PreviousPage}") « Newer
+          %JumpPagination(length=5)
+          %span(class="{current_page}") {PageNumber}
+          %JumpPage
+          %a.pagenumber(href="{URL}") {PageNumber}
+          %a(href="{NextPage}") Older »
+          %p.line
+    
+        .logos
+          %img.logos(src='http://knowtheory.net/assets/logos/the%20Missourian50px.jpeg')
+          %img.logos(src='http://knowtheory.net/assets/logos/kbia50px.jpeg')
+          %img.logos(src='http://knowtheory.net/assets/logos/NewsyLogonew50px.jpg')
+          %img.logos(src='http://knowtheory.net/assets/logos/KOMUnews50px.jpeg')
+          %img.logos(src='http://knowtheory.net/assets/logos/rji50px.jpeg')
+
         #colophon
-          %p Copyright etc
+          %p Copyright etc        
+        %p.line
