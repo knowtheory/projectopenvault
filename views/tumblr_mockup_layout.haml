@@ -37,11 +37,46 @@
             %span Committee
             %span Office
         .content
+          .badge
+            %img.headshot(src='/assets/peter_kinder_headshot.jpg')
+            .info
+              %p.name Peter Kinder
+              %p.office for Lt. Governor
+              %p.dollars-spent $28,245
+          .badge
+            %img.headshot(src='/assets/mccaskill_headshot.jpg')
+            .info
+              %p.name Claire McCaskill
+              %p.office for U.S. Senate
+              %p.dollars-spent $191,536
+          .badge
+            %img.headshot(src='/assets/john_brunner_headshot.jpg')
+            .info
+              %p.name John Brunner
+              %p.office for U.S. Senate
+              %p.dollars-spent $146,975
+          .badge
+            %img.headshot(src='/assets/sarah_steelman_headshot.jpg')
+            .info
+              %p.name Sarah Steelman
+              %p.office for U.S. Senate
+              %p.dollars-spent $47,020
+          .badge
+            %img.headshot()
+            .info
+              %p.name Candidate
+              %p.office for U.S. House District 4
+              %p.dollars-spent $191,536
+          .badge
+            %img.headshot()
+            .info
+              %p.name Candidate
+              %p.office for U.S. Senate
+              %p.dollars-spent $191,536
       
       #main
         %h2 Election News &amp; Analysis
         #posts=yield
-		
 
 
       #side-bar
@@ -93,26 +128,6 @@
                 }                          |
               }).render().start();
 
-
-	
-	
       #footer
-        #navigation	
-          %a(href="{PreviousPage}") « Newer
-          %JumpPagination(length=5)
-          %span(class="{current_page}") {PageNumber}
-          %JumpPage
-          %a.pagenumber(href="{URL}") {PageNumber}
-          %a(href="{NextPage}") Older »
-          %p.line
-    
-        .logos
-          %img.logos(src='http://knowtheory.net/assets/logos/the%20Missourian50px.jpeg')
-          %img.logos(src='http://knowtheory.net/assets/logos/kbia50px.jpeg')
-          %img.logos(src='http://knowtheory.net/assets/logos/NewsyLogonew50px.jpg')
-          %img.logos(src='http://knowtheory.net/assets/logos/KOMUnews50px.jpeg')
-          %img.logos(src='http://knowtheory.net/assets/logos/rji50px.jpeg')
-
         #colophon
-          %p Copyright etc        
-        %p.line
+          %p Copyright etc

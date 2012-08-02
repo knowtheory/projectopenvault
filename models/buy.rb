@@ -9,8 +9,10 @@ class Buy
   property :end_date,       Date
   property :spots_per_week, Integer
   property :rate_per_spot,  Integer
-  property :total,          Integer
-  property :election, Enum[:primary, :general, :issue]
+  property :total_cost,     Integer
+  property :election,       Enum[:primary, :general, :issue]
+  property :length,         Integer
+  property :total_runtime,  Integer
   
   belongs_to :submitter, :model => "User"
   belongs_to :station
@@ -29,8 +31,10 @@ class Buy
       'end_date'        => self.end_date.to_s,
       'spots_per_week'  => self.spots_per_week,
       'rate_per_spot'   => self.rate_per_spot,
-      'total'           => self.total,
+      'total_cost'      => self.total_cost,
       'election'        => self.election,
+      'length'          => self.length,
+      'total_runtime'   => self.total_runtime
     }
     rep
   end

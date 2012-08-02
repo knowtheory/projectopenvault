@@ -1,11 +1,21 @@
 module AdVault
   class App < Sinatra::Base
     get '/' do
-      haml :tumblr_mockup, :layout => :tumblr
+      @buys = Buy.all
+      @candidates = Candidate.all
+      haml :tumblr_mockup, :layout => :tumblr_mockup_layout
     end
     
     get '/blocks' do
-      haml :tumblr_blocks, :layout => :tumblr
+      @buys = Buy.all
+      @candidates = Candidate.all
+      haml :tumblr_blocks, :layout => :tumblr_mockup_layout
+    end
+    
+    get '/backbone' do
+      @buys = Buy.all
+      @candidates = Candidate.all
+      haml :tumblr_mockup, :layout => :tumblr
     end
 
     get '/spending.html' do
