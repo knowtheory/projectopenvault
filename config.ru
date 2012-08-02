@@ -20,4 +20,5 @@ app = Rack::Builder.new do
   map('/assets') { run AdVault::Assets }
 end
 
+use Rack::JSONP
 run app

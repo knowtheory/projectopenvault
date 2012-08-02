@@ -10,20 +10,26 @@ module AdVault
     
     resource :spending do
       get do
-        "Spending Data\n"
+        @buys = Buy.all(:limit=>20)
+        @buys.map{ |buy| buy.canonical }.to_json
       end
 
       segment "/:id" do
         get do
+          @buy = Buy.first(:id=>params[:id])
+          @buy.canonical.to_json
         end
         
         post do
+          @buy = Buy.first(:id=>params[:id])
         end
         
         put do
+          @buy = Buy.first(:id=>params[:id])
         end
         
         delete do
+          @buy = Buy.first(:id=>params[:id])
         end
       end
     end
@@ -49,6 +55,11 @@ module AdVault
     end
         
     resource :candidates do
+      get do
+        @candidates = Candidate.all
+        { :candidates => @candidates.map{ |candidate| candidate.canonical } }.to_json
+      end
+      
       segment "/:slug" do
         get do
           Candidate.first(:slug=>params[:slug]).canonical.to_json
