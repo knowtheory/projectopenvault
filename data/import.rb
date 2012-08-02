@@ -16,14 +16,15 @@ CSV.foreach(most_recent_data_file, :headers => true) do |row|
   start_date = Date.strptime row['start_date'], '%m/%d/%Y'
   end_date   = Date.strptime row['end_date'], '%m/%d/%Y'
 
-  buy            = Buy.new(Utilities.pick row, *%w(contract_id spots_per_week rate_per_spot start_time end_time election))
-  buy.start_date = start_date
-  buy.end_date   = end_date
-  buy.total      = buy.rate_per_spot * buy.spots_per_week
-  buy.submitter  = User.first :last_name => row['submitter']
-  buy.station    = Station.first :call_sign => row['station']
-  buy.buyer      = Buyer.first_or_create :name => row['buyer']
-  buy.committee = Committee.first_or_create :name => row['advertiser']
+  buy               = Buy.new(Utilities.pick row, *%w(contract_id spots_per_week rate_per_spot start_time end_time election length))
+  buy.start_date    = start_date
+  buy.end_date      = end_date
+  buy.total_cost    = buy.rate_per_spot * buy.spots_per_week
+  buy.total_runtime = buy.length * buy.spots_per_week
+  buy.submitter     = User.first :last_name => row['submitter']
+  buy.station       = Station.first :call_sign => row['station']
+  buy.buyer         = Buyer.first_or_create :name => row['buyer']
+  buy.committee     = Committee.first_or_create :name => row['advertiser']
 
   if row['candidate'] !~ /Issue/i
     buy.candidate = Candidate.first(:name => row['candidate'])

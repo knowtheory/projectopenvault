@@ -24,7 +24,8 @@ end
   ["KRCG-TV", "KRCG", "http://www.connectmidmissouri.com/"],
   ["KOMU-TV", "KOMU", "http://www.komu.com/home/"],
   ["J.W. Broadcasting", "KMIZ", "http://www.kmiz.com/"],
-  ["J.W. Broadcasting", "KQFX"]
+  ["J.W. Broadcasting", "KQFX"],
+  ["KOMU-CW", "KMOU-CW"]
 ].each{ |station| Station.first_or_create Hash[[:name, :call_sign, :url].zip(station)] }
 
 [
