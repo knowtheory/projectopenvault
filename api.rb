@@ -6,11 +6,16 @@ module AdVault
       def logger
         Api.logger
       end
+      
+      def content_type(type)
+        header['Content-Type'] = 'application/json'
+      end
     end
     
     resource :spending do
       get do
-        @buys = Buy.all(:limit=>20)
+        content_type :json
+        @buys = Buy.all
         @buys.map{ |buy| buy.canonical }.to_json
       end
 
@@ -57,7 +62,7 @@ module AdVault
     resource :candidates do
       get do
         @candidates = Candidate.all
-        { :candidates => @candidates.map{ |candidate| candidate.canonical } }.to_json
+        @candidates.map{ |candidate| candidate.canonical }.to_json
       end
       
       segment "/:slug" do

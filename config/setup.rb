@@ -22,7 +22,6 @@ require_all File.join(app_root, 'models')
 
 DataMapper.finalize
 
-require File.join(here, '../api')
-require File.join(here, '../app')
-require File.join(here, '../assets')
-
+require File.join(here, '..', 'api')
+require File.join(here, '..', 'app')
+require File.join(here, '..', 'assets')
