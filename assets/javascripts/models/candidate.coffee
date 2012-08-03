@@ -4,8 +4,8 @@ POV.models.Candidate = Backbone.Model.extend
       this.buys = new POV.models.Buys options.buys.where
         candidate_id: this.id
         
-  totalSpent: ->
-    this.buys.reduce ((total, buy) -> total + buy.get 'total_spent'), 0
+  #totalSpent: ->
+    #this.buys.reduce ((total, buy) -> total + buy.get 'total_cost'), 0
     
   headshot_url: ->
     "#{POV.host}/assets/#{this.get('slug')}_headshot.jpg"
@@ -13,3 +13,4 @@ POV.models.Candidate = Backbone.Model.extend
 POV.models.Candidates = Backbone.Collection.extend
   url: "/candidates",
   model: POV.models.Candidate
+  comparator: (candidate) -> -candidate.get('total_spent')

@@ -6,7 +6,7 @@ POV.views.SpendingBadge = Backbone.View.extend
       <div class="info">
         <p class="name">#{this.model.get('name')}</p>
         <p class="office">#{this.model.get('office')}</p>
-        <p class="dollars-spent">#{this.model.buys.total_cost()}</p>
+        <p class="dollars-spent">#{this.model.get('total_spent')}</p>
       </div>
     </div>
     """
