@@ -1,17 +1,44 @@
-# require './config/setup.rb'; DataMapper.auto_migrate!; load './data/fixtures.rb'; load './data/import.rb'
-require File.join(File.dirname(__FILE__),'..','config','setup.rb')
+# require './config/models.rb'; DataMapper.auto_migrate!; load './data/fixtures.rb'; load './data/import.rb'
+require File.join(File.dirname(__FILE__),'..','config','models.rb')
 load File.join(File.dirname(__FILE__),'fixtures.rb') # ensures that all the background data exists.
 require 'csv'
-
-def most_recent_data_file(dir=nil)
+#require './config/models.rb'; DataMapper.auto_migrate!
+def most_recent_data_file(name,dir=nil)
   path = dir || File.dirname(__FILE__)
-  pattern = /(\d{4})\.(\d{2})\.(\d{2})\.csv$/
+  pattern = /^#{name}\.(\d{4})\.(\d{2})\.(\d{2})\.csv$/
   File.join path, Dir.open(path).select{ |f| f =~ pattern }.sort_by{ |f| matches = f.match(pattern).to_a; matches.shift; matches.map(&:to_i) }.last
 end
 
-#data = CSV.open(most_recent_data_file('./data'), :headers => true).read
+#f = 'candidates'; data = CSV.open(most_recent_data_file(f,'./data'), :headers => true).read; row = data.first
 
-CSV.foreach(most_recent_data_file, :headers => true) do |row|
+CSV.foreach(most_recent_data_file('candidates'), :headers => true) do |row|
+
+  candidate = Candidate.new(Utilities.pick row, *%w(party, url))
+  candidate.name = row['candidate']
+
+  if row['current_office']
+    current_office = Office.first_or_new(:name => row['current_office'], 
+                                :region => row['region_current_office'])
+    current_office.title = row['title']               unless current_office.title
+    current_office.abbreviation = row['abbreviation'] unless current_office.abbreviation
+    
+    if current_office.save
+      puts "#{Time.now}: saved office #{current_office.id}"
+      candidate.incumbency = current_office
+    else
+      puts "#{Time.now}: Unable to save #{current_office.errors.inspect}"
+    end
+  end
+
+  running_for = Office.first_or_new(:name => row['office_sought'], :region => row['region_office_sought'])
+
+  puts running_for.save ? "#{Time.now}: saved office #{running_for.id}" : "#{Time.now}: Unable to save #{running_for.errors.inspect}"
+  
+  candidate.office = running_for
+  puts candidate.save ? "#{Time.now}: saved Candidate #{candidate.id}" : "#{Time.now}: Unable to save #{candidate.errors.inspect}"
+end
+
+CSV.foreach(most_recent_data_file('advault_data'), :headers => true) do |row|
 
   start_date = Date.strptime row['start_date'], '%m/%d/%Y'
   end_date   = Date.strptime row['end_date'], '%m/%d/%Y'

@@ -3,11 +3,14 @@ class Candidate
   
   property :id,        Serial
   property :name,      String, :required => true
-  property :slug,      String, :length => 2048
+  property :slug,      String, :required => true, :length => 2048, :unique => true
+  property :party,     String
   property :incumbent, Boolean, :default => false
   property :url,       String, :length => 2048, :format => :url
-
-  has 1, :office
+  property :race_id, Integer, :required => false
+  
+  belongs_to :office
+  belongs_to :incumbency, "Office", :child_key => [:incumbent_id], :required => false
   has n, :buys
 
   def name=(str)
@@ -25,7 +28,7 @@ class Candidate
       'total_spent' => self.buys.sum(:total_cost)
     }
     rep['buys'] = self.buys.map(&:canonical) if options[:buys]
-    rep['office'] = self.office.name if self.office
+    rep['office'] = self.office.abbreviation if self.office
     rep
   end
   

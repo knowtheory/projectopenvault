@@ -1,31 +1,28 @@
+#[
+#  ["Peter Kinder", true], 
+#  ["Brad Lager", true], 
+#  ["John Brunner"], 
+#  ["Sarah Steelman"], 
+#  ["Todd Akin", true], 
+#  ["Claire McCaskill", true], 
+#  ["Dave Spence"],
+#  ["Jay Nixon", true]
+#].each{ |candidate| Candidate.first_or_create Hash[[:name, :incumbent].zip(candidate)] }
+#
 [
-  ["Peter Kinder", true], 
-  ["Brad Lager", true], 
-  ["John Brunner"], 
-  ["Sarah Steelman"], 
-  ["Todd Akin", true], 
-  ["Claire McCaskill", true], 
-  ["Dave Spence"],
-  ["Jay Nixon", true]
-].each{ |candidate| Candidate.first_or_create Hash[[:name, :incumbent].zip(candidate)] }
-
-[
-  ["Lieutenant Governor", "Lieutenant Governor", "Lt. Gov.", "State-wide", "Peter Kinder"],
-  ["U.S. Senate", "Senator", "Sen.", "State-wide", "Claire McCaskill"],
-  ["Governor", "Governor", "Gov.", "State-wide", "Jay Nixon"],
-  ["Missouri Senate from the 12th District", "State Senator", "St. Sen.", "12th District", "Brad Lager"],
-  ["U.S. Representative from the 2nd District", "Representative",  "Rep.", "2nd District", "Todd Akin"]
+  ["County Sheriff", "Sheriff", "Sheriff", "Osage County"]
 ].each do |data|
-  data.push Candidate.first(:name=>data.pop) if data.size > 4
-  Office.first_or_create Hash[[:name, :title, :abbreviation, :region, :incumbent].zip(data)]
+  Office.first_or_create Hash[[:name, :title, :abbreviation, :region].zip(data)]
 end
+
+
 
 [
   ["KRCG-TV", "KRCG", "http://www.connectmidmissouri.com/"],
   ["KOMU-TV", "KOMU", "http://www.komu.com/home/"],
   ["J.W. Broadcasting", "KMIZ", "http://www.kmiz.com/"],
   ["J.W. Broadcasting", "KQFX"],
-  ["KOMU-CW", "KMOU-CW"]
+  ["The CW", "KOMU-CW"]
 ].each{ |station| Station.first_or_create Hash[[:name, :call_sign, :url].zip(station)] }
 
 [

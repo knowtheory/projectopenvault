@@ -3,13 +3,15 @@ class Office
   
   property :id,           Serial
   property :name,         String, :required => true, :length => 2048
-  property :slug,         String, :required => true, :length => 2048, :unique => true
+  property :slug,         String, :required => true, :length => 2048
   property :title,        String
   property :abbreviation, String
   property :region,       String
+  property :incumbent_id, Integer, :required => false
   
   has n, :buys
-  belongs_to :incumbent, "Candidate", :child_key => [:candidate_id], :required => false
+  has 1, :incumbent, "Candidate"
+  has n, :candidates
   
   def name=(str)
     self.slug = Utilities.sluggify(str)
