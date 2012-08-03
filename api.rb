@@ -92,6 +92,40 @@ module AdVault
         end
       end
     end
+
+    resource :committees do
+      get do
+        content_type :json
+        @committees = Committee.all
+        @committees.map{ |committee| committee.canonical }.to_json
+      end
+      
+      segment "/:slug" do
+        get do
+          Committee.first(:slug=>params[:slug]).canonical.to_json
+        end
+      
+        post do
+          Committee.first(:slug=>params[:slug])
+        end
+      
+        put do
+          Committee.first(:slug=>params[:slug])
+        end
+      
+        delete do
+          Committee.first(:slug=>params[:slug])
+        end
+      
+        get "/spending" do
+          "Hallo!"
+        end
+        
+        get "/ads" do
+          "Ads!"
+        end
+      end
+    end
     
     resource :offices do
       segment "/:slug" do

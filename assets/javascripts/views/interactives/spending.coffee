@@ -7,6 +7,7 @@ POV.views.Spending = Backbone.View.extend
     this.content    = new POV.views.SpendingContent
       el: this.$el.find ".content"
   render: () ->
+    console.log("Rendering Spending")
     this.$el.append this.navigation.attach()
     this.$el.append this.content.attach()
   attach: () ->
@@ -51,11 +52,15 @@ POV.views.SpendingContent = Backbone.View.extend
     this.current_page = 1
   render: () -> 
     collection = this.modes[this.current_mode]
-    models = collection
-    views = models.map( (model) -> new POV.views.SpendingBadge({model:model}) )
+    models = collection.page(1)
+    views = _.map(models, (model) -> new POV.views.SpendingBadge({model:model}) )
     """
     <div class="badges">
       #{(view.render() for view in views).join("\n")}
+    </div>
+    <div class="pagination">
+      <span>Previous</span>
+      <span>Next</span>
     </div>
     """
     

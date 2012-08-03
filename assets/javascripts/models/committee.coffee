@@ -11,10 +11,20 @@ POV.models.Committee = Backbone.Model.extend
     "#{POV.host}/assets/#{this.get('slug')}_headshot.jpg"
 
 POV.models.Committees = Backbone.Collection.extend
-  name       : "candidates"
-  url        : "/candidates"
-  model      : POV.models.Candidate
-  comparator : (candidate) -> -candidate.get('total_spent')
+  name       : "committee"
+  url        : "/committees"
+  model      : POV.models.Committee
+  comparator : (committee) -> -committee.get('total_spent')
   page_size  : 6
-  page       : (num) ->
-    pages = num
+  pages      : (page_size=6) ->
+    this.pages ||= []
+    model_count = this.length
+    page_index = 0
+    index = 0
+    while index < model_count - 1
+      page_index = Math.floor(index / page_size)
+      (this.pages[page_index] ||= []).push(this.models[index])
+      index += 1
+    this.pages
+  page: (num, page_size) ->
+    this.pages(page_size)[num-1]

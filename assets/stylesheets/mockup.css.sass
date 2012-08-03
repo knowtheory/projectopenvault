@@ -102,7 +102,6 @@ $smallcaps: 'Alegreya SC'
     .content
       margin: $header-gutter-width
       float: left
-      min-height: 200px
       .badges
         clear: right
         .badge
@@ -127,6 +126,9 @@ $smallcaps: 'Alegreya SC'
               font-family: 'Helvetica'
               font-weight: bold
               font-size: 24pt
+      .pagination
+        clear: both
+        float: left
 
   h2
     font-size: 20pt
@@ -142,16 +144,16 @@ $smallcaps: 'Alegreya SC'
     float: left
     
     #posts
-      #post
+      .post
         border-bottom: 1px dashed #C7C7C7
         h3
-        font-size: 24pt
-        a
           font-size: 24pt
-          text-decoration: none
-          color: black
-        a:hover
-          text-decoration: underline
+          a
+            font-size: 24pt
+            text-decoration: none
+            color: black
+          a:hover
+            text-decoration: underline
         p
           line-height: 1.25
           margin-bottom: 1em
