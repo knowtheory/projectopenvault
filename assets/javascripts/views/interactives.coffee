@@ -18,6 +18,7 @@ POV.views.Interactives = Backbone.View.extend
         #committees: committees
         #offices: offices
   render: () ->
+    this.$el.empty()
     this.$el.append(view.attach()) for name, view of this.views
   detach: () ->
     this.$el.empty()
