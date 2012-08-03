@@ -49,15 +49,10 @@ POV.views.SpendingContent = Backbone.View.extend
       #committee: committees
       #office:    offices
     this.current_page = 1
-    console.log("init")
   render: () -> 
-    console.log("rendering")
     collection = this.modes[this.current_mode]
     models = collection
-    console.log(models)
-    console.log(models.length)
     views = models.map( (model) -> new POV.views.SpendingBadge({model:model}) )
-    console.log(views)
     """
     <div class="badges">
       #{(view.render() for view in views).join("\n")}

@@ -4,6 +4,9 @@ POV.views.Interactives = Backbone.View.extend
     window.candidates = new POV.models.Candidates
     candidates.on 'reset', this.loaded, this
     candidates.fetch()
+    window.committees = new POV.models.Committees
+    committees.on 'reset', this.loaded, this
+    committees.fetch()
 
     this.loaded = 
       candidates: false
@@ -11,7 +14,7 @@ POV.views.Interactives = Backbone.View.extend
       spending: new POV.views.Spending
         el: this.$el.find('#spending')
         candidates: candidates
-        #committees: committees
+        committees: committees
         #offices: offices
   render: () ->
     this.$el.append(view.attach()) for name, view of this.views
