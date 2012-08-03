@@ -9,7 +9,7 @@ module AdVault
     get '/blocks' do
       @buys = Buy.all
       @candidates = Candidate.all
-      haml :tumblr_blocks, :layout => :tumblr_mockup_layout
+      haml :tumblr_blocks, :layout => :tumblr
     end
     
     get '/backbone' do

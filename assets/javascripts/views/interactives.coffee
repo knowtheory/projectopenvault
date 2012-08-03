@@ -1,6 +1,12 @@
 POV.views.Interactives = Backbone.View.extend
   id: "interactives"
   initialize: (options) ->
+    window.candidates = new POV.models.Candidates
+    candidates.on 'reset', this.loaded, this
+    candidates.fetch()
+
+    this.loaded = 
+      candidates: false
     this.views = 
       spending: new POV.views.Spending
         el: this.$el.find('#spending')
@@ -11,3 +17,9 @@ POV.views.Interactives = Backbone.View.extend
     this.$el.append(view.attach()) for name, view of this.views
   detach: () ->
     this.$el.empty()
+  loaded: (collection, response) ->
+    this.loaded[collection.name] = true
+    statuses = (status for name, status of this.loaded)
+    if _.all(statuses, (status) -> status)
+      this.render()
+    

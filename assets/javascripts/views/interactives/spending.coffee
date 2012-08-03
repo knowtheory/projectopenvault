@@ -7,7 +7,8 @@ POV.views.Spending = Backbone.View.extend
     this.content    = new POV.views.SpendingContent
       el: this.$el.find ".content"
   render: () ->
-    this.$el.html this.navigation.attach(), this.content.attach()
+    this.$el.append this.navigation.attach()
+    this.$el.append this.content.attach()
   attach: () ->
     this.render()
   detach: () ->
@@ -41,8 +42,30 @@ POV.views.SpendingNavigation = Backbone.View.extend
 POV.views.SpendingContent = Backbone.View.extend
   className: "content"
   events: {}
-  render: () -> ""
-  attach: () ->
-    this.$el.html(this.render())
-  open: (mode) ->
+  initialize: (options) ->
+    this.current_mode = if options.mode? then options.mode else "candidate"
+    this.modes =
+      candidate: candidates
+      #committee: committees
+      #office:    offices
+    this.current_page = 1
+    console.log("init")
+  render: () -> 
+    console.log("rendering")
+    collection = this.modes[this.current_mode]
+    models = collection
+    console.log(models)
+    console.log(models.length)
+    views = models.map( (model) -> new POV.views.SpendingBadge({model:model}) )
+    console.log(views)
+    """
+    <div class="badges">
+      #{(view.render() for view in views).join("\n")}
+    </div>
+    """
     
+  attach: () -> this.$el.html(this.render())
+  open: (mode) ->
+    this.current_mode = mode
+    this.current_page = 1
+    this.attach()

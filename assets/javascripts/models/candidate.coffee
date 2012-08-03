@@ -11,6 +11,10 @@ POV.models.Candidate = Backbone.Model.extend
     "#{POV.host}/assets/#{this.get('slug')}_headshot.jpg"
 
 POV.models.Candidates = Backbone.Collection.extend
-  url: "/candidates",
-  model: POV.models.Candidate
-  comparator: (candidate) -> -candidate.get('total_spent')
+  name       : "candidates"
+  url        : "/candidates"
+  model      : POV.models.Candidate
+  comparator : (candidate) -> -candidate.get('total_spent')
+  page_size  : 6
+  page       : (num) ->
+    pages = num

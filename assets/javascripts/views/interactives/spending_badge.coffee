@@ -1,12 +1,17 @@
 POV.views.SpendingBadge = Backbone.View.extend
+  formatDollars: (value) ->
+    str = "" + value
+    len = str.length
+    group_count = Math.ceil(str.length / 3)
+    
   render: ->
     """
     <div class="badge">
       <img src="#{POV.host}/assets/#{this.model.get('slug')}_headshot.jpg"}></img>
       <div class="info">
         <p class="name">#{this.model.get('name')}</p>
-        <p class="office">#{this.model.get('office')}</p>
-        <p class="dollars-spent">#{this.model.get('total_spent')}</p>
+        <p class="office">for #{this.model.get('office') || ''}</p>
+        <p class="dollars-spent">$#{this.model.get('total_spent') || 0}</p>
       </div>
     </div>
     """

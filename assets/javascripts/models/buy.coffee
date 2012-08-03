@@ -1,6 +1,7 @@
 POV.models.Buy = Backbone.Model.extend()
 
 POV.models.Buys = Backbone.Collection.extend
+  name: "buys"
   url: "/spending",
   model: POV.models.Buy,
   total_cost: ->
