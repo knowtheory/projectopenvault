@@ -22,6 +22,7 @@ module AdVault
       segment "/:id" do
         get do
           @buy = Buy.first(:id=>params[:id])
+          error! 'Not Found', 404 unless @buy
           @buy.canonical.to_json
         end
         

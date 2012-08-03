@@ -1,4 +1,5 @@
 POV.views.Spending = Backbone.View.extend
+  selector: "#spending"
   events: 
     "click .navigation .facets span": "openTab"
   initialize: (options) ->
@@ -8,9 +9,15 @@ POV.views.Spending = Backbone.View.extend
       el: this.$el.find ".content"
   render: () ->
     console.log("Rendering Spending")
-    this.$el.append this.navigation.attach()
-    this.$el.append this.content.attach()
-  attach: () ->
+    this.$el.html """
+    <div class="navigation"></div>
+    <div class="content"></div>
+    """
+    this.navigation.setElement(this.$el.find ".navigation")
+    this.content.setElement(this.$el.find ".content")
+    this.navigation.attach()
+    this.content.attach()
+  attach: (el) ->
     this.render()
   detach: () ->
     this.$el.empty()
@@ -21,7 +28,7 @@ POV.views.SpendingNavigation = Backbone.View.extend
   className: "navigation"
   render: () ->
     """
-    <p class="title">Total Spending</p>
+    <p class="title">Total Ad Spending</p>
     <div class="facets">
       <span class="candidate active">Candidate</span>
       <span class="committee">Committee</span>
@@ -64,7 +71,9 @@ POV.views.SpendingContent = Backbone.View.extend
     </div>
     """
     
-  attach: () -> this.$el.html(this.render())
+  attach: () -> 
+    console.log "attaching #{this.current_mode}"
+    this.$el.html(this.render())
   open: (mode) ->
     this.current_mode = mode
     this.current_page = 1

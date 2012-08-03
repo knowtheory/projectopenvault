@@ -11,7 +11,7 @@ POV.models.Committee = Backbone.Model.extend
     "#{POV.host}/assets/#{this.get('slug')}_headshot.jpg"
 
 POV.models.Committees = Backbone.Collection.extend
-  name       : "committee"
+  name       : "committees"
   url        : "/committees"
   model      : POV.models.Committee
   comparator : (committee) -> -committee.get('total_spent')
