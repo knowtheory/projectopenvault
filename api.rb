@@ -61,6 +61,7 @@ module AdVault
         
     resource :candidates do
       get do
+        content_type :json
         @candidates = Candidate.all
         @candidates.map{ |candidate| candidate.canonical }.to_json
       end

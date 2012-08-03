@@ -18,10 +18,12 @@ class Candidate
   def canonical(options={})
     rep = {
       'id'        => self.id,
+      'name'      => self.name,
       'slug'      => self.slug,
       'url'       => self.url
     }
     rep['buys'] = self.buys.map(&:canonical) if options[:buys]
+    rep['office'] = self.office.name if self.office
     rep
   end
   

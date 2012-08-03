@@ -1,8 +1,4 @@
-POV.models.Buy = Backbone.Model.extend
-  parse: (response) ->
-    console.log("RESPONSE")
-    console.log(response)
-    response
+POV.models.Buy = Backbone.Model.extend()
 
 POV.models.Buys = Backbone.Collection.extend
   url: "/spending",

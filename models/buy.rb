@@ -34,7 +34,8 @@ class Buy
       'total_cost'      => self.total_cost,
       'election'        => self.election,
       'length'          => self.length,
-      'total_runtime'   => self.total_runtime
+      'total_runtime'   => self.total_runtime,
+      'candidate_id'    => self.candidate_id
     }
     rep
   end
