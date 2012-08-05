@@ -20,7 +20,6 @@ class Candidate
   
   def canonical(options={})
     rep = {
-
       'id'          => self.id,
       'name'        => self.name,
       'slug'        => self.slug,

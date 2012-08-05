@@ -2,12 +2,6 @@ require './config/setup'
 require './config/models'
 require './config/app'
 
-logname = ENV['RACK_ENV'] == 'production' ? "production.log" : "development.log"
-
-log = File.new(File.join("log",logname), "a+")
-$stdout.reopen(log)
-$stderr.reopen(log)
-
 # Rack is a web server API for Ruby.
 # Rack apps accept requests, and respond with an array of three things:
 # A status, headers and the body.

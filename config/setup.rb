@@ -16,3 +16,8 @@ here = File.dirname(__FILE__)
 app_root = File.join(here, '..')
 require_all File.join(app_root, 'lib')
 
+logname = ENV['RACK_ENV'] == 'production' ? "production.log" : "development.log"
+log = File.new(File.join("log",logname), "a+")
+log.sync = true
+$stdout.reopen(log)
+$stderr.reopen(log)

@@ -2,7 +2,7 @@ module AdVault
   class App < Sinatra::Base
     configure :development do
       LOGGER = Logger.new("log/development.log")
-      enable :logging, :dump_errors
+      enable :logging
     end
 
     configure :production do
