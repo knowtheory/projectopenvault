@@ -27,19 +27,23 @@ $smallcaps: 'Alegreya SC'
       float: left
       margin-left: $header-gutter-width
       font-family: $smallcaps
-      img
-        margin-top: 10px
-        width: 61px
-        height: 48px
-        float: left
-      h1
-        vertical-align: top
-        font-size: 36pt
-        width: 480px
-        p.meta
+      a
+        text-decoration: none
+        img
+          margin-top: 10px
+          width: 61px
+          height: 48px
           float: left
-          font-size: 14pt
-          padding-bottom: 10px
+        h1
+          vertical-align: top
+          font-size: 36pt
+          width: 480px
+          p.meta
+            float: left
+            font-size: 14pt
+            padding-bottom: 10px
+      a:visited
+        color: black
 
     #aggregate
       float: right
@@ -78,8 +82,8 @@ $smallcaps: 'Alegreya SC'
         float: left
         font-family: $smallcaps
         font-size: 16pt
-        width: 200px
-        padding: 5px 130px 6px 0px
+        width: 250px
+        padding: 5px 80px 6px 0px
       .facets
         font-family: $smallcaps
         span
@@ -105,18 +109,19 @@ $smallcaps: 'Alegreya SC'
       .badges
         clear: right
         .badge
-          width: 33%
           float: left
           img
             width: 84px
             height: 84px
+            margin: 4px
+            border: 1px solid #C7C7C7
             float: left
-            margin: 5px
           .info
             float: left
-            margin: 5px
             p
               font-size: 16pt
+              width: 200px
+              margin-top: 5px
             p.name
               font-weight: bold
             p.office

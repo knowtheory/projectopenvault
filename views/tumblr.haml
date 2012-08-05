@@ -22,10 +22,11 @@
     #layout
       #header
         #masthead
-          %img(src='http://knowtheory.net/assets/tumblr-mockup.png')
-          %h1
-            Project OpenVault
-            %p.meta Election coverage for Mid-Missouri
+          %a(href='/')
+            %img(src='http://knowtheory.net/assets/tumblr-mockup.png')
+            %h1
+              Project OpenVault
+              %p.meta Election coverage for Mid-Missouri
         #aggregate
           %p#total_runtime
             %span.value= @buys.sum(:total_runtime)

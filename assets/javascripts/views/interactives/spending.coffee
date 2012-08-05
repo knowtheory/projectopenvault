@@ -20,7 +20,7 @@ POV.views.SpendingNavigation = Backbone.View.extend
   initialize: (options) -> @selector = options.selector if options?.selector
   render: () ->
     this.$el.html """
-    <p class="title">Total Ad Spending</p>
+    <p class="title">Total TV Ad Spending</p>
     <div class="facets">
       <span class="candidates active">Candidate</span>
       <span class="committees">Committee</span>
@@ -35,6 +35,33 @@ POV.views.SpendingNavigation = Backbone.View.extend
     class_name = clicked.attr('class')
     clicked.addClass('active')
     class_name
+
+POV.views.CandidateBadge = Backbone.View.extend
+  render: ->
+    """
+    <div class="badge">
+      <img src="#{POV.host}/assets/candidates/#{this.model.get('slug')}_headshot.jpg"}></img>
+      <div class="info">
+        <p class="name">#{this.model.get('name')}</p>
+        <p class="office">for #{this.model.get('office') || ''}</p>
+        <p class="dollars-spent">$#{POV.formatDollars(this.model.get('total_spent') || 0)}</p>
+      </div>
+    </div>
+    """
+  attach: -> this.$el.html @render()
+
+POV.views.CommitteeBadge = Backbone.View.extend
+  render: ->
+    """
+    <div class="badge">
+      <img src="#{POV.host}/assets/committees/#{this.model.get('slug')}.jpg"}></img>
+      <div class="info">
+        <p class="name">#{this.model.get('name')}</p>
+        <p class="dollars-spent">$#{POV.formatDollars(this.model.get('total_spent') || 0)}</p>
+      </div>
+    </div>
+    """
+  attach: -> this.$el.html @render()
     
 POV.views.SpendingContent = Backbone.View.extend
   selector: ".content"
@@ -45,10 +72,14 @@ POV.views.SpendingContent = Backbone.View.extend
   initialize: (options) ->
     @current_mode = if options?.mode then options.mode else "candidates"
     @modes =
-      candidates: candidates
-      committees: committees
+      candidates: 
+        collection: candidates
+        view:       POV.views.CandidateBadge
+      committees: 
+        collection: committees
+        view:       POV.views.CommitteeBadge
       #office:    offices
-    @current_collection = @modes[@current_mode]
+    @current_collection = @modes[@current_mode].collection
     @current_page = 0
   render: () ->
     this.$el.html """
@@ -64,49 +95,20 @@ POV.views.SpendingContent = Backbone.View.extend
     return unless @current_collection
     @current_pages = @current_collection.pages(6)
     @current_models = @current_pages[@current_page]
-    views = _.map(@current_models, (model) -> new POV.views.CandidateBadge({model:model}) )
+    views = _.map(@current_models, (model) => new @modes[@current_mode].view({model:model}) )
     (view.render() for view in views).join("\n")
   attach:     (el) -> @setElement(el.find(@selector)) and @attachViews()
   attachViews:  () -> 
   open: (mode) ->
     @current_mode = mode
     @current_page = 0
-    @current_collection = @modes[@current_mode]
+    @current_collection = @modes[@current_mode].collection
     @render()
   clickPreviousPage: (event) -> 
-    console.log("Previous!")
     @current_page = @current_pages.length if @current_page == 0
     @current_page--
     @render()
   clickNextPage:     (event) -> 
-    console.log("Next!")
     @current_page++
     @current_page = 0 if @current_page == @current_pages.length
     @render()
-    
-POV.views.CandidateBadge = Backbone.View.extend
-  render: ->
-    """
-    <div class="badge">
-      <img src="#{POV.host}/assets/#{this.model.get('slug')}_headshot.jpg"}></img>
-      <div class="info">
-        <p class="name">#{this.model.get('name')}</p>
-        <p class="office">for #{this.model.get('office') || ''}</p>
-        <p class="dollars-spent">$#{POV.formatDollars(this.model.get('total_spent') || 0)}</p>
-      </div>
-    </div>
-    """
-  attach: -> this.$el.html @render()
-
-POV.views.CommitteeBadge = Backbone.View.extend
-  render: ->
-    """
-    <div class="badge">
-      <img src="#{POV.host}/assets/#{this.model.get('slug')}.jpg"}></img>
-      <div class="info">
-        <p class="name">#{this.model.get('name')}</p>
-        <p class="dollars-spent">$#{POV.formatDollars(this.model.get('total_spent') || 0)}</p>
-      </div>
-    </div>
-    """
-  attach: -> this.$el.html @render()
