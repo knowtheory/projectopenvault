@@ -34,4 +34,10 @@ app = Rack::Builder.new do
 end
 
 use Rack::JSONP
+use Rack::ETag
+use Rack::Cache,
+  :verbose     => true,
+  :metastore   => 'file:tmp/meta',
+  :entitystore => 'file:tmp/body'
+
 run app

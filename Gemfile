@@ -1,6 +1,7 @@
 source :rubygems
 
 gem 'rack-contrib'
+gem 'rack-cache'
 gem 'grape'
 gem 'sinatra', :require => 'sinatra/base'
 gem 'coffee-script'
