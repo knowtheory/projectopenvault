@@ -98,7 +98,7 @@ POV.views.CandidateBadge = Backbone.View.extend
     """
   attach: -> this.$el.html @render()
 
-POV.views.CandidateBadge = Backbone.View.extend
+POV.views.CommitteeBadge = Backbone.View.extend
   render: ->
     """
     <div class="badge">
