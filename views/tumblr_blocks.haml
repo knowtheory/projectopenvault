@@ -1,3 +1,24 @@
+{block:Pagination}
+.navigation
+  {block:PreviousPage}
+  %a(href="{PreviousPage}") « Newer
+  {/block:PreviousPage}
+
+  {block:JumpPagination length="7"}
+  {block:CurrentPage}
+  .current_page {PageNumber}
+  {/block:CurrentPage}
+
+  {block:JumpPage}
+  %a(class="jump_page" href="{URL}") {PageNumber}
+  {/block:JumpPage}
+  {/block:JumpPagination}            
+
+  {block:NextPage}
+  %a(href="{NextPage}") Older »
+  {/block:NextPage}
+{/block:Pagination}
+
 {block:Posts}
 {block:Text}
 .post
@@ -53,22 +74,23 @@
 
 {/block:Posts}
 
-{block:Navigation}
+{block:Pagination}
 .navigation
-  {block:Pagination}
   {block:PreviousPage}
   %a(href="{PreviousPage}") « Newer
   {/block:PreviousPage}
-  {block:JumpPagination length="5"}
+
+  {block:JumpPagination length="7"}
   {block:CurrentPage}
-  %span(class="{current_page}") {PageNumber}
-  {/block:CurrentPage}}
+  .current_page {PageNumber}
+  {/block:CurrentPage}
+
   {block:JumpPage}
-  %a(href="{URL}") {PageNumber}
+  %a(class="jump_page" href="{URL}") {PageNumber}
   {/block:JumpPage}
-  {/block:JumpPagination} 
+  {/block:JumpPagination}            
+
   {block:NextPage}
   %a(href="{NextPage}") Older »
   {/block:NextPage}
-  {/block:Pagination}
-{/block:Navigation}
+{/block:Pagination}

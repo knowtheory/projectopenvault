@@ -1,3 +1,18 @@
+.navigation
+  .pages
+    %a « Newer
+    %a.jump_page 1
+    %span.current_page 2
+    %a.jump_page 3
+    %a.jump_page 4
+    %a.jump_page 5
+    %a.jump_page 6
+    %a.jump_page 7
+    %a Older »
+  %form.search(action="/search" method="get")
+    %input(type="text" name="q" value="{SearchQuery}")
+    %input(type="submit" value="Search Posts")
+  
 .post
   %h3
     %a(href="{Permalink}") St. Louis judge blocks Missouri Senate candidate's bid
@@ -24,3 +39,13 @@
 
     %p The St. Louis Post-Dispatch reported that St. Louis Circuit Judge Joan Moriarty rejected that argument Wednesday. The judge said Nasheed's reasoning could allow candidates to run in multiple districts.
 
+.navigation
+  %a « Newer
+  %a.jump_page 1
+  %span.current_page 2
+  %a.jump_page 3
+  %a.jump_page 4
+  %a.jump_page 5
+  %a.jump_page 6
+  %a.jump_page 7
+  %a Older »

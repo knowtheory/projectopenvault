@@ -165,7 +165,16 @@ $smallcaps: 'Alegreya SC'
         float: right
     
     #posts
+      .navigation
+        float: left
+        clear: both
+        width: 100%
+        .pages
+          float: left
+        form.search
+          float: right
       .post
+        clear: both
         border-bottom: 1px dashed #C7C7C7
         margin-bottom: 20px
         h3
@@ -176,12 +185,12 @@ $smallcaps: 'Alegreya SC'
             color: black
           a:hover
             text-decoration: underline
-        p
-          line-height: 1.25
-          margin-bottom: 1em
+          p
+            line-height: 1.25
+            margin-bottom: 1em
 
-        p.meta
-          font-family: smallcaps
+          p.meta
+            font-family: $smallcaps
 
 
   #side-bar
