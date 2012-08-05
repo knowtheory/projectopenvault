@@ -1,32 +1,33 @@
 POV.views.Interactives = Backbone.View.extend
+  selector: "#interactives"
   id: "interactives"
   initialize: (options) ->
+    @collections = []
     window.candidates = new POV.models.Candidates
-    candidates.on 'reset', this.loaded, this
-    candidates.fetch()
     window.committees = new POV.models.Committees
-    committees.on 'reset', this.loaded, this
-    committees.fetch()
+    
+    me = this
+    @collections.push candidates, committees
+    _.each @collections, (collection) ->
+      collection.on 'reset', me.loaded, me
+      collection.fetch()
 
-    this.loaded = 
+    @loaded = 
       candidates: false
       committees: false
-    this.views = 
+    @views = 
       spending: new POV.views.Spending
-        el: this.$el.find('#spending')
         candidates: candidates
         committees: committees
         #offices: offices
-  render: () ->
-    this.$el.append(view.attach(this.$el)) for name, view of this.views
-  detach: () ->
-    this.$el.empty()
+  render:       () -> @renderViews()
+  renderViews:  () -> (view.render() for selector, view of @views)
+  attach:     (el) -> @setElement(el or @selector) and @attachViews()
+  attachViews:  () -> view.attach(this.$el) for selector, view of @views
+    
   loaded: (collection, response) ->
-    console.log(collection)
-    this.loaded[collection.name] = true
-    statuses = (status for name, status of this.loaded)
-    console.log(this.loaded)
+    @loaded[collection.name] = true
+    statuses = (status for name, status of @loaded)
     if _.all(statuses, (status) -> status)
-      console.log("Logging Statuses")
-      this.render()
+      @attach() and @render()
     

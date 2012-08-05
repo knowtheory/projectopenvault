@@ -1,14 +1,14 @@
 POV.models.Candidate = Backbone.Model.extend
   initialize: (attributes, options) ->
     if options.buys
-      this.buys = new POV.models.Buys options.buys.where
-        candidate_id: this.id
+      @buys = new POV.models.Buys options.buys.where
+        candidate_id: @id
         
   #totalSpent: ->
-    #this.buys.reduce ((total, buy) -> total + buy.get 'total_cost'), 0
+    #@buys.reduce ((total, buy) -> total + buy.get 'total_cost'), 0
     
   headshot_url: ->
-    "#{POV.host}/assets/#{this.get('slug')}_headshot.jpg"
+    "#{POV.host}/assets/#{@get('slug')}_headshot.jpg"
 
 POV.models.Candidates = Backbone.Collection.extend
   name       : "candidates"
@@ -17,14 +17,15 @@ POV.models.Candidates = Backbone.Collection.extend
   comparator : (candidate) -> -candidate.get('total_spent')
   page_size  : 6
   pages      : (page_size=6) ->
-    this.pages ||= []
-    model_count = this.length
+    return @_pages if @_pages
+    @_pages ||= []
+    model_count = @length
     page_index = 0
     index = 0
     while index < model_count - 1
       page_index = Math.floor(index / page_size)
-      (this.pages[page_index] ||= []).push(this.models[index])
+      (@_pages[page_index] ||= []).push(@models[index])
       index += 1
-    this.pages
+    @_pages
   page: (num, page_size) ->
-    this.pages(page_size)[num-1]
+    @pages(page_size)[num-1]
