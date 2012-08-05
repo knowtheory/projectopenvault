@@ -1,5 +1,6 @@
 # require './config/models.rb'; DataMapper.auto_migrate!; load './data/fixtures.rb'; load './data/import.rb'
 require File.join(File.dirname(__FILE__),'..','config','models.rb')
+DataMapper.auto_migrate!
 load File.join(File.dirname(__FILE__),'fixtures.rb') # ensures that all the background data exists.
 require 'csv'
 #require './config/models.rb'; DataMapper.auto_migrate!
@@ -10,17 +11,16 @@ def most_recent_data_file(name,dir=nil)
 end
 
 #f = 'candidates'; data = CSV.open(most_recent_data_file(f,'./data'), :headers => true).read; row = data.first
-
 CSV.foreach(most_recent_data_file('candidates'), :headers => true) do |row|
 
   candidate = Candidate.new(Utilities.pick row, *%w(party, url))
-  candidate.name = row['candidate']
+  candidate.name = row['candidate'].strip
 
   if row['current_office']
-    current_office = Office.first_or_new(:name => row['current_office'], 
-                                :region => row['region_current_office'])
-    current_office.title = row['title']               unless current_office.title
-    current_office.abbreviation = row['abbreviation'] unless current_office.abbreviation
+    current_office = Office.first_or_new(:name   => row['current_office'].strip, 
+                                         :region => row['region_current_office'].strip)
+    current_office.title = row['title'].strip               unless current_office.title
+    current_office.abbreviation = row['abbreviation'].strip unless current_office.abbreviation
     
     if current_office.save
       puts "#{Time.now}: saved office #{current_office.id}"
@@ -30,7 +30,7 @@ CSV.foreach(most_recent_data_file('candidates'), :headers => true) do |row|
     end
   end
 
-  running_for = Office.first_or_new(:name => row['office_sought'], :region => row['region_office_sought'])
+  running_for = Office.first_or_new(:name => row['office_sought'].strip, :region => row['region_office_sought'].strip)
 
   puts running_for.save ? "#{Time.now}: saved office #{running_for.id}" : "#{Time.now}: Unable to save #{running_for.errors.inspect}"
   
@@ -48,14 +48,14 @@ CSV.foreach(most_recent_data_file('advault_data'), :headers => true) do |row|
   buy.end_date      = end_date
   buy.total_cost    = buy.rate_per_spot * buy.spots_per_week
   buy.total_runtime = buy.length * buy.spots_per_week
-  buy.submitter     = User.first :last_name => row['submitter']
-  buy.station       = Station.first :call_sign => row['station']
-  buy.buyer         = Buyer.first_or_create :name => row['buyer']
-  buy.committee     = Committee.first_or_create :name => row['advertiser']
+  buy.submitter     = User.first :last_name => row['submitter'].strip
+  buy.station       = Station.first :call_sign => row['station'].strip
+  buy.buyer         = Buyer.first_or_create :name => row['buyer'].strip
+  buy.committee     = Committee.first_or_create :name => row['advertiser'].strip
 
   if row['candidate'] !~ /Issue/i
-    buy.candidate = Candidate.first(:name => row['candidate'])
-    buy.office    = Office.first(:name => row['office'])
+    buy.candidate = Candidate.first(:name => row['candidate'].strip) if row['candidate']
+    buy.office    = Office.first(:name => row['office'].strip) if row['office']
   else
     # ???
   end

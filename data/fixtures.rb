@@ -15,8 +15,6 @@
   Office.first_or_create Hash[[:name, :title, :abbreviation, :region].zip(data)]
 end
 
-
-
 [
   ["KRCG-TV", "KRCG", "http://www.connectmidmissouri.com/"],
   ["KOMU-TV", "KOMU", "http://www.komu.com/home/"],
