@@ -1,4 +1,4 @@
-POV.views.SpendingBadge = Backbone.View.extend
+POV.views.CandidateBadge = Backbone.View.extend
   render: ->
     """
     <div class="badge">

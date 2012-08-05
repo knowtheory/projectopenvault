@@ -46,7 +46,7 @@ POV.views.SpendingContent = Backbone.View.extend
     @current_mode = if options?.mode then options.mode else "candidates"
     @modes =
       candidates: candidates
-      #committee: committees
+      committees: committees
       #office:    offices
     @current_collection = @modes[@current_mode]
     @current_page = 0
@@ -64,13 +64,13 @@ POV.views.SpendingContent = Backbone.View.extend
     return unless @current_collection
     @current_pages = @current_collection.pages(6)
     @current_models = @current_pages[@current_page]
-    views = _.map(@current_models, (model) -> new POV.views.SpendingBadge({model:model}) )
+    views = _.map(@current_models, (model) -> new POV.views.CandidateBadge({model:model}) )
     (view.render() for view in views).join("\n")
   attach:     (el) -> @setElement(el.find(@selector)) and @attachViews()
   attachViews:  () -> 
   open: (mode) ->
     @current_mode = mode
-    @current_page = 1
+    @current_page = 0
     @current_collection = @modes[@current_mode]
     @render()
   clickPreviousPage: (event) -> 
@@ -84,4 +84,29 @@ POV.views.SpendingContent = Backbone.View.extend
     @current_page = 0 if @current_page == @current_pages.length
     @render()
     
-  
+POV.views.CandidateBadge = Backbone.View.extend
+  render: ->
+    """
+    <div class="badge">
+      <img src="#{POV.host}/assets/#{this.model.get('slug')}_headshot.jpg"}></img>
+      <div class="info">
+        <p class="name">#{this.model.get('name')}</p>
+        <p class="office">for #{this.model.get('office') || ''}</p>
+        <p class="dollars-spent">$#{POV.formatDollars(this.model.get('total_spent') || 0)}</p>
+      </div>
+    </div>
+    """
+  attach: -> this.$el.html @render()
+
+POV.views.CandidateBadge = Backbone.View.extend
+  render: ->
+    """
+    <div class="badge">
+      <img src="#{POV.host}/assets/#{this.model.get('slug')}.jpg"}></img>
+      <div class="info">
+        <p class="name">#{this.model.get('name')}</p>
+        <p class="dollars-spent">$#{POV.formatDollars(this.model.get('total_spent') || 0)}</p>
+      </div>
+    </div>
+    """
+  attach: -> this.$el.html @render()
