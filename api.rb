@@ -1,20 +1,30 @@
 module AdVault
   class Api < Grape::API
     version 'v1', :using => :header, :vendor => 'advault'
-
+    helpers Garner::Mixins::Grape::Cache
+    
     helpers do
       def logger
         Api.logger
       end
       
       def content_type(type)
-        header['Content-Type'] = 'application/json'
+        case type
+        when :xml
+        else
+          header['Content-Type'] = 'application/json'
+        end
       end
+    end
+    
+    before do
+      logger.info "Hello!"
+      header['Cache-Control'] = 'public'
+      header['Content-Type']  = 'application/json'
     end
     
     resource :spending do
       get do
-        content_type :json
         @buys = Buy.all
         @buys.map{ |buy| buy.canonical }.to_json
       end
@@ -62,9 +72,14 @@ module AdVault
         
     resource :candidates do
       get do
-        content_type :json
-        @candidates = Candidate.all
-        @candidates.map{ |candidate| candidate.canonical }.to_json
+        logger.info("=========== CANDIDATE HEADERS ============")
+        logger.info(header)
+        logger.info("===========================================")
+        cache do
+          logger.info "IN GARNER CACHE BLOCK"
+          @candidates = Candidate.all
+          @candidates.map{ |candidate| candidate.canonical }.to_json
+        end
       end
       
       segment "/:slug" do

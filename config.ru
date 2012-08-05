@@ -17,7 +17,10 @@ $stderr.reopen(log)
 # Rack::Builder is a little wrapper that fits around other Rack apps
 # to coordinate their behavior.
 app = Rack::Builder.new do
-  
+  Garner::Cache::ObjectIdentity::KEY_STRATEGIES = [
+    Garner::Strategies::Keys::RequestGet,
+    Garner::Strategies::Keys::Jsonp
+  ]
   map('/assets') { run AdVault::Assets }
 
   # Rack::Cascade runs requests through a list

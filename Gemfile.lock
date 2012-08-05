@@ -1,6 +1,9 @@
 GEM
   remote: http://rubygems.org/
   specs:
+    activesupport (3.2.7)
+      i18n (~> 0.6)
+      multi_json (~> 1.0)
     addressable (2.2.8)
     backports (2.6.1)
     bcrypt-ruby (2.1.4)
@@ -58,6 +61,11 @@ GEM
     execjs (1.4.0)
       multi_json (~> 1.0)
     fastercsv (1.5.5)
+    garner (0.1.3)
+      activesupport
+      json
+      multi_json (>= 1.3.0)
+      rack
     grape (0.2.1)
       hashie (~> 1.2)
       multi_json
@@ -67,6 +75,7 @@ GEM
     haml (3.1.6)
     hashie (1.2.0)
     hike (1.2.1)
+    i18n (0.6.0)
     json (1.4.6)
     multi_json (1.3.6)
     multi_xml (0.5.1)
@@ -112,6 +121,7 @@ DEPENDENCIES
   coffee-script
   datamapper
   dm-postgres-adapter
+  garner
   grape
   haml
   rack-cache

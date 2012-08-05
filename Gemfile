@@ -1,14 +1,19 @@
 source :rubygems
 
-gem 'rack-contrib'
-gem 'rack-cache'
+gem 'thin'
 gem 'grape'
 gem 'sinatra', :require => 'sinatra/base'
-gem 'coffee-script'
-gem 'sprockets'
-gem 'datamapper'
-gem 'dm-postgres-adapter'
+gem 'sinatra-contrib'
+gem 'rack-contrib'
+gem 'rack-cache'
+gem 'garner'
+
 gem 'haml'
 gem 'sass'
-gem 'sinatra-contrib'
-gem 'thin'
+
+
+gem 'sprockets'
+gem 'coffee-script'
+
+gem 'datamapper'
+gem 'dm-postgres-adapter'
