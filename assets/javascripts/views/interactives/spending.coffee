@@ -39,33 +39,49 @@ POV.views.SpendingNavigation = Backbone.View.extend
 POV.views.SpendingContent = Backbone.View.extend
   selector: ".content"
   className: "content"
-  events: {}
+  events: 
+    "click .pagination .previous": "clickPreviousPage"
+    "click .pagination .next": "clickNextPage"
   initialize: (options) ->
     @current_mode = if options?.mode then options.mode else "candidates"
     @modes =
       candidates: candidates
       #committee: committees
       #office:    offices
-    @current_page = 1
+    @current_collection = @modes[@current_mode]
+    @current_page = 0
   render: () ->
     this.$el.html """
     <div class="badges">
       #{@renderViews()}
     </div>
     <div class="pagination">
-      <span>Previous</span>
-      <span>Next</span>
+      <span class="previous">Previous</span>
+      <span class="next">Next</span>
     </div>
     """
   renderViews:  () -> 
-    collection = @modes[@current_mode]
-    return unless collection
-    models = collection.page(1)
-    views = _.map(models, (model) -> new POV.views.SpendingBadge({model:model}) )
+    return unless @current_collection
+    @current_pages = @current_collection.pages(6)
+    @current_models = @current_pages[@current_page]
+    views = _.map(@current_models, (model) -> new POV.views.SpendingBadge({model:model}) )
     (view.render() for view in views).join("\n")
   attach:     (el) -> @setElement(el.find(@selector)) and @attachViews()
   attachViews:  () -> 
   open: (mode) ->
     @current_mode = mode
     @current_page = 1
+    @current_collection = @modes[@current_mode]
     @render()
+  clickPreviousPage: (event) -> 
+    console.log("Previous!")
+    @current_page = @current_pages.length if @current_page == 0
+    @current_page--
+    @render()
+  clickNextPage:     (event) -> 
+    console.log("Next!")
+    @current_page++
+    @current_page = 0 if @current_page == @current_pages.length
+    @render()
+    
+  

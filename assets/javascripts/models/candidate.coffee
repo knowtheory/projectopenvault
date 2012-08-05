@@ -16,16 +16,13 @@ POV.models.Candidates = Backbone.Collection.extend
   model      : POV.models.Candidate
   comparator : (candidate) -> -candidate.get('total_spent')
   page_size  : 6
-  pages      : (page_size=6) ->
-    return @_pages if @_pages
-    @_pages ||= []
+  pages      : (page_size=@page_size) ->
+    return @_pages if @_pages?.length == Math.ceil(@length / page_size)
+    @_pages = []
     model_count = @length
-    page_index = 0
-    index = 0
+    page_index = index = 0
     while index < model_count - 1
       page_index = Math.floor(index / page_size)
       (@_pages[page_index] ||= []).push(@models[index])
       index += 1
     @_pages
-  page: (num, page_size) ->
-    @pages(page_size)[num-1]
