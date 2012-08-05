@@ -2,6 +2,12 @@ require './config/setup'
 require './config/models'
 require './config/app'
 
+logname = ENV['RACK_ENV'] == 'production' ? "production.log" : "development.log"
+
+log = File.new(File.join("log",logname), "a+")
+$stdout.reopen(log)
+$stderr.reopen(log)
+
 # Rack is a web server API for Ruby.
 # Rack apps accept requests, and respond with an array of three things:
 # A status, headers and the body.
@@ -11,6 +17,7 @@ require './config/app'
 # Rack::Builder is a little wrapper that fits around other Rack apps
 # to coordinate their behavior.
 app = Rack::Builder.new do
+  
   map('/assets') { run AdVault::Assets }
 
   # Rack::Cascade runs requests through a list

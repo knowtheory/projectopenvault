@@ -1,5 +1,15 @@
 module AdVault
   class App < Sinatra::Base
+    configure :development do
+      LOGGER = Logger.new("log/development.log")
+      enable :logging, :dump_errors
+    end
+
+    configure :production do
+      LOGGER = Logger.new("log/production.log")
+      enable :logging
+    end
+
     get '/' do
       @buys = Buy.all
       @candidates = Candidate.all
