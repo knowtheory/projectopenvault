@@ -28,7 +28,7 @@ POV.views.SpendingNavigation = Backbone.View.extend
     </div>
     """
   attach: (el) -> @setElement el.find(@selector)
-  activeTabFor: (tab_name) ->
+  activeTabFor: (event) ->
     active = this.$el.find(".facets span.active")
     clicked = $(event.target)
     active.removeClass('active')
@@ -83,12 +83,12 @@ POV.views.SpendingContent = Backbone.View.extend
     @current_page = 0
   render: () ->
     this.$el.html """
-    <div class="badges">
-      #{@renderViews()}
-    </div>
     <div class="pagination">
       <span class="previous">Previous</span>
       <span class="next">Next</span>
+    </div>
+    <div class="badges">
+      #{@renderViews()}
     </div>
     """
   renderViews:  () -> 

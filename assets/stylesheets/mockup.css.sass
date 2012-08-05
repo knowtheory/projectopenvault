@@ -87,7 +87,7 @@ $smallcaps: 'Alegreya SC'
       .facets
         font-family: $smallcaps
         span
-          display: inline-block
+          float: left
           padding: 5px
           margin-top: 5px
           cursor: pointer
@@ -106,8 +106,12 @@ $smallcaps: 'Alegreya SC'
     .content
       margin: $header-gutter-width
       float: left
+      .pagination
+        clear: both
+        float: left
       .badges
-        clear: right
+        clear: both
+        padding: 0px 20px
         .badge
           float: left
           img
@@ -118,10 +122,11 @@ $smallcaps: 'Alegreya SC'
             float: left
           .info
             float: left
-            width: 200px
-            margin-top: 5px
+            width: 190px
+            margin: 4px
             p
-              font-size: 16pt
+              font-size: 14pt
+              padding-top: 4px
             p.name
               font-weight: bold
             p.office
@@ -131,17 +136,14 @@ $smallcaps: 'Alegreya SC'
               font-family: 'Helvetica'
               font-weight: bold
               font-size: 24pt
-      .pagination
-        clear: both
-        float: left
 
   h2
     font-size: 20pt
     font-weight: bold
     color: #395A8E
     border-bottom: 1px solid #C7C7C7
-    padding-bottom: 10px
-    margin-bottom: 20px
+    padding-bottom: 15px
+    margin: 20px 0px
 
   #main
     margin-left: $gutter-width
@@ -157,6 +159,10 @@ $smallcaps: 'Alegreya SC'
       padding-left: 1em
       border-left: 0.5em solid #E7E7E7
       font-style: italic
+    
+    h2
+      form#search
+        float: right
     
     #posts
       .post
