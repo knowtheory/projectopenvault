@@ -77,6 +77,7 @@ $smallcaps: 'Alegreya SC'
     margin-bottom: 20px
 
     .navigation
+      $tab-radius: 3px
       width: 920px
       margin-left: $header-gutter-width
       margin-right: $header-gutter-width
@@ -92,14 +93,12 @@ $smallcaps: 'Alegreya SC'
         padding: 5px 80px 6px 0px
       .facets
         font-family: $smallcaps
+        float: left
         span
           float: left
           padding: 5px
           margin-top: 5px
           cursor: pointer
-          
-        $tab-radius: 3px
-        span
           border-left: 1px solid white
           border-right: 1px solid white
         span.active
@@ -109,12 +108,31 @@ $smallcaps: 'Alegreya SC'
           border-bottom: 1px solid white
           border-top-left-radius: $tab-radius
           border-top-right-radius: $tab-radius
+      .pagination
+        float: right
+        padding-top: 4px
+        div
+          float: right
+          font-family: 'Helvetica'
+          font-size: 10pt
+          border-radius: $tab-radius
+          border: 2px solid #C7C7C7
+          padding: 4px
+          cursor: pointer
+        .previous
+          border-top-right-radius: 0px
+          border-bottom-right-radius: 0px
+          border-right: 0px
+          width: 60px
+          padding-left: 10px
+        .next
+          border-top-left-radius: 0px
+          border-bottom-left-radius: 0px
+          width: 48px
+          padding-left: 20px
     .content
       margin: $header-gutter-width
       float: left
-      .pagination
-        clear: both
-        float: left
       .badges
         clear: both
         padding: 0px 20px

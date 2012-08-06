@@ -3,6 +3,8 @@ POV.views.Spending = Backbone.View.extend
   id: "spending"
   events: 
     "click .navigation .facets span": "openTab"
+    "click .pagination .previous"   : "clickPreviousPage"
+    "click .pagination .next"       : "clickNextPage"
   initialize: (options) ->
     @selector = options.selector or @selector
     @views =
@@ -13,6 +15,8 @@ POV.views.Spending = Backbone.View.extend
   attach:     (el) -> @setElement(el.find(@selector)) and @attachViews()
   attachViews:  () -> view.attach(this.$el) for selector, view of @views
   openTab: (event) -> @views.content.open @views.navigation.activeTabFor(event)
+  clickPreviousPage: (event) -> @views.content.previousPage()
+  clickNextPage:     (event) -> @views.content.nextPage()
 
 POV.views.SpendingNavigation = Backbone.View.extend
   selector:  ".navigation"
@@ -26,6 +30,10 @@ POV.views.SpendingNavigation = Backbone.View.extend
       <span class="committees">Committee</span>
       <span class="offices">Office</span>
     </div>
+    <div class="pagination">
+      <div class="next">Next</div>
+      <div class="previous">Previous</div>
+    </div>
     """
   attach: (el) -> @setElement el.find(@selector)
   activeTabFor: (event) ->
@@ -35,6 +43,49 @@ POV.views.SpendingNavigation = Backbone.View.extend
     class_name = clicked.attr('class')
     clicked.addClass('active')
     class_name
+
+POV.views.SpendingContent = Backbone.View.extend
+  selector: ".content"
+  className: "content"
+  initialize: (options) ->
+    @current_mode = if options?.mode then options.mode else "candidates"
+    @modes =
+      candidates: 
+        collection: candidates
+        view:       POV.views.CandidateBadge
+      committees: 
+        collection: committees
+        view:       POV.views.CommitteeBadge
+      #office:    offices
+    @current_collection = @modes[@current_mode].collection
+    @current_page = 0
+  render: () ->
+    this.$el.html """
+    <div class="badges">
+      #{@renderViews()}
+    </div>
+    """
+  renderViews:  () -> 
+    return unless @current_collection
+    @current_pages = @current_collection.pages(6)
+    @current_models = @current_pages[@current_page]
+    views = _.map(@current_models, (model) => new @modes[@current_mode].view({model:model}) )
+    (view.render() for view in views).join("\n")
+  attach:     (el) -> @setElement(el.find(@selector)) and @attachViews()
+  attachViews:  () -> 
+  open: (mode) ->
+    @current_mode = mode
+    @current_page = 0
+    @current_collection = @modes[@current_mode].collection
+    @render()
+  previousPage: () -> 
+    @current_page = @current_pages.length if @current_page == 0
+    @current_page--
+    @render()
+  nextPage:     () -> 
+    @current_page++
+    @current_page = 0 if @current_page == @current_pages.length
+    @render()
 
 POV.views.CandidateBadge = Backbone.View.extend
   render: ->
@@ -62,53 +113,3 @@ POV.views.CommitteeBadge = Backbone.View.extend
     </div>
     """
   attach: -> this.$el.html @render()
-    
-POV.views.SpendingContent = Backbone.View.extend
-  selector: ".content"
-  className: "content"
-  events: 
-    "click .pagination .previous": "clickPreviousPage"
-    "click .pagination .next": "clickNextPage"
-  initialize: (options) ->
-    @current_mode = if options?.mode then options.mode else "candidates"
-    @modes =
-      candidates: 
-        collection: candidates
-        view:       POV.views.CandidateBadge
-      committees: 
-        collection: committees
-        view:       POV.views.CommitteeBadge
-      #office:    offices
-    @current_collection = @modes[@current_mode].collection
-    @current_page = 0
-  render: () ->
-    this.$el.html """
-    <div class="pagination">
-      <span class="previous">Previous</span>
-      <span class="next">Next</span>
-    </div>
-    <div class="badges">
-      #{@renderViews()}
-    </div>
-    """
-  renderViews:  () -> 
-    return unless @current_collection
-    @current_pages = @current_collection.pages(6)
-    @current_models = @current_pages[@current_page]
-    views = _.map(@current_models, (model) => new @modes[@current_mode].view({model:model}) )
-    (view.render() for view in views).join("\n")
-  attach:     (el) -> @setElement(el.find(@selector)) and @attachViews()
-  attachViews:  () -> 
-  open: (mode) ->
-    @current_mode = mode
-    @current_page = 0
-    @current_collection = @modes[@current_mode].collection
-    @render()
-  clickPreviousPage: (event) -> 
-    @current_page = @current_pages.length if @current_page == 0
-    @current_page--
-    @render()
-  clickNextPage:     (event) -> 
-    @current_page++
-    @current_page = 0 if @current_page == @current_pages.length
-    @render()

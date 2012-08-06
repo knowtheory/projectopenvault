@@ -1,6 +1,6 @@
-{block:Pagination}
 .navigation
   .pages
+    {block:Pagination}
     {block:PreviousPage}
     %a(href="{PreviousPage}") « Newer
     {/block:PreviousPage}
@@ -20,7 +20,7 @@
     {/block:NextPage}
     {/block:Pagination}
   %form.search(action="/search" method="get")
-    %input(type="text" name="q" value="{SearchQuery}")
+    %input(type="text" name="q")
     %input(type="submit" value="Search Posts")
 
 {block:Posts}
@@ -78,9 +78,15 @@
 
 {/block:Posts}
 
-{block:Pagination}
+{block:SearchPage}
+{block:NoSearchResults}
+No results found for “{SearchQuery}”
+{/block:NoSearchResults}
+{/block:SearchPage}
+
 .navigation
   .pages
+    {block:Pagination}
     {block:PreviousPage}
     %a(href="{PreviousPage}") « Newer
     {/block:PreviousPage}
@@ -100,5 +106,5 @@
     {/block:NextPage}
     {/block:Pagination}
   %form.search(action="/search" method="get")
-    %input(type="text" name="q" value="{SearchQuery}")
+    %input(type="text" name="q")
     %input(type="submit" value="Search Posts")
