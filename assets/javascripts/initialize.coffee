@@ -13,7 +13,20 @@ POV =
       groups.push(characters.slice(start, end))
       end -= 3
     groups.reverse().join(',')
-  
+  superFormatTime: (value) ->
+    minute_unit = 60
+    hour_unit   = minute_unit * 60
+    day_unit    = hour_unit * 24
+    days = Math.floor(value / day_unit)
+    remaining = value % day_unit
+    hours = Math.floor(remaining / hour_unit)
+    remaining = remaining % hour_unit
+    minutes = Math.floor(remaining / minute_unit)
+    remaining = remaining % minute_unit
+    seconds = remaining
+    "#{days}d:#{hours}h:#{minutes}m:#{seconds}s"
+  formatTime: (value) -> Math.floor(value / 60)
+    
 
 Backbone.sync = _.wrap Backbone.sync, ((sync, method, model, options) -> 
   getValue = (object,prop) ->
@@ -23,6 +36,7 @@ Backbone.sync = _.wrap Backbone.sync, ((sync, method, model, options) ->
       if _.isFunction(object[prop]) then object[prop]() else object[prop]
 
   opts = _.extend(options, {dataType: 'jsonp'})
+  url = options.url
   url = getValue(model, 'url') or urlError() unless options.url
   url = unless /^http/.test url then POV.host + url else url
   sync(method, model, _.extend(options, {dataType: 'jsonp', url: url})))

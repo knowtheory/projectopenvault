@@ -28,6 +28,14 @@ module AdVault
         @buys = Buy.all
         @buys.map{ |buy| buy.canonical }.to_json
       end
+      
+      get '/aggregate' do
+        cost, duration = Buy.aggregate(:total_cost.sum, :total_runtime.sum)
+        {
+          "duration" => duration,
+          "spent"    => cost
+        }.to_json
+      end
 
       segment "/:id" do
         get do

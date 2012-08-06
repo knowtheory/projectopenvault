@@ -30,4 +30,21 @@ POV.views.Interactives = Backbone.View.extend
     statuses = (status for name, status of @loaded)
     if _.all(statuses, (status) -> status)
       @attach() and @render()
-    
+
+POV.views.AggregateDisplay = Backbone.View.extend
+  initialize: (options) ->
+    data = options.model
+    data.on 'sync', @render, this
+  render:    () ->
+    this.$el.html """
+    <div id="aggregate">
+      <p id="total_runtime">
+        <span class="value">#{POV.formatTime @model.get('duration')}</span>
+        <span class="description">Minutes of ads run</span>
+      </p>
+      <p id="total_spent">
+        <span class="value">$#{POV.formatDollars @model.get('spent')}</span>
+        <span class="description">Spent on ads</span>
+      </p>
+    </div>
+    """
