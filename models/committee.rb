@@ -24,7 +24,7 @@ class Committee
       'type' => self.type,
       'description' => self.description,
       'url' => self.url,
-      'total_spent' => self.buys.sum(:total_cost)
+      'total_spent' => Buy.sum(:total_cost, :committee_id => self.id)
     }
     rep['buys'] = self.buys.map(&:canonical) if options[:buys]
     rep
