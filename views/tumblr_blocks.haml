@@ -1,23 +1,27 @@
 {block:Pagination}
 .navigation
-  {block:PreviousPage}
-  %a(href="{PreviousPage}") « Newer
-  {/block:PreviousPage}
-
-  {block:JumpPagination length="7"}
-  {block:CurrentPage}
-  .current_page {PageNumber}
-  {/block:CurrentPage}
-
-  {block:JumpPage}
-  %a(class="jump_page" href="{URL}") {PageNumber}
-  {/block:JumpPage}
-  {/block:JumpPagination}            
-
-  {block:NextPage}
-  %a(href="{NextPage}") Older »
-  {/block:NextPage}
-{/block:Pagination}
+  .pages
+    {block:PreviousPage}
+    %a(href="{PreviousPage}") « Newer
+    {/block:PreviousPage}
+    …
+    {block:JumpPagination length="7"}
+    {block:CurrentPage}
+    span.current_page {PageNumber}
+    {/block:CurrentPage}
+    {block:JumpPage}
+    %a(class="jump_page" href="{URL}") {PageNumber}
+    {/block:JumpPage}
+    {/block:JumpPagination}            
+    …
+    %a(href="") Older »
+    {block:NextPage}
+    %a(href="{NextPage}") Older »
+    {/block:NextPage}
+    {/block:Pagination}
+  %form.search(action="/search" method="get")
+    %input(type="text" name="q" value="{SearchQuery}")
+    %input(type="submit" value="Search Posts")
 
 {block:Posts}
 {block:Text}
@@ -76,21 +80,25 @@
 
 {block:Pagination}
 .navigation
-  {block:PreviousPage}
-  %a(href="{PreviousPage}") « Newer
-  {/block:PreviousPage}
-
-  {block:JumpPagination length="7"}
-  {block:CurrentPage}
-  .current_page {PageNumber}
-  {/block:CurrentPage}
-
-  {block:JumpPage}
-  %a(class="jump_page" href="{URL}") {PageNumber}
-  {/block:JumpPage}
-  {/block:JumpPagination}            
-
-  {block:NextPage}
-  %a(href="{NextPage}") Older »
-  {/block:NextPage}
-{/block:Pagination}
+  .pages
+    {block:PreviousPage}
+    %a(href="{PreviousPage}") « Newer
+    {/block:PreviousPage}
+    …
+    {block:JumpPagination length="7"}
+    {block:CurrentPage}
+    span.current_page {PageNumber}
+    {/block:CurrentPage}
+    {block:JumpPage}
+    %a(class="jump_page" href="{URL}") {PageNumber}
+    {/block:JumpPage}
+    {/block:JumpPagination}            
+    …
+    %a(href="") Older »
+    {block:NextPage}
+    %a(href="{NextPage}") Older »
+    {/block:NextPage}
+    {/block:Pagination}
+  %form.search(action="/search" method="get")
+    %input(type="text" name="q" value="{SearchQuery}")
+    %input(type="submit" value="Search Posts")

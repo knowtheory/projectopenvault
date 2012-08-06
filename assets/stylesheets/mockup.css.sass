@@ -9,6 +9,15 @@ body
   font-family: 'Alegreya', serif
   background: #F1F1F1
 
+a
+  text-decoration: none
+
+a:visited
+  color: black
+
+a:hover
+  text-decoration: underline
+
 $gutter-width: 30px
 $header-gutter-width: 20px
 $smallcaps: 'Alegreya SC'
@@ -28,7 +37,6 @@ $smallcaps: 'Alegreya SC'
       margin-left: $header-gutter-width
       font-family: $smallcaps
       a
-        text-decoration: none
         img
           margin-top: 10px
           width: 61px
@@ -42,8 +50,6 @@ $smallcaps: 'Alegreya SC'
             float: left
             font-size: 14pt
             padding-bottom: 10px
-      a:visited
-        color: black
 
     #aggregate
       float: right
@@ -142,7 +148,7 @@ $smallcaps: 'Alegreya SC'
     font-weight: bold
     color: #395A8E
     border-bottom: 1px solid #C7C7C7
-    padding-bottom: 15px
+    padding-bottom: 20px
     margin: 20px 0px
 
   #main
@@ -160,19 +166,23 @@ $smallcaps: 'Alegreya SC'
       border-left: 0.5em solid #E7E7E7
       font-style: italic
     
-    h2
-      form#search
-        float: right
-    
     #posts
       .navigation
+        width: 100%
         float: left
         clear: both
-        width: 100%
+        padding-bottom: 20px
+        margin-bottom: 20px
+        border-bottom: 1px solid #C7C7C7
         .pages
+          margin-left: 15px
           float: left
+          a, span
+            font-size: 16pt
         form.search
+          margin-right: 15px
           float: right
+      
       .post
         clear: both
         border-bottom: 1px dashed #C7C7C7
