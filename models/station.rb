@@ -7,4 +7,15 @@ class Station
   property :url,       String, :length => 2048, :format => :url
   
   has n, :buys
+
+  def canonical(options={})
+    rep = {
+      'name' => self.name,
+      'call_sign' => self.call_sign,
+      'url' => self.url,
+      'total_spent' => Buy.sum(:total_cost, :station_id => self.id)
+    }
+    rep['buys'] = self.buys.map(&:canonical) if options[:buys]
+    rep
+  end
 end
