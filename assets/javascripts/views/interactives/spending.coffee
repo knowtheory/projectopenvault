@@ -24,11 +24,10 @@ POV.views.SpendingNavigation = Backbone.View.extend
   initialize: (options) -> @selector = options.selector if options?.selector
   render: () ->
     this.$el.html """
-    <p class="title">Total TV Ad Spending</p>
+    <p class="title">Mid-Missouri TV Ad Spending by:</p>
     <div class="facets">
       <span class="candidates active">Candidate</span>
       <span class="committees">Committee</span>
-      <span class="offices">Office</span>
     </div>
     <div class="pagination">
       <div class="next">Next</div>
