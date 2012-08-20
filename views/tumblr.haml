@@ -44,55 +44,21 @@
         %h2 Election News &amp; Analysis
         #posts=yield
 		
-
-
-
+      #search
+        %script
+          (function() {                                                                                                           |
+				    var cx = '017540231442163185513:c4m2rs_3xke';                                                                         |
+				    var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;                        |
+				    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//www.google.com/cse/cse.js?cx=' + cx;    |                                                     
+				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);                               |
+				  })();                                                                                                                   |
+        
       #side-bar
          #question
            %h2 Let Us Know
            /Question
-           %h3 How Awesome is Carolyn?
-           #response
-             %form{:action => "https://docs.google.com/spreadsheet/formResponse?formkey=dEhya3FHb0lGMFdNb2FLb1RHZjBTcUE6MQ", :method => "post", :onsubmit => "submitted=true;", :target => "hidden_iframe"}
-               %br
-                 .errorbox-good
-                   .ss-item.ss-radio
-                     .ss-form-entry
-                    / The easiest way to change the question, as far as I can figure out, is to add the question to the form, view the code and copy the code starting at the 'label class="ss-q-title"...' point through to the last /li.  You then have to also change something later on.  I marked that part with a comment too
-                     %label.ss-q-title{:for => "entry_0"}
-                       %label.ss-q-help{:for => "entry_0"}               
-                         %ul.ss-choices
-                           %li.ss-choice-item
-                             %label.ss-choice-label
-                               %input#group_0_1.ss-q-radio{:name => "entry.0.group", :type => "radio", :value => "Very"}
-                                 Very
-                           %li.ss-choice-item
-                           %label.ss-choice-label
-                             %input#group_0_2.ss-q-radio{:name => "entry.0.group", :type => "radio", :value => "Extremely"}
-                               Extremely
-                           %li.ss-choice-item
-                           %label.ss-choice-label
-                             %input#group_0_3.ss-q-radio{:name => "entry.0.group", :type => "radio", :value => "Awesomely awesome"}
-                               Awesomely awesome
-                           %li.ss-choice-item
-                           %label.ss-choice-label
-                             %input#group_0_4.ss-q-radio{:name => "entry.0.group", :type => "radio", :value => "Bah hum bug"}
-                               Bah hum bug
+          %iframe{:src => "question.haml"}
 
-                       %br
-                         .errorbox-good
-                           .ss-item.ss-text
-                             .ss-form-entry
-                               %label.ss-q-title{:for => "entry_3"}
-                               Comments
-                               %label.ss-q-help{:for => "entry_3"}
-                               %input#entry_3.ss-q-short{:name => "entry.3.single", :type => "text", :value => ""}
-                         %br
-                           %input{:name => "pageNumber", :type => "hidden", :value => "0"}
-                             %input{:name => "backupCache", :type => "hidden", :value => ""}
-                               .ss-item.ss-navigate
-                                 .ss-form-entry
-                                   %input{:name => "submit", :type => "submit", :value => "Submit"}
  
 
         #twitter

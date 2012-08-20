@@ -1,0 +1,76 @@
+<body>
+  <h3>How Awesome is Carolyn?</h3>
+  <div id="response">
+    <form :action => "https://docs.google.com/spreadsheet/formResponse?formkey=dEhya3FHb0lGMFdNb2FLb1RHZjBTcUE6MQ", :method => "post", :onsubmit => "submitted=true;", :target => "hidden_iframe">
+      <br>
+        <div class="errorbox-good">
+          <div class="ss-item ss-radio">
+            <div class="ss-form-entry">
+            </div> 
+          </div> 
+        </div>
+       / The easiest way to change the question, as far as I can figure out, is to add the question to the form, view the code and copy the code starting at the 'label class="ss-q-title"...' point through to the last /li.  You then have to also change something later on.  I marked that part with a comment too
+            <label class="ss-q-title" :for => "entry_0">
+              <label class="ss-q-help" :for => "entry_0">
+                <ul class="ss-choices">
+                  <li class="ss-choice-item">
+                  </li>
+                  <label class="ss-choice-label">
+
+                    <input id="group_0_1" class="ss-q-radio" :name => "entry.0.group", :type => "radio", :value => "Very" />
+                      Very
+                  </label>
+                  <li class="ss-choice-item">
+                  </li>
+                  <label class="ss-choice-label">
+
+                    <input id="group_0_2" class="ss-q-radio" :name => "entry.0.group", :type => "radio", :value => "Extremely" />
+                      Extremely
+                  </label>
+                  <li class="ss-choice-item">
+                  </li>
+                  <label class="ss-choice-label">
+
+                    <input id="group_0_3" class="ss-q-radio" :name => "entry.0.group", :type => "radio", :value => "Awesomely awesome" />
+                      Awesomely awesome
+                  </label>
+                  <li class="ss-choice-item">
+                  </li>
+                  <label class="ss-choice-label">
+
+                    <input id="group_0_4" class="ss-q-radio" :name => "entry.0.group", :type => "radio", :value => "Bah hum bug" />
+                      Bah hum bug
+                  </label>
+                </ul>
+              </label>
+              <br>
+                <div class="errorbox-good">
+                  <div class="ss-item ss-text">
+                    <div class="ss-form-entry">
+                      <label class="ss-q-title" :for => "entry_3">
+                      </label>
+                      Comments
+                      <label class="ss-q-help" :for => "entry_3">
+                      </label>
+
+                      <input id="entry_3" class="ss-q-short" :name => "entry.3.single", :type => "text", :value => "" />
+                    </div>
+                  </div>
+                </div>
+                <br>
+
+                  <input :name => "pageNumber", :type => "hidden", :value => "0" />
+
+                    <input :name => "backupCache", :type => "hidden", :value => "" />
+                      <div class="ss-item ss-navigate">
+                        <div class="ss-form-entry">
+
+                          <input :name => "submit", :type => "submit", :value => "Submit" value="%html  %head"/>
+                        </div>
+                      </div>
+                </br>
+              </br>
+            </label>
+      </br>
+    </form>
+  </div>
