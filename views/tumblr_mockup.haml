@@ -11,9 +11,7 @@
     %a.jump_page(href="") 7
     …
     %a(href="") Older »
-  %form.search(action="/search" method="get")
-    %input(type="text" name="q")
-    %input(type="submit" value="Search Posts")
+  %gcse:searchbox-only
   
 .post
   %h3
@@ -56,6 +54,4 @@
     %a.jump_page(href="") 6
     %a.jump_page(href="") 7
     %a(href="") Older »
-  %form.search(action="/search" method="get")
-    %input(type="text" name="q")
-    %input(type="submit" value="Search Posts")
+  %gcse:searchbox-only
