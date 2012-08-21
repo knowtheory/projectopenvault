@@ -84,13 +84,14 @@
         %h2 Election News &amp; Analysis
         #posts=yield        
         #search
-          %script
-            (function() {                                                                                                           |
-              var cx = '017540231442163185513:c4m2rs_3xke';                                                                         |
-              var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;                        |
-              gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//www.google.com/cse/cse.js?cx=' + cx;    |                                                     
-              var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);                               |
-            })();                                                                                                                   |
+          %script                                                                                                       
+            (function() {                                                                                                         |
+              var cx = '017540231442163185513:2eandezs7_i';                                                                       |
+              var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;                      |
+              gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//www.google.com/cse/cse.js?cx=' + cx;  |                                                               
+              var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);                             |
+            })();                                                                                                                 |
+        
 
       #side-bar
         #question
@@ -136,5 +137,15 @@
               }).render().start();
 
       #footer
+        .logos
+          %a{:href => "http://www.columbiamissourian.com/"}
+            %img.logos{:src => "http://knowtheory.net/assets/logos/the%20Missourian50px.jpeg"}/
+          %a{:href => "http://www.kbia.org"}
+            %img.logos{:src => "http://knowtheory.net/assets/logos/kbia50px.jpeg"}/
+          %a{:href => "http://www.newsy.com/"}
+            %img.logos{:src => "http://knowtheory.net/assets/logos/NewsyLogonew50px.jpg"}/
+          %a{:href => "http://www.kbia.org"}
+            %img.logos{:src => "http://knowtheory.net/assets/logos/KOMUnews50px.jpeg"}/
+
         #colophon
           %p Copyright etc
