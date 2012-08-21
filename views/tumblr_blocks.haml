@@ -19,9 +19,8 @@
     %a(href="{NextPage}") Older »
     {/block:NextPage}
     {/block:Pagination}
-  %form.search(action="/search" method="get")
-    %input(type="text" name="q")
-    %input(type="submit" value="Search Posts")
+
+%gcse:searchbox
 
 {block:Posts}
 {block:Text}
@@ -54,9 +53,9 @@
 .quote.post
   {Quote}
   %p.meta By {PostAuthorName}, {TimeAgo}
-  {block:Source}
+{block:Source}
   #meta {Source}
-  {/block:Source}
+{/block:Source}
 {/block:Quote}
 {block:Link}
 .link.post
@@ -108,6 +107,4 @@ No results found for “{SearchQuery}”
 
 
 
-  %form.search(action="/search" method="get")
-    %input(type="text" name="q")
-    %input(type="submit" value="Search Posts")
+  %gcse:seachbox
