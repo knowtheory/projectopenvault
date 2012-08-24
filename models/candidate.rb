@@ -27,7 +27,7 @@ class Candidate
       'total_spent' => Buy.sum(:total_cost, :candidate_id => self.id)
     }
     rep['buys'] = self.buys.map(&:canonical) if options[:buys]
-    rep['office'] = self.office.abbreviation if self.office
+    rep['office'] = self.office.short_name if self.office
     rep
   end
   
