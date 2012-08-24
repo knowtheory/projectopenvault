@@ -47,23 +47,16 @@
 		
       #search
         %script                                                                                                                                                             
-            (function() {                                                                                                         |
-              var cx = '017540231442163185513:2eandezs7_i';                                                                       |
-              var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;                      |
-              gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//www.google.com/cse/cse.js?cx=' + cx;  |                                                           
-              var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);                             |
-            })();                                                                                                                 |
-        %gcse:searchbox-only
-
+          (function() {                                                                                                         |
+            var cx = '017540231442163185513:2eandezs7_i';                                                                       |
+            var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;                      |
+            gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//www.google.com/cse/cse.js?cx=' + cx;  |                                                           
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);                             |
+          })();
         
       #side-bar
-         #question
-           %h2 Let Us Know
-           /Question
-          %iframe{:src => "question.haml"}
-	
- 
-
+        #question
+          %h2 Let Us Know
         #twitter
           %h2
             Twitter
@@ -97,9 +90,6 @@
                 }                          |
               }).render().start();
 
-
-	
-	
       #footer
         .logos
         %a{:href => "http://www.columbiamissourian.com/"}
