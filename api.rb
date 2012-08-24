@@ -80,11 +80,7 @@ module AdVault
         
     resource :candidates do
       get do
-        logger.info("=========== CANDIDATE HEADERS ============")
-        logger.info(header)
-        logger.info("===========================================")
         cache do
-          logger.info "IN GARNER CACHE BLOCK"
           @candidates = Candidate.all
           @candidates.map{ |candidate| candidate.canonical }.to_json
         end
@@ -119,7 +115,6 @@ module AdVault
 
     resource :committees do
       get do
-        content_type :json
         @committees = Committee.all
         @committees.map{ |committee| committee.canonical }.to_json
       end
@@ -130,15 +125,15 @@ module AdVault
         end
       
         post do
-          Committee.first(:slug=>params[:slug])
+          Committee.first(:slug=>params[:slug]).to_json
         end
       
         put do
-          Committee.first(:slug=>params[:slug])
+          Committee.first(:slug=>params[:slug]).to_json
         end
       
         delete do
-          Committee.first(:slug=>params[:slug])
+          Committee.first(:slug=>params[:slug]).to_json
         end
       
         get "/spending" do
@@ -152,18 +147,26 @@ module AdVault
     end
     
     resource :offices do
+      get do
+        @offices = Office.all
+        @offices.map{ |office| office.canonical }.to_json
+      end
+      
       segment "/:slug" do
         get do
           Office.first(:slug=>params[:slug]).canonical.to_json
         end
         
         post do
+          Office.first(:slug=>params[:slug]).to_json
         end
         
         put do
+          Office.first(:slug=>params[:slug]).to_json
         end
         
         delete do
+          Office.first(:slug=>params[:slug]).to_json
         end
         
         get "/spending" do
