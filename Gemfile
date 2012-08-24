@@ -7,6 +7,7 @@ gem 'sinatra-contrib'
 gem 'rack-contrib'
 gem 'rack-cache'
 gem 'garner'
+gem 'rake'
 
 gem 'haml'
 gem 'sass'
