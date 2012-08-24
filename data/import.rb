@@ -55,7 +55,7 @@ CSV.foreach(most_recent_data_file('advault_data'), :headers => true) do |row|
 
   if row['candidate'] !~ /Issue/i
     buy.candidate = Candidate.first(:name => row['candidate'].strip) if row['candidate']
-    buy.office    = Office.first(:name => row['office'].strip) if row['office']
+    buy.office    = Office.first(:name => row['office'].strip, :region => row['region'].strip) if row['office'] and row['region']
   else
     # ???
   end
