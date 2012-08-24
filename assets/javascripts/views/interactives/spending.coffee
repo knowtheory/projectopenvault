@@ -28,6 +28,7 @@ POV.views.SpendingNavigation = Backbone.View.extend
     <div class="facets">
       <span class="candidates active">Candidate</span>
       <span class="committees">Committee</span>
+      <span class="offices">Office</span>
     </div>
     <div class="pagination">
       <div class="next">Next</div>
@@ -55,7 +56,9 @@ POV.views.SpendingContent = Backbone.View.extend
       committees: 
         collection: committees
         view:       POV.views.CommitteeBadge
-      #office:    offices
+      offices:
+        collection: offices
+        view:       POV.views.OfficeBadge
     @current_collection = @modes[@current_mode].collection
     @current_page = 0
   render: () ->
@@ -101,6 +104,19 @@ POV.views.CandidateBadge = Backbone.View.extend
   attach: -> this.$el.html @render()
 
 POV.views.CommitteeBadge = Backbone.View.extend
+  render: ->
+    """
+    <div class="badge">
+      <img src="#{POV.host}/assets/committees/#{this.model.get('slug')}.jpg"}></img>
+      <div class="info">
+        <p class="name">#{this.model.get('name')}</p>
+        <p class="dollars-spent">$#{POV.formatDollars(this.model.get('total_spent') || 0)}</p>
+      </div>
+    </div>
+    """
+  attach: -> this.$el.html @render()
+
+POV.views.OfficeBadge = Backbone.View.extend
   render: ->
     """
     <div class="badge">

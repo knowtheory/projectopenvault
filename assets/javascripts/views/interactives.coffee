@@ -5,9 +5,10 @@ POV.views.Interactives = Backbone.View.extend
     @collections = []
     window.candidates = new POV.models.Candidates
     window.committees = new POV.models.Committees
+    window.offices    = new POV.models.Offices
     
     me = this
-    @collections.push candidates, committees
+    @collections.push candidates, committees, offices
     _.each @collections, (collection) ->
       collection.on 'reset', me.loaded, me
       collection.fetch()
@@ -15,11 +16,12 @@ POV.views.Interactives = Backbone.View.extend
     @loaded = 
       candidates: false
       committees: false
+      offices:    false
     @views = 
       spending: new POV.views.Spending
         candidates: candidates
         committees: committees
-        #offices: offices
+        offices:    offices
   render:       () -> @renderViews()
   renderViews:  () -> (view.render() for selector, view of @views)
   attach:     (el) -> @setElement(el or @selector) and @attachViews()
