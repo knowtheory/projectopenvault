@@ -17,8 +17,8 @@
     %script(charset="utf-8" src="/assets/views/interactives/spending.js")
     %script(charset="utf-8" src="/assets/views/interactives/committee.js")
     %script(charset="utf-8" src="/assets/pov.js")    
-    
     %script="POV.host = 'http://localhost:9292'" if ENV['RACK_ENV']=="development"
+
   %body
     #layout
       #header
@@ -46,13 +46,15 @@
         #posts=yield
 		
       #search
-        %script
+        %script                                                                                                                                                             
             (function() {                                                                                                         |
               var cx = '017540231442163185513:2eandezs7_i';                                                                       |
               var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;                      |
               gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//www.google.com/cse/cse.js?cx=' + cx;  |                                                           
               var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);                             |
             })();                                                                                                                 |
+        %gcse:searchbox-only
+
         
       #side-bar
          #question

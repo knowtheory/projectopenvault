@@ -1,4 +1,4 @@
-%html
+html
   %head
     %title= "{Title}"
     %link(href='http://fonts.googleapis.com/css?family=Alegreya:400italic,400,700|Alegreya+SC' rel='stylesheet' type='text/css')
@@ -10,11 +10,7 @@
     %script(charset="utf-8" src="/assets/initialize.js")    
     %script(charset="utf-8" src="/assets/models/buy.js")
     %script(charset="utf-8" src="/assets/models/candidate.js")
-    %script(charset="utf-8" src="/assets/models/committee.js")
-    %script(charset="utf-8" src="/assets/models/office.js")
-    %script(charset="utf-8" src="/assets/views/interactives.js")
     %script(charset="utf-8" src="/assets/views/interactives/spending_badge.js")
-    %script(charset="utf-8" src="/assets/views/interactives/spending.js")
     %script(charset="utf-8" src="/assets/views/interactives/committee.js")
     %script(charset="utf-8" src="/assets/pov.js")    
 
@@ -83,8 +79,22 @@
                 %p.dollars-spent $191,536
       
       #main
-        %h2 Election News &amp; Analysis
-        #posts=yield
+        %h2 About Us
+        #posts
+				Welcome to Project Open Vault. POV is an online, ongoing conversation about politics in the run up to the November general election, and beyond. It’s also an interactive forum, a really cool database, and, we hope, an engaging community.
+
+				A key part of the POV project is the Political Ad Vault, a database tracking the campaign ads of mid-Missouri political candidates. The ad vault provides a window into campaign spending, priorities and messaging. Check it out, and be sure to let us know what you think.
+
+				The goal of the POV project is to provide better, more engaging coverage of mid-Missouri politics. We hope to increase awareness of Missouri politics behind the scenes, and to spark meaningful conversations and debates among citizens and the POV community that joins us.
+
+				POV is the result of several mid-Missouri newsrooms that have come together to collaborate, innovate, and have some serious fun regarding this election season. Our partners include the Columbia Missourian, KBIA Radio, KOMU TV and the National Institute for Computer Assisted Reporting (NICAR). We’ve also received a lot of help and support from the Reynolds Journalism Institute.
+
+				Please have a look around, and feel free to engage with us by answering our daily “big question,” commenting on our coverage and sharing our information on your social media sites.
+
+				You can contact POV by emailing POV Editor Matt Patane here:
+
+				Thanks for stopping by.  Let’s start a conversation.
+
         %script                                                                                                                 
           (function() {                                                                                                         |
             var cx = '017540231442163185513:2eandezs7_i';                                                                       |
