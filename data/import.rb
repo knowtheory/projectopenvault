@@ -10,6 +10,15 @@ def most_recent_data_file(name,dir=nil)
   File.join path, Dir.open(path).select{ |f| f =~ pattern }.sort_by{ |f| matches = f.match(pattern).to_a; matches.shift; matches.map(&:to_i) }.last
 end
 
+CSV.foreach(most_recent_data_file('offices'), :headers => true) do |row|
+  office = Office.new(Utilities.pick row, *%w(name title abbreviation region))
+  if office.save
+    puts "#{Time.now}: saved office #{office.id}"
+  else
+    puts "#{Time.now}: Unable to save #{office.errors.inspect}"
+  end  
+end
+
 #f = 'candidates'; data = CSV.open(most_recent_data_file(f,'./data'), :headers => true).read; row = data.first
 CSV.foreach(most_recent_data_file('candidates'), :headers => true) do |row|
 
