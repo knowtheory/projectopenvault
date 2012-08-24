@@ -3,8 +3,6 @@ POV.views.Spending = Backbone.View.extend
   id: "spending"
   events: 
     "click .navigation .facets span": "openTab"
-    "click .pagination .previous"   : "clickPreviousPage"
-    "click .pagination .next"       : "clickNextPage"
   initialize: (options) ->
     @selector = options.selector or @selector
     @views =
@@ -15,8 +13,6 @@ POV.views.Spending = Backbone.View.extend
   attach:     (el) -> @setElement(el.find(@selector)) and @attachViews()
   attachViews:  () -> view.attach(this.$el) for selector, view of @views
   openTab: (event) -> @views.content.open @views.navigation.activeTabFor(event)
-  clickPreviousPage: (event) -> @views.content.previousPage()
-  clickNextPage:     (event) -> @views.content.nextPage()
 
 POV.views.SpendingNavigation = Backbone.View.extend
   selector:  ".navigation"
@@ -30,10 +26,6 @@ POV.views.SpendingNavigation = Backbone.View.extend
       <span class="committees">Committee</span>
       <span class="offices">Office</span>
     </div>
-    <div class="pagination">
-      <div class="next">Next</div>
-      <div class="previous">Previous</div>
-    </div>
     """
   attach: (el) -> @setElement el.find(@selector)
   activeTabFor: (event) ->
@@ -45,6 +37,10 @@ POV.views.SpendingNavigation = Backbone.View.extend
     class_name
 
 POV.views.SpendingContent = Backbone.View.extend
+  events: 
+    "click .pagination .previous"   : "clickPreviousPage"
+    "click .pagination .next"       : "clickNextPage"
+    
   selector: ".content"
   className: "content"
   initialize: (options) ->
@@ -65,6 +61,10 @@ POV.views.SpendingContent = Backbone.View.extend
     this.$el.html """
     <div class="badges">
       #{@renderViews()}
+    </div>
+    <div class="pagination">
+      <div class="next">Next</div>
+      <div class="previous">Previous</div>
     </div>
     """
   renderViews:  () -> 
@@ -88,3 +88,5 @@ POV.views.SpendingContent = Backbone.View.extend
     @current_page++
     @current_page = 0 if @current_page == @current_pages.length
     @render()
+  clickPreviousPage: (event) -> @previousPage()
+  clickNextPage:     (event) -> @nextPage()
