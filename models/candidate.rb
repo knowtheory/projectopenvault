@@ -24,7 +24,7 @@ class Candidate
       'name'        => self.name,
       'slug'        => self.slug,
       'url'         => self.url,
-      'total_spent' => Buy.sum(:total_cost, :candidate_id => self.id)
+      'total_spent' => Buy.sum(:total_cost, :candidate_id => self.id) || 0
     }
     rep['buys'] = self.buys.map(&:canonical) if options[:buys]
     rep['office'] = self.office.short_name if self.office

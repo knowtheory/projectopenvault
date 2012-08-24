@@ -149,7 +149,7 @@ module AdVault
     resource :offices do
       get do
         @offices = Office.all
-        @offices.map{ |office| office.canonical }.to_json
+        @offices.map{ |office| office.canonical }.select{ |attr| attr["total_spent"] > 0 }.to_json
       end
       
       segment "/:slug" do

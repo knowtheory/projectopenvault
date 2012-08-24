@@ -26,7 +26,7 @@ CSV.foreach(most_recent_data_file('candidates'), :headers => true) do |row|
   candidate.name = row['candidate'].strip
 
   if row['current_office']
-    current_office = Office.first_or_new(:name   => row['current_office'].strip, 
+    current_office = Office.first_or_new(:name   => row['current_office'].strip,
                                          :region => row['region_current_office'].strip)
     current_office.title = row['title'].strip               unless current_office.title
     current_office.abbreviation = row['abbreviation'].strip unless current_office.abbreviation

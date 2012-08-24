@@ -32,17 +32,24 @@ class Office
   
   def canonical(options={})
     rep = {
-      'name' => self.name,
+      'name' => self.full_name,
       'slug' => self.slug,
       'title' => self.title,
-      'abbreviation' => self.abbreviation,
-      'region' => self.region
+      'abbreviation' => self.short_name,
+      'region' => self.region,
+      'total_spent' => Buy.sum(:total_cost, :office_id => self.id) || 0
     }
     rep['incumbent'] = self.incumbent.name if self.incumbent
     rep['buys'] = self.buys.map(&:canonical) if options[:buys]
     rep
   end
-  
+
+  def full_name
+    result = name
+    result += " of #{short_region}" if name =~ /representative|(state senator)/i
+    return result
+  end
+
   def short_name
     result = abbreviation
     result += " of #{short_region}" if name =~ /representative/i
@@ -50,7 +57,7 @@ class Office
   end
   
   def short_region
-    region.sub(/(State|Missouri) (\d+)th (House|Senate|Congressional) District/i, 'District \2')
+    region.sub(/(State|Missouri) (\d+)(st|nd|rd|th) (House|Senate|Congressional) District/i, 'District \2')
   end
 end
 
