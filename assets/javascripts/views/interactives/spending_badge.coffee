@@ -2,7 +2,7 @@ POV.views.CandidateBadge = Backbone.View.extend
   render: ->
     """
     <div class="badge">
-      <img src="#{POV.host}/assets/#{this.model.get('slug')}_headshot.jpg"}></img>
+      <img src="#{POV.host}/assets/candidates/#{this.model.get('slug')}_headshot.jpg"}></img>
       <div class="info">
         <p class="name">#{this.model.get('name')}</p>
         <p class="office">for #{this.model.get('office') || ''}</p>
@@ -12,10 +12,28 @@ POV.views.CandidateBadge = Backbone.View.extend
     """
   attach: -> this.$el.html @render()
 
-POV.views.BadgeList = Backbone.View.extend
-  className: "content"
+POV.views.CommitteeBadge = Backbone.View.extend
   render: ->
-    badges = this.collection.reduce ((html, model) -> html + new POV.views.SpendingBadge(model: model)), ""
-    this.$el.html(badges)
-  attach: ->
-    this.$el.html this.render()
+    """
+    <div class="badge">
+      <img src="#{POV.host}/assets/committees/#{this.model.get('slug')}.jpg"}></img>
+      <div class="info">
+        <p class="name">#{this.model.get('name')}</p>
+        <p class="dollars-spent">$#{POV.formatDollars(this.model.get('total_spent') || 0)}</p>
+      </div>
+    </div>
+    """
+  attach: -> this.$el.html @render()
+
+POV.views.OfficeBadge = Backbone.View.extend
+  render: ->
+    """
+    <div class="badge">
+      <img src="#{POV.host}/assets/committees/#{this.model.get('slug')}.jpg"}></img>
+      <div class="info">
+        <p class="name">#{this.model.get('name')}</p>
+        <p class="dollars-spent">$#{POV.formatDollars(this.model.get('total_spent') || 0)}</p>
+      </div>
+    </div>
+    """
+  attach: -> this.$el.html @render()
