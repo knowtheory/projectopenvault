@@ -29,7 +29,7 @@ POV.views.OfficeBadge = Backbone.View.extend
   render: ->
     """
     <div class="badge">
-      <img src="#{POV.host}/assets/committees/#{this.model.get('slug')}.jpg"}></img>
+      <img></img>
       <div class="info">
         <p class="name">#{this.model.get('name')}</p>
         <p class="dollars-spent">$#{POV.formatDollars(this.model.get('total_spent') || 0)}</p>
