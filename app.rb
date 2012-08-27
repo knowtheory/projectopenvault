@@ -28,13 +28,13 @@ module AdVault
       haml :tumblr_mockup, :layout => :tumblr
     end
     
-    get '/question/:id' do
+    get '/questions/:id' do
       @question = Question.get(params[:id])
       raise Sinatra::NotFound unless @question
       haml :question, :layout => false
     end
     
-    get '/question/:id/followup' do
+    get '/questions/:id/followup' do
       @question = Question.get(params[:id])
       raise Sinatra::NotFound unless @question
       haml :followup, :layout => false
