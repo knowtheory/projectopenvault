@@ -13,7 +13,7 @@ module AdVault
     get '/' do
       @buys = Buy.all
       @candidates = Candidate.all
-      haml :tumblr_mockup, :layout => :tumblr_mockup_layout
+      haml :tumblr_mockup, :layout => :tumblr
     end
     
     get '/blocks' do
