@@ -27,6 +27,18 @@ module AdVault
       @candidates = Candidate.all
       haml :tumblr_mockup, :layout => :tumblr
     end
+    
+    get '/question/:id' do
+      @question = Question.get(params[:id])
+      raise Sinatra::NotFound unless @question
+      haml :question, :layout => false
+    end
+    
+    get '/question/:id/followup' do
+      @question = Question.get(params[:id])
+      raise Sinatra::NotFound unless @question
+      haml :followup, :layout => false
+    end
 
     get '/spending.html' do
       haml "%h1 Spending"

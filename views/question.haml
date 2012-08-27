@@ -1,65 +1,45 @@
 %html
   %head
-    %title= "{Title}"
     %link(href='http://fonts.googleapis.com/css?family=Alegreya:400italic,400,700|Alegreya+SC' rel='stylesheet' type='text/css')
     %link(type="text/css" rel="stylesheet" media="screen" href="/assets/mockup.css")
-    %script(charset="utf-8" src="http://widgets.twimg.com/j/2/widget.js")
-    %script(charset="utf-8" src="/assets/lib/jquery-1.7.2.min.js")
-    %script(charset="utf-8" src="/assets/lib/underscore-1.3.3.js")
-    %script(charset="utf-8" src="/assets/lib/backbone-0.9.2.js")
-    %script(charset="utf-8" src="/assets/initialize.js")    
-    %script(charset="utf-8" src="/assets/models/buy.js")
-    %script(charset="utf-8" src="/assets/models/candidate.js")
-    %script(charset="utf-8" src="/assets/models/committee.js")
-    %script(charset="utf-8" src="/assets/views/interactives.js")
-    %script(charset="utf-8" src="/assets/views/interactives/spending_badge.js")
-    %script(charset="utf-8" src="/assets/views/interactives/spending.js")
-    %script(charset="utf-8" src="/assets/views/interactives/committee.js")
-    %script(charset="utf-8" src="/assets/pov.js")    
-    
-    %script="POV.host = 'http://localhost:9292'" if ENV['RACK_ENV']=="development"
-
-
+    %script(type="text/javascript") var submitted=false;
+    %style
+      background { background: #EFF3FD; }
   %body
-    %h3 How Awesome is Carolyn?
-    #response
-      %form{:action => "https://docs.google.com/spreadsheet/formResponse?formkey=dEhya3FHb0lGMFdNb2FLb1RHZjBTcUE6MQ", :method => "post", :onsubmit => "submitted=true;", :target => "hidden_iframe"}
-        %br
+    #question
+      %iframe#ss-form{:name=>"ss-form", :style=>"display:none;", :onload=>"if(submitted){window.location='/question/#{@question.id}/followup';}"}>
+      .hidden_iframe
+        %form(action="https://docs.google.com/spreadsheet/formResponse?formkey=dFRscUdYTUNLUzZhRXA4UmFLb3VTdWc6MQ&amp;ifq" method="POST"
+  target="ss-form" onsubmit="submitted=true;")
           .errorbox-good
-            .ss-item.ss-radio
+            .ss-item.ss-paragraph-text
               .ss-form-entry
-         / The easiest way to change the question, as far as I can figure out, is to add the question to the form, view the code and copy the code starting at the 'label class="ss-q-title"...' point through to the last /li.  You then have to also change something later on.  I marked that part with a comment too
-              %label.ss-q-title{:for => "entry_0"}
-                %label.ss-q-help{:for => "entry_0"}               
-                  %ul.ss-choices
-                    %li.ss-choice-item
-                    %label.ss-choice-label
-                      %input#group_0_1.ss-q-radio{:name => "entry.0.group", :type => "radio", :value => "Very"}
-                        Very
-                    %li.ss-choice-item
-                    %label.ss-choice-label
-                      %input#group_0_2.ss-q-radio{:name => "entry.0.group", :type => "radio", :value => "Extremely"}
-                        Extremely
-                    %li.ss-choice-item
-                    %label.ss-choice-label
-                      %input#group_0_3.ss-q-radio{:name => "entry.0.group", :type => "radio", :value => "Awesomely awesome"}
-                        Awesomely awesome
-                    %li.ss-choice-item
-                    %label.ss-choice-label
-                      %input#group_0_4.ss-q-radio{:name => "entry.0.group", :type => "radio", :value => "Bah hum bug"}
-                        Bah hum bug
-
-                %br
-                  .errorbox-good
-                    .ss-item.ss-text
-                      .ss-form-entry
-                        %label.ss-q-title{:for => "entry_3"}
-                        Comments
-                        %label.ss-q-help{:for => "entry_3"}
-                        %input#entry_3.ss-q-short{:name => "entry.3.single", :type => "text", :value => ""}
-                  %br
-                    %input{:name => "pageNumber", :type => "hidden", :value => "0"}
-                      %input{:name => "backupCache", :type => "hidden", :value => ""}
-                        .ss-item.ss-navigate
-                          .ss-form-entry
-                            %input{:name => "submit", :type => "submit", :value => "Submit"}
+                %label.ss-q-title(for="entry_0")=@question.prompt
+                %label.ss-q-help(for="entry_0")
+                %textarea.ss-q-long#entry_0(name="entry.0.single" rows="8" cols="75")
+          %input(type="hidden" name="pageNumber" value="0")
+          %input(type="hidden" name="backupCache" value="")
+          .ss-item.ss-navigate
+            .ss-form-entry
+              %input.submit(type="submit" name="submit" value="Submit")
+        %script(type="text/javascript")
+          (function() {                                               |
+            var divs = document.getElementById('ss-form').            |
+              getElementsByTagName('div');                            |
+            var numDivs = divs.length;                                |
+            for (var j = 0; j < numDivs; j++) {                       |
+              if (divs[j].className == 'errorbox-bad') {              |
+                divs[j].lastChild.firstChild.lastChild.focus();       |
+                return;                                               |
+              }                                                       |
+            }                                                         |
+            for (var i = 0; i < numDivs; i++) {                       |
+              var div = divs[i];                                      |
+              if (div.className == 'ss-form-entry' &&                 |
+              div.firstChild &&                                       |
+              div.firstChild.className == 'ss-q-title') {             |
+                div.lastChild.focus();                                |
+                return;                                               |
+              }                                                       |
+            }                                                         |
+          })();
