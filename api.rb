@@ -30,7 +30,8 @@ module AdVault
       end
       
       get '/aggregate' do
-        cost, duration = Buy.aggregate(:total_cost.sum, :total_runtime.sum)
+        end_date = params[:end_date] || Time.now
+        cost, duration = Buy.all("end_date.lte" => end_date).aggregate(:total_cost.sum, :total_runtime.sum)
         {
           "duration" => duration,
           "spent"    => cost

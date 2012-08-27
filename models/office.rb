@@ -37,10 +37,13 @@ class Office
       'title' => self.title,
       'abbreviation' => self.short_name,
       'region' => self.region,
-      'total_spent' => Buy.sum(:total_cost, :office_id => self.id) || 0
     }
     rep['incumbent'] = self.incumbent.name if self.incumbent
-    rep['buys'] = self.buys.map(&:canonical) if options[:buys]
+
+    conditions = { "end_date.lte" => (options["end_date"] || Time.now) }
+    buys = Buy.all conditions
+    rep['total_spent'] = buys.sum(:total_cost, :committee_id => self.id) || 0
+    rep['buys'] = buys.map(&:canonical) if options[:buys]
     rep
   end
 
