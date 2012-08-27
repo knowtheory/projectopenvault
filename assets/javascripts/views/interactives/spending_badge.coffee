@@ -6,7 +6,7 @@ POV.views.CandidateBadge = Backbone.View.extend
       <div class="info">
         <p class="name">#{this.model.get('name')}</p>
         <p class="office">for #{this.model.get('office') || ''}</p>
-        <p class="dollars-spent">$#{POV.formatDollars(this.model.get('total_spent') || 0)}</p>
+        <p class="dollars-spent">$#{POV.Utilities.formatDollars(this.model.get('total_spent') || 0)}</p>
       </div>
     </div>
     """
@@ -19,7 +19,7 @@ POV.views.CommitteeBadge = Backbone.View.extend
       <img src="#{POV.host}/assets/committees/#{this.model.get('slug')}.jpg"}></img>
       <div class="info">
         <p class="name">#{this.model.get('name')}</p>
-        <p class="dollars-spent">$#{POV.formatDollars(this.model.get('total_spent') || 0)}</p>
+        <p class="dollars-spent">$#{POV.Utilities.formatDollars(this.model.get('total_spent') || 0)}</p>
       </div>
     </div>
     """
@@ -32,7 +32,7 @@ POV.views.OfficeBadge = Backbone.View.extend
       <img></img>
       <div class="info">
         <p class="name">#{this.model.get('name')}</p>
-        <p class="dollars-spent">$#{POV.formatDollars(this.model.get('total_spent') || 0)}</p>
+        <p class="dollars-spent">$#{POV.Utilities.formatDollars(this.model.get('total_spent') || 0)}</p>
       </div>
     </div>
     """
