@@ -7,7 +7,7 @@
       background { background: #EFF3FD; }
   %body
     #question
-      %iframe#ss-form{:name=>"ss-form", :style=>"display:none;", :onload=>"if(submitted){window.location='/question/#{@question.id}/followup';}"}>
+      %iframe#ss-form{:name=>"ss-form", :style=>"display:none;", :onload=>"if(submitted){window.location='/questions/#{@question.id}/followup';}"}>
       .hidden_iframe
         %form(action="https://docs.google.com/spreadsheet/formResponse?formkey=dFRscUdYTUNLUzZhRXA4UmFLb3VTdWc6MQ&amp;ifq" method="POST"
   target="ss-form" onsubmit="submitted=true;")
