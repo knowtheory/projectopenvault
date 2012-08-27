@@ -28,7 +28,7 @@ class Committee
 
     conditions = { "end_date.lte" => (options["end_date"] || Time.now), :committee_id => self.id }
     buys = Buy.all conditions
-    rep['total_spent'] = buys.sum(:total_cost, :committee_id => self.id) || 0
+    rep['total_spent'] = buys.sum(:total_cost) || 0
     rep['buys'] = buys.map(&:canonical) if options[:buys]
     rep
   end
