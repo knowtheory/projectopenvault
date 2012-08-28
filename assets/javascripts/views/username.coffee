@@ -6,7 +6,7 @@ POV.views.Byline = Backbone.View.extend
     davidherzog:   "David Herzog"
     janetsaidi:    "Janet Saidi"
     joyandstuff:   "Joy Mayer"
-    mfpatane:      "Matt Patane"
+    mfpatane:      "Matthew Patane"
     ryanfamuliner: "Ryan Famuliner"
     scottphamkbia: "Scott Pham"
     swaffords:     "Scott Swafford"
