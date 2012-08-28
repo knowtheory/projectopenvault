@@ -36,6 +36,7 @@ module AdVault
     end
     
     get '/questions/:id/followup' do
+      headers "X-FRAME-OPTIONS" => "Allow-From http://projectopenvault.com"
       @question = Question.get(params[:id])
       raise Sinatra::NotFound unless @question
       haml :followup, :layout => false
