@@ -13,6 +13,7 @@ class Buy
   property :election,       Enum[:primary, :general, :issue]
   property :length,         Integer
   property :total_runtime,  Integer
+  property :cancelled,       Boolean, :default => false
   
   belongs_to :submitter, :model => "User"
   belongs_to :station

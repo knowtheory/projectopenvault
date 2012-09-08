@@ -1,0 +1,49 @@
+$gutter-width: 30px
+$header-gutter-width: 20px
+$smallcaps: 'Alegreya SC'
+$dark-blue: #002b7a
+$light-blue: #eef3fd
+$mid-blue: #375890
+
+#layout
+  #main
+    margin: 0 $gutter-width
+    float: left
+    background-color: white
+    *
+      padding: 0
+      margin: 0
+    h1
+      vertical-align: top
+      font-size: 36pt
+      margin-bottom: 20px
+    table#buys
+      float: left
+      border-spacing: 0
+      text-align: center
+      tbody
+        tr
+          th
+            border-top: 1px solid #000000
+            border-bottom: 1px solid #000000
+            border-right: 1px solid #000000
+            margin: 0
+            padding: 0
+            font-weight: bold
+          td
+            border-bottom: 1px solid #000000
+            border-right: 1px solid #000000
+            background-color: white
+            margin: 0
+            padding: 0
+          td:first-child
+            border-left: 1px solid #000000
+          th:first-child
+            border-left: 1px solid #000000
+        tr.odd
+          td
+            background-color: $light-blue
+  #footer
+    width: 100%
+    clear: both
+

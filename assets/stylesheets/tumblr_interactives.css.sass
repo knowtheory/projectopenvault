@@ -1,0 +1,103 @@
+$gutter-width: 30px
+$header-gutter-width: 20px
+$smallcaps: 'Alegreya SC'
+
+/* LAYOUT */
+#layout
+  #interactives
+    float: left
+    clear: both
+    width: 100%
+    border-bottom: 5px solid #EFF3FD
+    moz-box-shadow: 0px 5px 0px #002b7a
+    webkit-box-shadow: 0px 5px 0px #002b7a
+    box-shadow: 0px 5px 0px #002b7a
+    behavior: url(ie-css3.htc)
+    margin-bottom: 20px
+
+    .navigation
+      $tab-radius: 3px
+      width: 920px
+      margin-left: $header-gutter-width
+      margin-right: $header-gutter-width
+      float: left
+      clear: both
+      border-top: 1px solid #C7C7C7
+      border-bottom: 1px solid #C7C7C7
+      .title
+        float: left
+        font-family: $smallcaps
+        font-size: 16pt
+        padding: 10px
+      .facets
+        font-family: $smallcaps
+        float: right
+        margin-right: 60px
+        span
+          float: left
+          padding: 10px
+          margin-top: 5px
+          cursor: pointer
+          border-left: 1px solid white
+          border-right: 1px solid white
+        span.active
+          background-color: white
+          margin-bottom: -1px
+          border: 1px solid #C7C7C7
+          border-bottom: 1px solid white
+          border-top-left-radius: $tab-radius
+          border-top-right-radius: $tab-radius
+    .content
+      margin: $header-gutter-width
+      float: left
+      width: 920px
+      .badges
+        clear: both
+        padding: 0px 20px
+        .badge
+          float: left
+          img
+            width: 84px
+            height: 84px
+            margin: 4px
+            border: 1px solid #C7C7C7
+            float: left
+          .info
+            float: left
+            width: 190px
+            margin: 4px
+            p
+              font-size: 14pt
+              padding-top: 4px
+            p.name
+              font-weight: bold
+            p.office
+              font-family: $smallcaps
+              font-size: 12pt
+            p.dollars-spent
+              font-family: 'Helvetica'
+              font-weight: bold
+              font-size: 24pt
+      .pagination
+        clear: left
+        $tab-radius: 3px
+        padding-top: 4px
+        margin: 0 auto
+        div
+          float: right
+          font-family: 'Helvetica'
+          font-size: 10pt
+          border-radius: $tab-radius
+          border: 1px solid #C7C7C7
+          padding: 8px
+          cursor: pointer
+        .previous
+          border-top-right-radius: 0px
+          border-bottom-right-radius: 0px
+          border-right: 0px
+          width: 48%
+        .next
+          border-top-left-radius: 0px
+          border-bottom-left-radius: 0px
+          width: 48%
+          text-align: right

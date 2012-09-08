@@ -1,0 +1,109 @@
+*
+  font-size: 16px
+  font-weight: normal
+  line-height: 1
+  padding: 0
+  margin: 0
+
+body
+  font-family: 'Alegreya', serif
+  background: #F1F1F1
+
+a
+  color: #002B7A
+
+a:visited
+  color: black
+
+iframe
+  border: 0px
+
+$gutter-width: 30px
+$header-gutter-width: 20px
+$smallcaps: 'Alegreya SC'
+
+/* LAYOUT */
+#layout
+  border: 1px solid #D6D6D6
+  border-top-width: 0
+  background: white
+  margin: 0 auto
+  width: 960px
+
+  #header
+    padding-top: 15px
+    #masthead
+      float: left
+      margin-left: $header-gutter-width
+      font-family: $smallcaps
+      a
+        text-decoration: none
+        img
+          margin-top: 10px
+          margin-right: 5px
+          width: 61px
+          height: 48px
+          float: left
+        h1
+          vertical-align: top
+          font-size: 36pt
+          width: 480px
+          p.meta
+            float: left
+            font-size: 14pt
+            padding-bottom: 10px
+
+    #aggregate
+      float: right
+      p
+        float: left
+        margin-right: $header-gutter-width
+      span.value
+        font-size: 28pt
+      span
+        display: block
+        font-size: 16pt
+        font-family: $smallcaps
+  #footer
+    #colophon
+      p
+        font-size: 14pt
+      a
+        font-size: 14pt
+      
+#question-box
+  height: 340px
+  width: 280px
+#question
+  width: 280px
+  form
+    margin: 10px
+  label
+    font-style: italic
+    font-size: 24pt
+    display: block
+  textarea
+    margin-top: 10px
+    width: 100%
+  ul
+    list-style-type: none
+    padding: 0
+    margin-left: 0
+  text
+    width: 200px
+    max-width: 200px
+    height: 50px
+    line-height: 150%
+    clear: all
+  input.submit
+    margin-top: 10px
+    width: 100%
+
+.followup
+  margin: auto
+  padding: 20px
+  width: 240px
+  font-style: italic
+  font-size: 18pt
+  a
+    font-size: 18pt

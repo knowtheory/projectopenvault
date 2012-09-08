@@ -1,0 +1,26 @@
+%h1= @candidate.name
+
+%table#buys
+  %tr.header
+    %th Station
+    %th Committee
+    %th Run From Date
+    %th Run To Date
+    %th Run From Hour
+    %th Run To Hour
+    %th Ad Runs Per Week
+    %th Ad Length
+    %th Cost per Ad
+    %th Total Spent
+  - @candidate.buys.each_with_index do |buy, index|
+    %tr{:class=>(index % 2 == 0 && "odd")}
+      %td=buy.station.call_sign
+      %td=buy.committee.name
+      %td=buy.start_date
+      %td=buy.end_date
+      %td=buy.start_time
+      %td=buy.end_time
+      %td=buy.spots_per_week
+      %td="#{buy.length} seconds"
+      %td="$#{buy.rate_per_spot}"
+      %td="$#{buy.total_cost}"

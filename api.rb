@@ -83,7 +83,7 @@ module AdVault
       get do
         cache do
           @candidates = Candidate.all
-          @candidates.map{ |candidate| candidate.canonical }.to_json
+          @candidates.map{ |candidate| candidate.canonical }.select{ |attr| attr["total_spent"] > 0 }.to_json
         end
       end
       
@@ -117,7 +117,7 @@ module AdVault
     resource :committees do
       get do
         @committees = Committee.all
-        @committees.map{ |committee| committee.canonical }.to_json
+        @committees.map{ |committee| committee.canonical }.select{ |attr| attr["total_spent"] > 0 }.to_json
       end
       
       segment "/:slug" do

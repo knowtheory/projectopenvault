@@ -55,15 +55,8 @@ module AdVault
     end
 
     get '/candidates/:slug.html' do
-      haml "%h1 Candidate #{Candidate.first(:slug=>params[:slug]).name}"
-    end
-
-    get '/candidates/:slug/spending.html' do
-      haml "%h1 Spending for Candidate #{Candidate.first(:slug=>params[:slug]).name}"
-    end
-
-    get '/candidates/:slug/ads.html' do
-      haml "%h1 Ads for Candidate #{Candidate.first(:slug=>params[:slug]).name}"
+      @candidate = Candidate.first(:id => params[:slug])
+      haml :candidate, :layout => :vault # "%h1 Candidate #{Candidate.first(:slug=>params[:slug]).name}"
     end
 
     get '/offices.html' do

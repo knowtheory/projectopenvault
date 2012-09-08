@@ -1,6 +1,13 @@
 # require './config/models.rb'; DataMapper.auto_migrate!; load './data/fixtures.rb'; load './data/import.rb'
 require File.join(File.dirname(__FILE__),'..','config','models.rb')
-DataMapper.auto_migrate!
+DataMapper.auto_upgrade!
+
+def drop(resource)
+  DataMapper.repository.adapter.execute("drop table #{resource.storage_name} cascade")
+end
+
+[Buy, Buyer, Committee, Ad, Office, Candidate, User, Station].each{ |resource| drop resource and resource.auto_migrate! }
+
 load File.join(File.dirname(__FILE__),'fixtures.rb') # ensures that all the background data exists.
 require 'csv'
 #require './config/models.rb'; DataMapper.auto_migrate!
@@ -38,12 +45,13 @@ CSV.foreach(most_recent_data_file('candidates'), :headers => true) do |row|
       puts "#{Time.now}: Unable to save #{current_office.errors.inspect}"
     end
   end
-
-  running_for = Office.first_or_new(:name => row['office_sought'].strip, :region => row['region_office_sought'].strip)
-
-  puts running_for.save ? "#{Time.now}: saved office #{running_for.id}" : "#{Time.now}: Unable to save #{running_for.errors.inspect}"
   
-  candidate.office = running_for
+  unless row['office_sought'].nil? or row['region_office_sought'].nil?
+    running_for = Office.first_or_new(:name => row['office_sought'].strip, :region => row['region_office_sought'].strip)
+    puts running_for.save ? "#{Time.now}: saved office #{running_for.id}" : "#{Time.now}: Unable to save #{running_for.errors.inspect}"
+    candidate.office = running_for
+  end
+  
   puts candidate.save ? "#{Time.now}: saved Candidate #{candidate.id}" : "#{Time.now}: Unable to save #{candidate.errors.inspect}"
 end
 
@@ -61,6 +69,7 @@ CSV.foreach(most_recent_data_file('advault_data'), :headers => true) do |row|
   buy.station       = Station.first :call_sign => row['station'].strip
   buy.buyer         = Buyer.first_or_create :name => row['buyer'].strip
   buy.committee     = Committee.first_or_create :name => row['advertiser'].strip
+  buy.cancelled     = row['cancelled'] =~ /yes/i
 
   if row['candidate'] !~ /Issue/i
     buy.candidate = Candidate.first(:name => row['candidate'].strip) if row['candidate']
