@@ -13,7 +13,7 @@ class Buy
   property :election,       Enum[:primary, :general, :issue]
   property :length,         Integer
   property :total_runtime,  Integer
-  property :cancelled,       Boolean, :default => false
+  property :cancelled,      Boolean, :default => false, :required => true
   
   belongs_to :submitter, :model => "User"
   belongs_to :station
@@ -21,6 +21,13 @@ class Buy
   belongs_to :committee
   belongs_to :candidate, :required => false
   belongs_to :office,    :required => false
+
+  def self.fulfilled(conditions={})
+    defaults = { "end_date.lte" => Time.now, "cancelled" => false}
+    opts = defaults.merge(conditions)
+    puts opts.inspect
+    all opts
+  end
   
   def canonical(options = {})
     rep = {

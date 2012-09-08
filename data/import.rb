@@ -69,7 +69,7 @@ CSV.foreach(most_recent_data_file('advault_data'), :headers => true) do |row|
   buy.station       = Station.first :call_sign => row['station'].strip
   buy.buyer         = Buyer.first_or_create :name => row['buyer'].strip
   buy.committee     = Committee.first_or_create :name => row['advertiser'].strip
-  buy.cancelled     = row['cancelled'].match /yes/i
+  buy.cancelled     = !!row['cancelled'].match(/yes/i)
 
   if row['candidate'] !~ /Issue/i
     buy.candidate = Candidate.first(:name => row['candidate'].strip) if row['candidate']
