@@ -17,3 +17,11 @@ namespace :data do
     load './data/import.rb'
   end
 end
+
+
+task :console do
+  require 'irb'
+  ARGV.clear
+  require './config/models'
+  IRB.start
+end
