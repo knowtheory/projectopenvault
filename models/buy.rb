@@ -24,9 +24,7 @@ class Buy
 
   def self.fulfilled(conditions={})
     defaults = { "end_date.lte" => Time.now, "cancelled" => false}
-    opts = defaults.merge(conditions)
-    puts opts.inspect
-    all opts
+    all defaults.merge(conditions)
   end
   
   def canonical(options = {})
