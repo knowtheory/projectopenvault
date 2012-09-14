@@ -1,15 +1,15 @@
 %html
   %head
-    %link(href='http://fonts.googleapis.com/css?family=Alegreya:400italic,400,700|Alegreya+SC' rel='stylesheet' type='text/css')
     %link(type="text/css" rel="stylesheet" media="screen" href="/assets/common.css")
     %link(type="text/css" rel="stylesheet" media="screen" href="/assets/details.css")
     %script(src="/assets/candidates.js")
+    %script="POV.host = 'http://localhost:9292'" if ENV['RACK_ENV']=="development"
   %body
     #layout
       #header
         #masthead
           %a(href='/')
-            %img(src='http://knowtheory.net/assets/tumblr-mockup.png')
+            %img(src='/assets/tumblr-mockup.png')
             %h1
               Project OpenVault
               %p.meta Election coverage for Mid-Missouri

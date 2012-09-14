@@ -41,7 +41,9 @@ class Buy
       'election'        => self.election,
       'length'          => self.length,
       'total_runtime'   => self.total_runtime,
-      'candidate_id'    => self.candidate_id
+      'candidate_id'    => self.candidate_id,
+      'station'         => self.station.call_sign,
+      'committee'       => self.committee.name
     }
     rep
   end

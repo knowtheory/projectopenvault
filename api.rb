@@ -2,6 +2,7 @@ module AdVault
   class Api < Grape::API
     version 'v1', :using => :header, :vendor => 'advault'
     helpers Garner::Mixins::Grape::Cache
+    default_format :json
     
     helpers do
       def logger
@@ -25,7 +26,7 @@ module AdVault
     
     resource :spending do
       get do
-        @buys = Buy.all
+        @buys = Buy.fulfilled
         @buys.map{ |buy| buy.canonical }.to_json
       end
       
@@ -105,7 +106,9 @@ module AdVault
         end
       
         get "/spending" do
-          "Hallo!"
+          @candidate = Candidate.first(:id=>params[:slug])
+          error!(404) unless @candidate
+          Buy.fulfilled(:candidate_id => @candidate.id).map{ |b| b.canonical }.to_json
         end
         
         get "/ads" do
