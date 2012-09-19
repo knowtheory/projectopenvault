@@ -1,6 +1,7 @@
 POV = 
   models: {}
-  views: {}
+  views:
+    Buy: {}
   host: 'http://ads.projectopenvault.com'
 
 Backbone.sync = _.wrap Backbone.sync, ((sync, method, model, options) -> 
