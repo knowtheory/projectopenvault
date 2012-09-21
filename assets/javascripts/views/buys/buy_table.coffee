@@ -9,7 +9,7 @@ POV.views.Buy.Table = Backbone.View.extend
     options.collection.on('reset', @render, this)
 
   prepare: () ->
-    columns = [
+    column_data = [
       { name: "Station",          property: "station"       },
       { name: "Committee",        property: "committee"     },
       { name: "Run from date",    property: "start_date"    },
@@ -21,8 +21,8 @@ POV.views.Buy.Table = Backbone.View.extend
       { name: "Cost per ad",      property: "rate_per_spot" },
       { name: "Total spent",      property: "total_cost"    }
     ]
-    @headerCollection = new Backbone.Collection(columns)
-    @header = new POV.views.Buy.TableHeader(collection: @headerCollection)
+    @columns = new POV.models.BuyProperties(column_data)
+    @header = new POV.views.Buy.TableHeader(collection: @columns)
     rows = @rows = []
     @filtered.each (model, index) -> 
       options = { model: model }
@@ -37,8 +37,9 @@ POV.views.Buy.Table = Backbone.View.extend
 
   sort: (click) ->
     property = this.$(click.srcElement).attr('class')
-    @filter = (model) -> model.get(property)
-    @filtered = new Backbone.Collection(@collection.sortBy @filter)
+    @filtered = new Backbone.Collection(@collection.models)
+    @filtered.comparator = @collection.sorter(property)
+    @filtered.sort()
     this.prepare()
     this.render()
     
@@ -53,14 +54,14 @@ POV.views.Buy.TableRow = Backbone.View.extend
   tagName: 'tr'
   render: () ->
     this.$el.html """
-      <td>#{@model.get('station')}</td>
-      <td>#{@model.get('committee')}</td>
-      <td>#{@model.get('start_date')}</td>
-      <td>#{@model.get('end_date')}</td>
-      <td>#{@model.get('start_time')}</td>
-      <td>#{@model.get('end_time')}</td>
-      <td>#{@model.get('spots_per_week')}</td>
-      <td>#{@model.get('length')}</td>
-      <td>#{@model.get('rate_per_spot')}</td>
-      <td>#{@model.get('total_cost')}</td>
+      <td><a href="/stations/#{ @model.get('station') }.html">#{ @model.get('station') }</a></td>
+      <td><a href="/committees/#{ POV.Utilities.sluggify @model.get('committee') }.html">#{ @model.get('committee') }</a></td>
+      <td>#{ @model.start_date() }</td>
+      <td>#{ @model.end_date() }</td>
+      <td>#{ @model.get('start_time') }</td>
+      <td>#{ @model.get('end_time') }</td>
+      <td>#{ @model.get('spots_per_week') }</td>
+      <td>#{ @model.get('length') }</td>
+      <td>#{ @model.get('rate_per_spot') }</td>
+      <td>#{ @model.get('total_cost') }</td>
       """

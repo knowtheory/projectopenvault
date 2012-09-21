@@ -106,7 +106,7 @@ module AdVault
         end
       
         get "/spending" do
-          @candidate = Candidate.first(:id=>params[:slug])
+          @candidate = Candidate.first(:slug=>params[:slug])
           error!(404) unless @candidate
           Buy.fulfilled(:candidate_id => @candidate.id).map{ |b| b.canonical }.to_json
         end
@@ -141,7 +141,9 @@ module AdVault
         end
       
         get "/spending" do
-          "Hallo!"
+          @committee = Committee.first(:slug=>params[:slug])
+          error!(404) unless @committee
+          Buy.fulfilled(:committee_id => @committee.id).map{ |b| b.canonical }.to_json
         end
         
         get "/ads" do
@@ -202,7 +204,9 @@ module AdVault
         end
         
         get "/spending" do
-          "Hallo!"
+          @station = Station.first(:call_sign=>params[:call_sign])
+          error!(404) unless @station
+          Buy.fulfilled(:station_id => @station.id).map{ |b| b.canonical }.to_json
         end
         
         get "/ads" do

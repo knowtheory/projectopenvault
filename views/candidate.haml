@@ -5,5 +5,5 @@
   %span.office= @candidate.office.name
 
 %table#buys
-%script="window.buys = new POV.models.Buys(); buy_table = new POV.views.Buy.Table({el: '#buys', collection: buys}); buys.fetch({url: '/candidates/#{@candidate.id}/spending.json'})"
+%script="window.buys = new POV.models.Buys(); buy_table = new POV.views.Buy.Table({el: '#buys', collection: buys}); buys.fetch({url: '/candidates/#{@candidate.slug}/spending.json'})"
   

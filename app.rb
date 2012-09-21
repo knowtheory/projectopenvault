@@ -55,8 +55,9 @@ module AdVault
     end
 
     get '/candidates/:slug.html' do
-      @candidate = Candidate.first(:id => params[:slug])
-      haml :candidate, :layout => :vault # "%h1 Candidate #{Candidate.first(:slug=>params[:slug]).name}"
+      @candidate = Candidate.first(:slug => params[:slug])
+      raise Sinatra::NotFound unless @candidate
+      haml :candidate, :layout => :vault
     end
 
     get '/offices.html' do
@@ -74,17 +75,28 @@ module AdVault
     get '/offices/:slug/ads.html' do
       haml "%h1 Office"
     end
+    
+    get '/committees.html' do
+      haml "%h1 Committees"
+    end
+
+    get '/committees/:slug.html' do
+      raise Sinatra::NotFound unless @committee = Committee.first( :slug => params[:slug] )
+      haml :buy_tables, :layout => :vault, :locals => {:header => @committee.name, :url => "/committees/#{@committee.slug}/spending.json"}
+    end
 
     get '/stations.html' do
-      haml "%h1 Station"
+      haml "%h1 Stations"
     end
 
-    get '/stations/:slug.html' do
-      haml "%h1 Station"
+    get '/stations/:call.html' do
+      raise Sinatra::NotFound unless @station = Station.first( :call_sign => params[:call] )
+      haml :buy_tables, :layout => :vault, :locals => {:header => @station.name, :url => "/stations/#{@station.call_sign}/spending.json"}
     end
 
-    get '/stations/:slug/spending.html' do
-      haml "%h1 Station"
+    get '/stations/:call/spending.html' do
+      raise Sinatra::NotFound unless @station = Station.first( :call_sign => params[:call] )
+      haml :buy_tables, :layout => :vault, :locals => {:header => @station.name, :url => "/stations/#{@station.call_sign}/spending.json"}
     end
 
     get '/stations/:slug/ads.html' do
