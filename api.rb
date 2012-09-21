@@ -19,7 +19,6 @@ module AdVault
     end
     
     before do
-      logger.info "Hello!"
       header['Cache-Control'] = 'public'
       header['Content-Type']  = 'application/json'
     end
@@ -119,9 +118,11 @@ module AdVault
 
     resource :committees do
       get do
-        conditions = Utilities.pick(params, %w(type))
+        conditions = Utilities.pick(params, *%w(type))
+        conditions.delete "type" if conditions["type"] and conditions["type"] == "all"
         logger.info(conditions.inspect)
         @committees = Committee.all(conditions)
+        @committees -= Committee.all(:type => :candidate) if params['type'] and params['type'] == "all"
         @committees.map{ |committee| committee.canonical }.select{ |attr| attr["total_spent"] > 0 }.to_json
       end
       
