@@ -122,7 +122,7 @@ module AdVault
         conditions.delete "type" if conditions["type"] and conditions["type"] == "all"
         logger.info(conditions.inspect)
         @committees = Committee.all(conditions)
-        @committees -= Committee.all(:type => :candidate) if params['type'] and params['type'] == "all"
+        @committees -= Committee.all(:type => :candidate) unless params['type'] and params['type'] == "all"
         @committees.map{ |committee| committee.canonical }.select{ |attr| attr["total_spent"] > 0 }.to_json
       end
       
