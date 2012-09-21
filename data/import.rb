@@ -61,6 +61,8 @@ CSV.foreach(most_recent_data_file('advault_data'), :headers => true) do |row|
   end_date   = Date.strptime row['end_date'], '%m/%d/%Y'
 
   buy               = Buy.new(Utilities.pick row, *%w(contract_id spots_per_week rate_per_spot start_time end_time election length))
+  buy.start_time    = (row['start_time'] || '').strip
+  buy.end_time      = (row['end_time'] || '').strip
   buy.start_date    = start_date
   buy.end_date      = end_date
   buy.total_cost    = buy.rate_per_spot * buy.spots_per_week

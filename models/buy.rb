@@ -1,10 +1,11 @@
 class Buy
   include DataMapper::Resource
+  TIME = /^(\d{1,2})(:(\d{2}))?\s+([axp]\.?m\.?)$/
   
   property :id,             Serial
   property :contract_id,    Integer, :required => true
-  property :start_time,     String
-  property :end_time,       String
+  property :start_time,     String, :format => TIME
+  property :end_time,       String, :format => TIME
   property :start_date,     Date
   property :end_date,       Date
   property :spots_per_week, Integer
