@@ -54,8 +54,8 @@ POV.views.Buy.TableRow = Backbone.View.extend
   tagName: 'tr'
   render: () ->
     this.$el.html """
-      <td><a href="/stations/#{ @model.get('station') }.html">#{ @model.get('station') }</a></td>
-      <td><a href="/committees/#{ POV.Utilities.sluggify @model.get('committee') }.html">#{ @model.get('committee') }</a></td>
+      <td><a href="#{POV.host}/stations/#{ @model.get('station') }.html">#{ @model.get('station') }</a></td>
+      <td><a href="#{POV.host}/committees/#{ POV.Utilities.sluggify @model.get('committee') }.html">#{ @model.get('committee') }</a></td>
       <td>#{ @model.start_date() }</td>
       <td>#{ @model.end_date() }</td>
       <td>#{ @model.get('start_time') }</td>

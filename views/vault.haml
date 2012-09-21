@@ -21,5 +21,23 @@
           %p#total_spent
             %span.value Loading...
             %span.description Spent on ads
+        #navigation
+          %a{:href => "http://projectopenvault.com/about" } About The Project
+          %a{:href => "http://www.columbiamissourian.com/"} The Missourian
+          %a{:href => "http://www.kbia.org"} KBIA Radio
+          %a{:href => "http://www.kbia.org"} KOMU8 TV
       #main=yield
       #footer
+        .logos
+        %a{:href => "http://www.columbiamissourian.com/"}
+          %img.logos{:src => "http://knowtheory.net/assets/logos/the%20Missourian50px.jpeg"}
+        %a{:href => "http://www.kbia.org"}
+          %img.logos{:src => "http://knowtheory.net/assets/logos/kbia50px.jpeg"}
+        %a{:href => "http://www.kbia.org"}
+          %img.logos{:src => "http://knowtheory.net/assets/logos/KOMUnews50px.jpeg"}
+
+        #colophon
+          %p Copyright 2012 Board of Curators, University of Missouri
+          %p Icons Copyright <a href="http://entypo.com/">Entypo</a> via <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA</a>
+        %p.line
+      

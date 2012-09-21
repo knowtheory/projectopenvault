@@ -26,6 +26,29 @@ CSV.foreach(most_recent_data_file('offices'), :headers => true) do |row|
   end  
 end
 
+CSV.foreach(most_recent_data_file('committees'), :headers => true) do |row|
+  committee = Committee.new(Utilities.pick row, *%w(name url description))
+  if row['type']
+    if row['type'] =~ /Candidate/i
+      committee.type = :candidate
+    elsif row['type'] =~ /Party/i
+      committee.type = :party
+    elsif row['type'] =~ /501\(c\)\(4\)/i
+      committee.type = :five_oh_one_c_four
+    elsif row['type'] =~ /527/i
+      committee.type = :five_twenty_seven
+    elsif row['type'] =~ /Independent/i
+      committee.type = :independent
+    else
+      committee.type = :not_applicable
+    end
+  else
+    committee.type = :not_applicable
+  end
+  
+  puts committee.save ? "#{Time.now}: saved Committee #{committee.id}" : "#{Time.now}: Unable to save #{committee.errors.inspect}"
+end
+
 #f = 'candidates'; data = CSV.open(most_recent_data_file(f,'./data'), :headers => true).read; row = data.first
 CSV.foreach(most_recent_data_file('candidates'), :headers => true) do |row|
 

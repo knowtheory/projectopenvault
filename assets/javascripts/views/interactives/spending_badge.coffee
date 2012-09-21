@@ -4,7 +4,7 @@ POV.views.CandidateBadge = Backbone.View.extend
     <div class="badge">
       <img src="#{POV.host}/assets/candidates/#{this.model.get('slug')}_headshot.jpg"}></img>
       <div class="info">
-        <p class="name"><a href="/candidates/#{@model.get('slug')}.html">#{this.model.get('name')}</a></p>
+        <p class="name"><a href="#{POV.host}/candidates/#{@model.get('slug')}.html">#{this.model.get('name')}</a></p>
         <p class="office">for #{this.model.get('office') || ''}</p>
         <p class="dollars-spent">$#{POV.Utilities.formatDollars(this.model.get('total_spent') || 0)}</p>
       </div>

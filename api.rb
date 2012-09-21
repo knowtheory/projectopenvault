@@ -119,7 +119,9 @@ module AdVault
 
     resource :committees do
       get do
-        @committees = Committee.all
+        conditions = Utilities.pick(params, %w(type))
+        logger.info(conditions.inspect)
+        @committees = Committee.all(conditions)
         @committees.map{ |committee| committee.canonical }.select{ |attr| attr["total_spent"] > 0 }.to_json
       end
       

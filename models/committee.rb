@@ -1,13 +1,20 @@
 class Committee
   include DataMapper::Resource
+  COMMITTEE_TYPE = {
+    :candidate => "candidate", 
+    :party => "party", 
+    :five_oh_one_c_four => "501(c)(4)", 
+    :five_twenty_seven => "527", 
+    :independent => "independent", 
+    :not_applicable => "not applicable"
+  }
   
   property :id,   Serial
   property :name, String, :required => true
   property :slug, String, :length => 2048
-  property :type, String
+  property :type, Enum[:candidate, :party, :five_oh_one_c_four, :five_twenty_seven, :independent, :not_applicable]
   property :description, Text
   property :url,  String, :length => 2048, :format => :url
-  #property :tax_status, Enum[:five_oh_one_c_four, :five_oh_one_c_six, :super_pac]
   
   has n, :buys
   has n, :ads
