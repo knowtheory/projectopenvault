@@ -11,9 +11,7 @@ module AdVault
     end
 
     get '/' do
-      @buys = Buy.all
-      @candidates = Candidate.all
-      haml :tumblr_mockup, :layout => :tumblr
+      redirect "http://projectopenvault.com", 301
     end
     
     get '/blocks' do
@@ -65,7 +63,8 @@ module AdVault
     end
 
     get '/offices/:slug.html' do
-      haml "%h1 Office"
+      raise Sinatra::NotFound unless @office = Office.first( :slug => params[:slug] )
+      haml :buy_tables, :layout => :vault, :locals => {:header => @office.name, :url => "/offices/#{@office.slug}/spending.json"}
     end
 
     get '/offices/:slug/spending.html' do

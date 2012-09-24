@@ -179,7 +179,9 @@ module AdVault
         end
         
         get "/spending" do
-          "Hallo!"
+          @office = Office.first(:slug=>params[:slug])
+          error!(404) unless @office
+          Buy.fulfilled(:office_id => @office.id).map{ |b| b.canonical }.to_json
         end
         
         get "/ads" do

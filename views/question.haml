@@ -9,14 +9,8 @@
     #question
       %iframe#ss-form{:name=>"ss-form", :style=>"display:none;", :onload=>"if(submitted){window.location='/questions/#{@question.id}/followup';}"}>
       .hidden_iframe
-        %form(action="https://docs.google.com/spreadsheet/formResponse?formkey=dFRscUdYTUNLUzZhRXA4UmFLb3VTdWc6MQ&amp;ifq" method="POST"
-  target="ss-form" onsubmit="submitted=true;")
-          .errorbox-good
-            .ss-item.ss-paragraph-text
-              .ss-form-entry
-                %label.ss-q-title(for="entry_0")=@question.prompt
-                %label.ss-q-help(for="entry_0")
-                %textarea.ss-q-long#entry_0(name="entry.0.single" rows="8" cols="75")
+        %form{ :action=>@question.form_url, :method=>"POST", :target=>"ss-form", :onsubmit=>"submitted=true;" }
+          .errorbox-good= @question.form_markup
           %input(type="hidden" name="pageNumber" value="0")
           %input(type="hidden" name="backupCache" value="")
           .ss-item.ss-navigate
