@@ -28,6 +28,7 @@ POV.views.Byline = Backbone.View.extend
     @username = (options.username || options.el.html() || "").toLowerCase()
   
   render: () ->
-    """#{@fullNames[@username]} <span class="affiliation">(#{@affiliations[@username]})</span>"""
+    affilation = """ <span class="affiliation">(#{@affiliations[@username]})</span>""" if @affiliations[@username]
+    """#{@fullNames[@username]} #{affilation}"""
 
   attach: -> this.$el.html @render()
