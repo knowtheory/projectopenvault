@@ -128,5 +128,11 @@ module AdVault
 
     get '/shared' do
     end
+    
+    get '/questions/new' do
+    end
+    
+    get '/questions' do
+    end
   end
 end

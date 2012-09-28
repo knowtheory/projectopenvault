@@ -11,6 +11,7 @@ POV.views.Byline = Backbone.View.extend
     scottphamkbia: "Scott Pham"
     swaffords:     "Scott Swafford"
     jenleereeves:  "Jen Lee Reeves"
+    projectopenvault: "Project OpenVault Team"
   
   affiliations:
     knowtheory:    "Project Open Vault"
