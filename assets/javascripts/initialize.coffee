@@ -2,7 +2,7 @@ POV =
   models: {}
   views:
     Buy: {}
-  host: 'http://ads.projectopenvault.com'
+  host: 'http://data.projectopenvault.com'
 
 Backbone.sync = _.wrap Backbone.sync, ((sync, method, model, options) -> 
   getValue = (object,prop) ->
