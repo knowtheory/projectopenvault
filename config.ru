@@ -30,17 +30,17 @@ app = Rack::Builder.new do
   # Advault::App is a Sinatra app handles ONLY routes that end with .html
   # AdVault::Api is a Grape app handles all other routes
   map('/') do
+    use Rack::JSONP
+    use Rack::ETag
+    use Rack::Cache,
+      :verbose     => true,
+      :metastore   => 'file:tmp/meta',
+      :entitystore => 'file:tmp/body'
+
     run Rack::Cascade.new([AdVault::App, AdVault::Api])
   end
 
   map('/admin')  { run AdVault::Admin }
 end
-
-use Rack::JSONP
-use Rack::ETag
-use Rack::Cache,
-  :verbose     => true,
-  :metastore   => 'file:tmp/meta',
-  :entitystore => 'file:tmp/body'
 
 run app
