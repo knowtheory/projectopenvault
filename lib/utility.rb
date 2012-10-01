@@ -32,4 +32,11 @@ module Utilities
     seconds = remaining % 60
     "#{days}d, #{hours}h, #{minutes}m, #{seconds}s"
   end
+  
+  def self.most_recent_data_file(name,dir=nil)
+    path = dir || File.dirname(__FILE__)
+    pattern = /^#{name}\.(\d{4})\.(\d{2})\.(\d{2})\.csv$/
+    File.join path, Dir.open(path).select{ |f| f =~ pattern }.sort_by{ |f| matches = f.match(pattern).to_a; matches.shift; matches.map(&:to_i) }.last
+  end
+  
 end
