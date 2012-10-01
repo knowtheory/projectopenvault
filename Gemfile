@@ -8,6 +8,7 @@ gem 'rack-contrib'
 gem 'rack-cache'
 gem 'garner'
 gem 'rake'
+gem 'redcarpet'
 
 gem 'haml'
 gem 'sass'

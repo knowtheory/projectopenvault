@@ -1,4 +1,3 @@
-#@ sourceMappingURL=/assets/maps/test.js.map
 $(document).ready () ->
   window.bylines = []
   _.each $(".byline"), (el) ->

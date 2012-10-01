@@ -4,6 +4,9 @@
   Candidate for
   %span.office= @candidate.office.name
 
+.chart#one(style="width:450px;height:300px")
+.chart#two(style="width:450px;height:300px")
+
 %table#buys
 %script="window.buys = new POV.models.Buys(); buy_table = new POV.views.Buy.Table({el: '#buys', collection: buys}); buys.fetch({url: '/candidates/#{@candidate.slug}/spending.json'})"
   

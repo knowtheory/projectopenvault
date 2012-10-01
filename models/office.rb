@@ -8,6 +8,7 @@ class Office
   property :abbreviation, String
   property :region,       String
   property :incumbent_id, Integer, :required => false
+  property :description,  Text
   
   has n, :buys
   has 1, :incumbent, "Candidate"
@@ -36,6 +37,7 @@ class Office
       'slug' => self.slug,
       'title' => self.title,
       'abbreviation' => self.short_name,
+      'description' => self.description,
       'region' => self.region,
     }
     rep['incumbent'] = self.incumbent.name if self.incumbent

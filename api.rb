@@ -3,7 +3,7 @@ module AdVault
     version 'v1', :using => :header, :vendor => 'advault'
     helpers Garner::Mixins::Grape::Cache
     default_format :json
-    
+
     helpers do
       def logger
         Api.logger
@@ -92,20 +92,36 @@ module AdVault
           Candidate.first(:slug=>params[:slug]).canonical.to_json
         end
       
-        post do
-          Candidate.first(:slug=>params[:slug])
-        end
+        resource do
+          http_basic do
+            logger.info("Basic Auth!")
+            true
+          end
+
+          post do
+            error!(404) unless @candidate = Candidate.first(:slug=>params[:slug])
+            attrs = Hash[CGI.parse(request.body.read).map{ |k,v| [k, ((v.kind_of? Array and v.size == 1 ) ? v.first : v )]}]
+            @candidate.attributes = Utilities.pick(attrs, "name", "party", "url", "description")
+
+            if @candidate.save
+              @candidate.canonical.to_json
+            else
+              error! @candidate.errors.to_json, 401
+            end
+          end
       
-        put do
-          Candidate.first(:slug=>params[:slug])
-        end
+          put do
+            Candidate.first(:slug=>params[:slug])
+          end
       
-        delete do
-          Candidate.first(:slug=>params[:slug])
+          delete do
+            Candidate.first(:slug=>params[:slug])
+          end
         end
       
         get "/spending" do
           @candidate = Candidate.first(:slug=>params[:slug])
+          logger.info(@candidate.inspect)
           error!(404) unless @candidate
           Buy.fulfilled(:candidate_id => @candidate.id).map{ |b| b.canonical }.to_json
         end
@@ -120,7 +136,6 @@ module AdVault
       get do
         conditions = Utilities.pick(params, *%w(type))
         conditions.delete "type" if conditions["type"] and conditions["type"] == "all"
-        logger.info(conditions.inspect)
         @committees = Committee.all(conditions)
         @committees -= Committee.all(:type => :candidate) unless params['type'] and params['type'] == "all"
         @committees.map{ |committee| committee.canonical }.select{ |attr| attr["total_spent"] > 0 }.to_json

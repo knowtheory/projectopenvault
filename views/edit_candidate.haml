@@ -1,0 +1,14 @@
+%form{:method=>"POST", :action=> "http://#{credentials.join(":")}@#{AdVault::HOSTNAME}/candidates/#{@candidate.slug}"}
+  %label
+    Name:
+    %input{:name => "name", :value => @candidate.name}
+  %label
+    Party:
+    %input{:name => "party", :value => @candidate.party}
+  %label
+    Website:
+    %input{:name=> "url", :value => @candidate.url}
+  %label
+    Description:
+    %textarea{:name => "description"}
+  %input(type="submit")

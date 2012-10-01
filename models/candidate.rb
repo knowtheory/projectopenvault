@@ -1,13 +1,14 @@
 class Candidate
   include DataMapper::Resource
   
-  property :id,        Serial
-  property :name,      String, :required => true
-  property :slug,      String, :required => true, :length => 2048, :unique => true
-  property :party,     String
-  property :incumbent, Boolean, :default => false
-  property :url,       String, :length => 2048, :format => :url
-  property :race_id, Integer, :required => false
+  property :id,           Serial
+  property :name,         String,  :required => true
+  property :slug,         String,  :required => true, :length => 2048, :unique => true
+  property :party,        String
+  property :incumbent,    Boolean, :default => false
+  property :url,          String,  :length => 2048, :format => :url
+  property :race_id,      Integer, :required => false
+  property :description,  Text
   
   belongs_to :office
   belongs_to :incumbency, "Office", :child_key => [:incumbent_id], :required => false
@@ -23,7 +24,9 @@ class Candidate
       'id'          => self.id,
       'name'        => self.name,
       'slug'        => self.slug,
+      'party'       => self.party,
       'url'         => self.url,
+      'description' => self.description
     }
 
     buys = Buy.all(:candidate_id => self.id).fulfilled

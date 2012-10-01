@@ -10,6 +10,20 @@ module AdVault
       enable :logging
     end
 
+    helpers do
+      def protected!
+        unless authorized?
+          response['WWW-Authenticate'] = %(Basic realm="Restricted Area")
+          throw(:halt, [401, "Not authorized\n"])
+        end
+      end
+
+      def authorized?
+        @auth ||=  Rack::Auth::Basic::Request.new(request.env)
+        @auth.provided? && @auth.basic? && @auth.credentials && @auth.credentials == ['admin', 'admin']
+      end
+    end
+
     get '/' do
       redirect "http://projectopenvault.com", 301
     end
@@ -28,15 +42,13 @@ module AdVault
     
     get '/questions/:id' do
       headers "X-FRAME-OPTIONS" => "Allow-From http://projectopenvault.com"
-      @question = Question.get(params[:id])
-      raise Sinatra::NotFound unless @question
+      raise Sinatra::NotFound unless @question = Question.get(params[:id])
       haml :question, :layout => false
     end
     
     get '/questions/:id/followup' do
       headers "X-FRAME-OPTIONS" => "Allow-From http://projectopenvault.com"
-      @question = Question.get(params[:id])
-      raise Sinatra::NotFound unless @question
+      raise Sinatra::NotFound unless @question = Question.get(params[:id])
       haml :followup, :layout => false
     end
 
@@ -53,9 +65,20 @@ module AdVault
     end
 
     get '/candidates/:slug.html' do
-      @candidate = Candidate.first(:slug => params[:slug])
-      raise Sinatra::NotFound unless @candidate
-      haml :candidate, :layout => :vault
+      raise Sinatra::NotFound unless @candidate = Candidate.first(:slug => params[:slug])
+      locals = {
+        :header => @candidate.name, 
+        :description => markdown(@candidate.description || ""),
+        :url => "/candidates/#{@candidate.slug}/spending.json",
+        :javascript_paths => ["/assets/vault"]
+      }
+      haml :buy_tables, :layout => :vault, :locals => locals
+    end
+
+    get '/candidates/:slug/edit.html' do
+      protected!
+      raise Sinatra::NotFound unless @candidate = Candidate.first(:slug => params[:slug])      
+      haml :edit_candidate, :layout => :vault, :locals => {:credentials => @auth.credentials}
     end
 
     get '/offices.html' do
@@ -120,7 +143,23 @@ module AdVault
   end
 
   class Admin < Sinatra::Base
+    helpers do
+      def protected!
+        unless authorized?
+          response['WWW-Authenticate'] = %(Basic realm="Restricted Area")
+          throw(:halt, [401, "Not authorized\n"])
+        end
+      end
+
+      def authorized?
+        @auth ||=  Rack::Auth::Basic::Request.new(request.env)
+        @auth.provided? && @auth.basic? && @auth.credentials && @auth.credentials == ['admin', 'admin']
+      end
+    end
+    
     get '/' do
+      protected!
+      haml "%h1 Hello"
     end
 
     get '/share' do

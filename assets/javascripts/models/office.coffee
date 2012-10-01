@@ -1,5 +1,8 @@
 POV.models.Office = Backbone.Model.extend
   initialize: (attributes, options) ->
+    if options.buys
+      @buys = new POV.models.Buys options.buys.where
+        office_id: @id
 
 POV.models.Offices = Backbone.Collection.extend
   name       : "offices"

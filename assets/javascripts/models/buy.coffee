@@ -1,7 +1,7 @@
 POV.models.Buy = Backbone.Model.extend
   initialize: (attributes, options) ->
-    @_start_date = new Date "#{attributes.start_date} CDT"
-    @_end_date   = new Date "#{attributes.end_date} CDT"
+    @_start_date = new Date attributes.start_date
+    @_end_date   = new Date attributes.end_date
     @start_time = this.parse_time(attributes.start_time)
     @end_time = this.parse_time(attributes.end_time)
 

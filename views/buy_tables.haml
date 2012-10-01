@@ -1,5 +1,8 @@
 %h1= header
 
+.description=description
+
+.chart#ad_counts(style="width:450px;height:300px")
+.chart#dollar_counts(style="width:450px;height:300px")
+
 %table#buys
-%script="window.buys = new POV.models.Buys(); buy_table = new POV.views.Buy.Table({el: '#buys', collection: buys}); buys.fetch({url: '#{url}'})"
-  
