@@ -1,0 +1,40 @@
+%html
+  %head
+    %link(type="text/css" rel="stylesheet" media="screen" href="/assets/common.css")
+    %link(type="text/css" rel="stylesheet" media="screen" href="/assets/details.css")
+    %script(src="/assets/table_display.js")
+    %script="POV.host = 'http://localhost:9292'" if ENV['RACK_ENV']=="development"
+  %body
+    #layout
+      #header
+        #masthead
+          %a(href='/')
+            %img(src='/assets/tumblr-mockup.png')
+            %h1
+              Project OpenVault
+              %p.meta Election coverage for Mid-Missouri
+        #aggregate
+          %p#total_runtime
+            %span.value Loading...
+            %span.description Minutes of ads run
+
+          %p#total_spent
+            %span.value Loading...
+            %span.description Spent on ads
+        #navigation
+          %a{:href => "http://projectopenvault.com/about" } About
+          %a{:href => "http://projectopenvault.com/staff" } Staff
+      #main=yield
+      #footer
+        .logos
+        %a{:href => "http://www.columbiamissourian.com/"}
+          %img.logos{:src => "http://data.projectopenvault.com/assets/logos/the%20Missourian50px.jpeg"}
+        %a{:href => "http://www.kbia.org"}
+          %img.logos{:src => "http://data.projectopenvault.com/assets/logos/kbia50px.jpeg"}
+        %a{:href => "http://www.kbia.org"}
+          %img.logos{:src => "http://data.projectopenvault.com/assets/logos/KOMUnews50px.jpeg"}
+
+        #colophon
+          %p Copyright 2012 Board of Curators, University of Missouri
+          %p Icons Copyright <a href="http://entypo.com/">Entypo</a> via <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA</a>
+        %p.line
