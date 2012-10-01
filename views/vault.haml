@@ -5,6 +5,7 @@
     %script(src="/assets/table_display.js")
     %script="POV.host = 'http://localhost:9292'" if ENV['RACK_ENV']=="development"
     %script="url = '#{url}'"
+    %script="tag = '#{slug}'"
     %script(src="/assets/vault.js")
   %body
     #layout

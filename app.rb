@@ -66,10 +66,12 @@ module AdVault
 
     get '/candidates/:slug.html' do
       raise Sinatra::NotFound unless @candidate = Candidate.first(:slug => params[:slug])
+
       locals = {
-        :header => @candidate.name, 
-        :description => markdown(@candidate.description || ""),
-        :url => "/candidates/#{@candidate.slug}/spending.json",
+        :header           => @candidate.name, 
+        :description      => markdown(@candidate.description || ""),
+        :slug             => @candidate.slug,
+        :url              => "/candidates/#{@candidate.slug}/spending.json",
         :javascript_paths => ["/assets/vault"]
       }
       haml :buy_tables, :layout => :vault, :locals => locals
@@ -87,7 +89,19 @@ module AdVault
 
     get '/offices/:slug.html' do
       raise Sinatra::NotFound unless @office = Office.first( :slug => params[:slug] )
-      haml :buy_tables, :layout => :vault, :locals => {:header => @office.name, :url => "/offices/#{@office.slug}/spending.json"}
+      locals = {
+        :header      => @office.name,
+        :description => markdown( @office.description || "" ),
+        :slug        => @office.slug,
+        :url         => "/offices/#{@office.slug}/spending.json"
+      }
+      haml :buy_tables, :layout => :vault, :locals => locals
+    end
+
+    get '/offices/:slug/edit.html' do
+      protected!
+      raise Sinatra::NotFound unless @office = Office.first(:slug => params[:slug])      
+      haml :edit_office, :layout => :vault, :locals => {:credentials => @auth.credentials}
     end
 
     get '/offices/:slug/spending.html' do
@@ -104,7 +118,19 @@ module AdVault
 
     get '/committees/:slug.html' do
       raise Sinatra::NotFound unless @committee = Committee.first( :slug => params[:slug] )
-      haml :buy_tables, :layout => :vault, :locals => {:header => @committee.name, :url => "/committees/#{@committee.slug}/spending.json"}
+      locals = {
+        :header      => @committee.name, 
+        :description => markdown( @committee.description || "" ),
+        :slug        => @committee.slug,
+        :url         => "/committees/#{@committee.slug}/spending.json"
+      }
+      haml :buy_tables, :layout => :vault, :locals => locals
+    end
+
+    get '/committees/:slug/edit.html' do
+      protected!
+      raise Sinatra::NotFound unless @committee = Committee.first(:slug => params[:slug])      
+      haml :edit_committee, :layout => :vault, :locals => {:credentials => @auth.credentials}
     end
 
     get '/stations.html' do

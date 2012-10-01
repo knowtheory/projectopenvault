@@ -3,25 +3,27 @@ POV.views.Buy.Chart = Backbone.View.extend
   initialize: (options) ->
     this.collection.on('reset', @render, this)
   render: () ->
-    $.plot(this.$el, @chart_data(), @chart_attributes)
+    $.plot(this.$el, @chart_data(), @chart_attributes())
   chart_data: () ->
-    d1 = [];
+    @d1 = [];
     i = 0
     while (i < Math.PI * 2)
-      d1.push([i, Math.sin(i)]);
+      @d1.push([i, Math.sin(i)]);
       i += 0.25
     
-    d2 = [];
+    @d2 = [];
+    i = 0
     while (i < Math.PI * 2)
-      d2.push([i, Math.cos(i)]);
+      @d2.push([i, Math.cos(i)]);
       i += 0.25
 
-    d3 = [];
+    @d3 = [];
+    i = 0
     while (i < Math.PI * 2)
-      d3.push([i, Math.tan(i)]);
+      @d3.push([i, Math.tan(i)]);
       i += 0.1
     
-    [{ label: "sin(x)",  data: d1}, { label: "cos(x)",  data: d2}, { label: "tan(x)",  data: d3}]
+    [{ label: "sin(x)",  data: @d1}, { label: "cos(x)",  data: @d2}, { label: "tan(x)",  data: @d3}]
   chart_attributes: () ->
     {
       series: {
