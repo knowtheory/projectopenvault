@@ -1,44 +1,49 @@
 POV.views.Buy.Chart = Backbone.View.extend
   className: "chart"
   initialize: (options) ->
-    this.collection.on('reset', @render, this)
+    @collection.on('reset', @render, this)
+    @attribute = options.attribute || 'spots_per_week'
+    @description = options.description || "ads run"
   render: () ->
-    $.plot(this.$el, @chart_data(), @chart_attributes())
+    aggregator = (memo, model) -> memo + model.get(@attribute)
+    value = @collection.reduce aggregator, 0, this
+    this.$el.html """
+        <h2>#{ if @attribute == "total_cost" then "$#{POV.Utilities.formatDollars(value)}" else value } total #{@description}</h2>
+        <div class="flot" style="width:450px;height:300px"></div>
+      """
+    $.plot(this.$el.find(".flot"), @chart_data(), @chart_attributes())
   chart_data: () ->
-    @d1 = [];
-    i = 0
-    while (i < Math.PI * 2)
-      @d1.push([i, Math.sin(i)]);
-      i += 0.25
-    
-    @d2 = [];
-    i = 0
-    while (i < Math.PI * 2)
-      @d2.push([i, Math.cos(i)]);
-      i += 0.25
+    @buys_by_month = @collection.groupBy (buy) -> buy._start_date.getMonth()
+    aggregate_buys = (grouped_buys, group) => 
+      sum_spots = (memo, model) => memo += model.get(@attribute)
+      [ group, _.reduce( grouped_buys, sum_spots, 0 ) ]
 
-    @d3 = [];
-    i = 0
-    while (i < Math.PI * 2)
-      @d3.push([i, Math.tan(i)]);
-      i += 0.1
-    
-    [{ label: "sin(x)",  data: @d1}, { label: "cos(x)",  data: @d2}, { label: "tan(x)",  data: @d3}]
+    @spot_count = _.map( @buys_by_month, aggregate_buys )
+    [{ label: @description, data: @spot_count }]
   chart_attributes: () ->
     {
       series: {
         lines: { show: true },
-        points: { show: false }
+        points: { show: true }
       },
-      xaxis: {
-        ticks: [0, [Math.PI/2, "\u03c0/2"], [Math.PI, "\u03c0"], [Math.PI * 3/2, "3\u03c0/2"], [Math.PI * 2, "2\u03c0"]]
-      },
-      yaxis: {
-        ticks: 10,
-        min: -2,
-        max: 2
-      },
+      xaxis: { ticks: _.map( _.keys(@buys_by_month), @months ) },
       grid: {
         backgroundColor: { colors: ["#fff", "#eee"] }
       }
     }
+  months: (num) ->
+    month_map = {
+      1: "Jan"
+      2: "Feb"
+      3: "Mar"
+      4: "Apr"
+      5: "May"
+      6: "Jun"
+      7: "Jul"
+      8: "Aug"
+      9: "Sep"
+      10: "Oct"
+      11: "Nov"
+      12: "Dec"
+    }
+    [+num, month_map[num]]

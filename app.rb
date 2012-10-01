@@ -80,7 +80,7 @@ module AdVault
     get '/candidates/:slug/edit.html' do
       protected!
       raise Sinatra::NotFound unless @candidate = Candidate.first(:slug => params[:slug])      
-      haml :edit_candidate, :layout => :vault, :locals => {:credentials => @auth.credentials}
+      haml :edit_candidate, :layout => :admin_layout, :locals => {:credentials => @auth.credentials}
     end
 
     get '/offices.html' do
@@ -101,7 +101,7 @@ module AdVault
     get '/offices/:slug/edit.html' do
       protected!
       raise Sinatra::NotFound unless @office = Office.first(:slug => params[:slug])      
-      haml :edit_office, :layout => :vault, :locals => {:credentials => @auth.credentials}
+      haml :edit_office, :layout => :admin_layout, :locals => {:credentials => @auth.credentials}
     end
 
     get '/offices/:slug/spending.html' do
@@ -130,7 +130,7 @@ module AdVault
     get '/committees/:slug/edit.html' do
       protected!
       raise Sinatra::NotFound unless @committee = Committee.first(:slug => params[:slug])      
-      haml :edit_committee, :layout => :vault, :locals => {:credentials => @auth.credentials}
+      haml :edit_committee, :layout => :admin_layout, :locals => {:credentials => @auth.credentials}
     end
 
     get '/stations.html' do
@@ -188,7 +188,7 @@ module AdVault
       @candidates = Candidate.all
       @committees = Committee.all
       @offices = Office.all
-      haml :admin, :layout => :vault
+      haml :admin, :layout => :admin_layout
     end
 
     get '/share' do
