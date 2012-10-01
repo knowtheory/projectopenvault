@@ -1,0 +1,8 @@
+%form{:method=>"POST", :action=> "http://#{credentials.join(":")}@#{AdVault::HOSTNAME}/offices/#{@office.slug}"}
+  %label
+    Name:
+    %input{:name => "name", :value => @office.name}
+  %label
+    Description:
+    %textarea{:name => "description"}
+  %input(type="submit")

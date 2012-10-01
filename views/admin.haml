@@ -1,0 +1,17 @@
+%h1 Candidates
+%ul.candidates
+  - @candidates.each do |candidate|
+    %li
+      %a{:href=>"/candidates/#{candidate.slug}/edit.html"}= candidate.name
+
+%h1 Committees
+%ul.committees
+  - @committees.each do |committee|
+    %li
+      %a{:href=>"/committees/#{committee.slug}/edit.html"}= committee.name
+
+%h1 Offices
+%ul.offices
+  - @offices.each do |office|
+    %li
+      %a{:href=>"/offices/#{office.slug}/edit.html"}= office.name

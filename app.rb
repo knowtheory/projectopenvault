@@ -159,7 +159,10 @@ module AdVault
     
     get '/' do
       protected!
-      haml "%h1 Hello"
+      @candidates = Candidate.all
+      @committees = Committee.all
+      @offices = Office.all
+      haml :admin, :layout => :vault
     end
 
     get '/share' do
