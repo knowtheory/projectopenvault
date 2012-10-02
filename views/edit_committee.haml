@@ -7,5 +7,5 @@
     %input{:name=> "url", :value => @committee.url}
   %label
     Description:
-    %textarea{:name => "description"}
+    %textarea{:name => "description", :cols => 60, :rows => 20 }= @committee.description
   %input(type="submit")

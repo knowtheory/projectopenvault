@@ -4,5 +4,5 @@
     %input{:name => "name", :value => @office.name}
   %label
     Description:
-    %textarea{:name => "description"}
+    %textarea{:name => "description", :cols => 60, :rows => 20}= @office.description
   %input(type="submit")

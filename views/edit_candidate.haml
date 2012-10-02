@@ -10,5 +10,5 @@
     %input{:name=> "url", :value => @candidate.url}
   %label
     Description:
-    %textarea{:name => "description", :cols => 60, :rows => 20}
+    %textarea{:name => "description", :cols => 60, :rows => 20}= @candidate.description
   %input(type="submit")
