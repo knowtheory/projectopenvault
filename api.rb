@@ -89,7 +89,8 @@ module AdVault
       
       segment "/:slug" do
         get do
-          Candidate.first(:slug=>params[:slug]).canonical.to_json
+          error!(404) unless @candidate = Candidate.first(:slug=>params[:slug])
+          @candidate.canonical.to_json
         end
       
         resource do
@@ -145,17 +146,32 @@ module AdVault
         get do
           Committee.first(:slug=>params[:slug]).canonical.to_json
         end
+
+        resource do
+          http_basic do
+            logger.info("Basic Auth!")
+            true
+          end
+
+          post do
+            error!(404) unless @committee = Committee.first(:slug=>params[:slug])
+            attrs = Hash[CGI.parse(request.body.read).map{ |k,v| [k, ((v.kind_of? Array and v.size == 1 ) ? v.first : v )]}]
+            @committee.attributes = Utilities.pick(attrs, "name", "url", "description")
+
+            if @committee.save
+              @committee.canonical.to_json
+            else
+              error! @committee.errors.to_json, 401
+            end
+          end
       
-        post do
-          Committee.first(:slug=>params[:slug]).to_json
-        end
+          put do
+            Committee.first(:slug=>params[:slug]).to_json
+          end
       
-        put do
-          Committee.first(:slug=>params[:slug]).to_json
-        end
-      
-        delete do
-          Committee.first(:slug=>params[:slug]).to_json
+          delete do
+            Committee.first(:slug=>params[:slug]).to_json
+          end
         end
       
         get "/spending" do
@@ -178,19 +194,35 @@ module AdVault
       
       segment "/:slug" do
         get do
-          Office.first(:slug=>params[:slug]).canonical.to_json
+          error!(404) unless @office = Office.first(:slug=>params[:slug])
+          @office.canonical.to_json
         end
         
-        post do
-          Office.first(:slug=>params[:slug]).to_json
-        end
+        resource do
+          http_basic do
+            logger.info("Basic Auth!")
+            true
+          end
+
+          post do
+            error!(404) unless @office = Office.first(:slug=>params[:slug])
+            attrs = Hash[CGI.parse(request.body.read).map{ |k,v| [k, ((v.kind_of? Array and v.size == 1 ) ? v.first : v )]}]
+            @office.attributes = Utilities.pick(attrs, "name", "url", "description")
+
+            if @office.save
+              @office.canonical.to_json
+            else
+              error! @office.errors.to_json, 401
+            end
+          end
         
-        put do
-          Office.first(:slug=>params[:slug]).to_json
-        end
+          put do
+            Office.first(:slug=>params[:slug]).to_json
+          end
         
-        delete do
-          Office.first(:slug=>params[:slug]).to_json
+          delete do
+            Office.first(:slug=>params[:slug]).to_json
+          end
         end
         
         get "/spending" do
