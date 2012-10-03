@@ -139,7 +139,13 @@ module AdVault
 
     get '/stations/:call.html' do
       raise Sinatra::NotFound unless @station = Station.first( :call_sign => params[:call] )
-      haml :buy_tables, :layout => :vault, :locals => {:header => @station.name, :url => "/stations/#{@station.call_sign}/spending.json"}
+      locals = {
+        :header      => @station.name, 
+        :description => markdown( @station.description || "" ),
+        :slug        => @station.call_sign,
+        :url         => "/stations/#{@station.call_sign}/spending.json"
+      }
+      haml :buy_tables, :layout => :vault, :locals => locals
     end
 
     get '/stations/:call/spending.html' do
