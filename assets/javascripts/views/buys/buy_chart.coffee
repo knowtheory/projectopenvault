@@ -21,12 +21,14 @@ POV.views.Buy.Chart = Backbone.View.extend
     @spot_count = _.map( @buys_by_month, aggregate_buys )
     [{ label: @description, data: @spot_count }]
   chart_attributes: () ->
+    totals = _.map(@buys_by_month, (list, month) -> _.reduce(list, ((memo, num) -> list + num), 0 ) )
     {
       series: {
         lines: { show: true },
         points: { show: true }
       },
       xaxis: { ticks: _.map( _.keys(@buys_by_month), @months ) },
+      yaxis: { min: 0, max: _.max(totals) }
       grid: {
         backgroundColor: { colors: ["#fff", "#eee"] }
       }
