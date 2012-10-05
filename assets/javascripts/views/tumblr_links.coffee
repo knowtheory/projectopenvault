@@ -12,5 +12,5 @@ POV.views.TumblrLinks = Backbone.View.extend
 
   render: () ->
     model_links = (memo, model) ->
-      """<li><a href="#{model.get('url-with-slug')}">#{model.get('regular-title')}</a></li>"""
+      memo + """<li><a href="#{model.get('url-with-slug')}">#{model.get('regular-title')}</a></li>"""
     this.$el.html @collection.reduce model_links, ""
