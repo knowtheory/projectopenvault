@@ -9,6 +9,7 @@ POV.models.Offices = Backbone.Collection.extend
   url        : "/offices"
   model      : POV.models.Office
   page_size  : 6
+  comparator : (office) -> -office.get('total_spent')
   pages      : (page_size=@page_size) ->
     return @_pages if @_pages?.length == Math.ceil(@length / page_size)
     @_pages = []
