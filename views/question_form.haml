@@ -1,0 +1,5 @@
+%form{:method=>"POST", :action=> "http://#{AdVault::HOSTNAME}/admin/questions/new"}
+  %label
+    Question:
+    %textarea{:name => "prompt", :cols => 60, :rows => 20}
+  %input(type="submit")

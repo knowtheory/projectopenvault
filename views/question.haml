@@ -9,8 +9,14 @@
     #question
       %iframe#ss-form{:name=>"ss-form", :style=>"display:none;", :onload=>"if(submitted){window.location='/questions/#{@question.id}/followup';}"}>
       .hidden_iframe
-        %form{ :action=>@question.form_url, :method=>"POST", :target=>"ss-form", :onsubmit=>"submitted=true;" }
-          .errorbox-good= @question.form_markup
+        %form{ :action=>"https://docs.google.com/a/knowtheory.net/spreadsheet/formResponse?formkey=dDNGckJnZ2l1N2RhZ1Y5UEhuX2VpaFE6MQ&amp;embedded=true&amp;ifq", :method=>"POST", :target=>"ss-form", :onsubmit=>"submitted=true;" }
+          .errorbox-good
+            %input{:type=>"text", :name=>"entry.0.single", :value=>"#{@question.prompt}", :class=>"ss-q-short", :id=>"entry_0", :style=>"display:none"}
+            .ss-item.ss-paragraph-text
+              %label.ss-q-title(for="entry_1")
+                =@question.prompt
+                %textarea(name="entry.1.single" rows="8" cols="75" class="ss-q-long" id="entry_1")
+            
           %input(type="hidden" name="pageNumber" value="0")
           %input(type="hidden" name="backupCache" value="")
           .ss-item.ss-navigate

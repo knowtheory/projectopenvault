@@ -19,3 +19,11 @@
   - @offices.each do |office|
     %li
       %a{:href=>"/offices/#{office.slug}/edit.html"}= office.name
+
+%h1 Questions
+%ul
+  %li
+    %a{:href=>"/admin/questions/new"} New Question
+  - @questions.map do |question|
+    %li
+      %a{:href=>"/questions/#{question.id}"}= "/questions/#{question.id}"

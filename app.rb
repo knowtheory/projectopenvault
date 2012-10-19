@@ -194,6 +194,7 @@ module AdVault
       @candidates = Candidate.all
       @committees = Committee.all
       @offices = Office.all
+      @questions = Question.all
       haml :admin, :layout => :admin_layout
     end
 
@@ -204,9 +205,37 @@ module AdVault
     end
     
     get '/questions/new' do
+      protected!
+      @question = Question.new
+      haml :question_form, :layout => :admin_layout
+    end
+
+    post '/questions/new' do
+      protected!
+      url = "https://docs.google.com/a/knowtheory.net/spreadsheet/formResponse?formkey=dDNGckJnZ2l1N2RhZ1Y5UEhuX2VpaFE6MQ&amp;embedded=true&amp;ifq"
+      @question = Question.new(
+        :prompt => params[:prompt], 
+        :form_markup=>"<div></div>",
+        :form_url=> url)
+      redirect '/admin' if @question.save
+      haml :question_form, :layout => :admin_layout
     end
     
-    get '/questions' do
+    get '/questions/?' do
+      protected!
+      @questions = Question.all
+      haml :questions
     end
+    
+    get '/questions/:id' do
+      protected!
+      
+    end
+    
+    put '/questions/:id' do
+      protected!
+      
+    end
+    
   end
 end
