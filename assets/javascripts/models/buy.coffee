@@ -18,7 +18,7 @@ POV.models.Buys = Backbone.Collection.extend
   name: "buys"
   url: "/spending",
   model: POV.models.Buy,
-  comparator: (model) -> model.get('start_date')
+  comparator: (model) -> -model._start_date
   total_cost: ->
     this.reduce ((grand_total, buy) -> grand_total + buy.get 'total_cost'), 0
   sorter: (property) ->
