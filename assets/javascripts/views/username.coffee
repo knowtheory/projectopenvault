@@ -13,6 +13,7 @@ POV.views.Byline = Backbone.View.extend
     jenleereeves:  "Jen Lee Reeves"
     projectopenvault: "Project OpenVault Team"
     stacewelsh:     "Stacey Welsh"
+    codylagrow:     "Cody LaGrow"
   
   affiliations:
     knowtheory:    "Project Open Vault"
@@ -25,6 +26,7 @@ POV.views.Byline = Backbone.View.extend
     swaffords:     "The Columbia Missourian"
     jenleereeves:  "KOMU8"
     stacewelsh:    "KOMU8"
+    codylagrow:    "KOMU8"
 
   initialize: (options) ->
     @username = (options.username || options.el.html() || "").toLowerCase()
