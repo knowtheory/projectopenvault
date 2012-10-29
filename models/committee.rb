@@ -10,7 +10,7 @@ class Committee
   }
   
   property :id,   Serial
-  property :name, String, :required => true
+  property :name, String, :required => true, :length => 2048
   property :slug, String, :length => 2048
   property :type, Enum[:candidate, :party, :five_oh_one_c_four, :five_twenty_seven, :independent, :not_applicable], :default => :not_applicable
   property :description, Text
