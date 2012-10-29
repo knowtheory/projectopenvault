@@ -28,57 +28,66 @@ end
 #  end  
 #end
 #
-#CSV.foreach(most_recent_data_file('committees'), :headers => true) do |row|
-#  committee = Committee.new(Utilities.pick row, *%w(name url description))
-#  if row['type']
-#    if row['type'] =~ /Candidate/i
-#      committee.type = :candidate
-#    elsif row['type'] =~ /Party/i
-#      committee.type = :party
-#    elsif row['type'] =~ /501\(c\)\(4\)/i
-#      committee.type = :five_oh_one_c_four
-#    elsif row['type'] =~ /527/i
-#      committee.type = :five_twenty_seven
-#    elsif row['type'] =~ /Independent/i
-#      committee.type = :independent
-#    else
-#      committee.type = :not_applicable
-#    end
-#  else
-#    committee.type = :not_applicable
-#  end
-#  
-#  puts committee.save ? "#{Time.now}: saved Committee #{committee.id}" : "#{Time.now}: Unable to save #{committee.errors.inspect}"
-#end
-#
-#f = 'candidates'; data = CSV.open(most_recent_data_file(f,'./data'), :headers => true).read; row = data.first
-#CSV.foreach(most_recent_data_file('candidates'), :headers => true) do |row|
-#
-#  candidate = Candidate.new(Utilities.pick row, *%w(party, url))
-#  candidate.name = row['candidate'].strip
-#
-#  if row['current_office']
-#    current_office = Office.first_or_new(:name   => row['current_office'].strip,
-#                                         :region => row['region_current_office'].strip)
-#    current_office.title = row['title'].strip               unless current_office.title
-#    current_office.abbreviation = row['abbreviation'].strip unless current_office.abbreviation
-#    
-#    if current_office.save
-#      puts "#{Time.now}: saved office #{current_office.id}"
-#      candidate.incumbency = current_office
-#    else
-#      puts "#{Time.now}: Unable to save #{current_office.errors.inspect}"
-#    end
-#  end
-#  
-#  unless row['office_sought'].nil? or row['region_office_sought'].nil?
-#    running_for = Office.first_or_new(:name => row['office_sought'].strip, :region => row['region_office_sought'].strip)
-#    puts running_for.save ? "#{Time.now}: saved office #{running_for.id}" : "#{Time.now}: Unable to save #{running_for.errors.inspect}"
-#    candidate.office = running_for
-#  end
-#  
-#  puts candidate.save ? "#{Time.now}: saved Candidate #{candidate.id}" : "#{Time.now}: Unable to save #{candidate.errors.inspect}"
-#end
+
+rows.reject{ |row| Committee.first(:name => row["name"]) }
+CSV.foreach(most_recent_data_file('committees'), :headers => true) do |row|
+  unless Committee.first(:name => row["name"])
+    committee = Committee.new(Utilities.pick row, *%w(name url description))
+    if row['type']
+      if row['type'] =~ /Candidate/i
+        committee.type = :candidate
+      elsif row['type'] =~ /Party/i
+        committee.type = :party
+      elsif row['type'] =~ /501\(c\)\(4\)/i
+        committee.type = :five_oh_one_c_four
+      elsif row['type'] =~ /527/i
+        committee.type = :five_twenty_seven
+      elsif row['type'] =~ /Independent/i
+        committee.type = :independent
+      else
+        committee.type = :not_applicable
+      end
+    else
+      committee.type = :not_applicable
+    end
+  
+    puts committee.save ? "#{Time.now}: saved Committee #{committee.id}" : "#{Time.now}: Unable to save #{committee.errors.inspect}"
+  else
+    puts "#{row["name"]} exists."
+  end
+end
+
+f = 'candidates'; data = CSV.open(most_recent_data_file(f,'./data'), :headers => true).read; row = data.first
+CSV.foreach(most_recent_data_file('candidates'), :headers => true) do |row|
+  unless Candidate.first(:name => row['candidate'])
+    candidate = Candidate.new(Utilities.pick row, *%w(party, url))
+    candidate.name = row['candidate'].strip
+
+    if row['current_office']
+      current_office = Office.first_or_new(:name   => row['current_office'].strip,
+                                           :region => row['region_current_office'].strip)
+      current_office.title = row['title'].strip               unless current_office.title
+      current_office.abbreviation = row['abbreviation'].strip unless current_office.abbreviation
+    
+      if current_office.save
+        puts "#{Time.now}: saved office #{current_office.id}"
+        candidate.incumbency = current_office
+      else
+        puts "#{Time.now}: Unable to save #{current_office.errors.inspect}"
+      end
+    end
+  
+    unless row['office_sought'].nil? or row['region_office_sought'].nil?
+      running_for = Office.first_or_new(:name => row['office_sought'].strip, :region => row['region_office_sought'].strip)
+      puts running_for.save ? "#{Time.now}: saved office #{running_for.id}" : "#{Time.now}: Unable to save #{running_for.errors.inspect}"
+      candidate.office = running_for
+    end
+  
+    puts candidate.save ? "#{Time.now}: saved Candidate #{candidate.id}" : "#{Time.now}: Unable to save #{candidate.errors.inspect}"
+  else
+    puts "#{row['candidate']} already exists."
+  end
+end
 
 CSV.foreach(most_recent_data_file('advault_data'), :headers => true) do |row|
 
