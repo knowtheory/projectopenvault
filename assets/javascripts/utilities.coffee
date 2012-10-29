@@ -25,6 +25,9 @@ POV.Utilities =
     "#{days}d:#{hours}h:#{minutes}m:#{seconds}s"
 
   formatTime: (value) -> Math.floor(value / 60)
+  day_of_year: (date) -> 
+    start_of_year = new Date(date.getFullYear(), 0, 0)
+    Math.floor( (date - start_of_year) / (1000 * 60 * 60 * 24) )
 
   sluggify: (str) ->
     slugged = str.replace(/[^\x00-\x7F]/g, '')
